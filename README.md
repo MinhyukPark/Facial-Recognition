@@ -17,6 +17,13 @@ Trying to apply what I learned in class about Principal Component Analysis and
 Singular Value Decomposition and create a C-library for a set of functions that
 will determine whether a given image contains a humanly-recognizable face or not,
 and if recognized if it is a face that is in the dataset.
+## How to Run
+
+`make`
+to build for release
+
+`make debug`
+to build for debugging
 
 ## TODOs
 
