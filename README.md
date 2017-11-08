@@ -1,4 +1,13 @@
 # Facial-Recognition
+[![MIT license](https://img.shields.io/badge/License-MIT-blue.svg)](https://lbesson.mit-license.org/)
+[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/dwyl/esta/issues)
+![](https://img.shields.io/badge/maintained-yes-green.svg?style=flat)
+
+:hourglass: *Work in Progress*
+
+built with :heartpulse:
+
+:lock: Signed using GPG
 
 Facial Detection using Eigenfaces
 
