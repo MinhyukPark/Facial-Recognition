@@ -21,10 +21,15 @@ Catastrophic cancellation when normalizing?
 ### Linear Algebra functions
 
 matmat_subtract()
+
 matmat_multiply()
+
 vecmat_multiply()
+
 matvec_multiply()
+
 matscalar_multiply()
+
 mat_transpose()
 
 ### Libtiff
