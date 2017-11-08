@@ -37,10 +37,12 @@ pre-build:
 post-build: release
 	rm ./linalg.c
 	rm ./linalg.h
+	rm -r ./$(OBJS_DIR)
 
 failed:	
 	-rm ./linalg.c
 	-rm ./linalg.h
+	-rm -r ./$(OBJS_DIR)
 #### static library fix end ####
 
 release: $(EXE_DIR)/$(EXE_FACEREC)
