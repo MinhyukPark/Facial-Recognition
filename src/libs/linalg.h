@@ -8,12 +8,26 @@
 
 #include <stdlib.h>
 
+
+typedef struct _vector {
+    size_t size;
+    double data[];
+} vector;
+
+typedef struct _matrix {
+    size_t row;
+    size_t col;
+    double data[];
+} matrix;
+
+
+
 /**
  * @brief Performs vector * matrix
- * this function will malloc for the user a double**
- * @return a double** representing a matrix
+ * this function will malloc for the user a matrix*
+ * @return a matrix*
  * @param vec
  * @param mat
  */
- double** vecmat_multiply(double* vec, double** mat);
+ double** vecmat_multiply(const vector* vec, const matrix* mat);
  
