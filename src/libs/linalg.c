@@ -4,10 +4,7 @@
  * @date 7 Nov 2017
  * @brief File containing common linear algebra functions.
  */
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-
+ 
 #include "linalg.h"
 
 

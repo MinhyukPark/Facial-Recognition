@@ -2,7 +2,7 @@ OBJS_DIR = .objs
 EXE_DIR = ..
 EXE_FACEREC=facerec
 # add more libraries here if necessary
-OBJS_FACEREC=$(EXE_FACEREC).o linalg.o
+OBJS_FACEREC=$(EXE_FACEREC).o linalg.o tiff_util.o
 
 ## COMPILER
 # using gcc over clang because of pre-fetching optimization that is coming eventually
@@ -15,7 +15,7 @@ CFLAGS_RELEASE = -O2 $(WARNINGS) $(INC) -g -std=c99 -c -MMD -MP -D_GNU_SOURCE -p
 ## LINKER
 # eventually I would like to use a static library here
 LD = gcc
-LDFLAGS = -pthread
+LDFLAGS = -pthread -ltiff
 
 # PHONY declarations
 .PHONY: all
@@ -33,15 +33,21 @@ all:
 pre-build:
 	cp ./libs/linalg.c ./linalg.c
 	cp ./libs/linalg.h ./linalg.h
+	cp ./libs/tiff_util.c ./tiff_util.c
+	cp ./libs/tiff_util.h ./tiff_util.h
 
 post-build: release
 	rm ./linalg.c
 	rm ./linalg.h
+	rm ./tiff_util.c
+	rm ./tiff_util.h
 	rm -r ./$(OBJS_DIR)
 
 failed:	
 	-rm ./linalg.c
 	-rm ./linalg.h
+	-rm ./tiff_util.c
+	-rm ./tiff_util.h
 	-rm -r ./$(OBJS_DIR)
 #### static library fix end ####
 
@@ -53,6 +59,8 @@ debug: clean
 post-build-debug: $(EXE_DIR)/$(EXE_FACEREC:%=%-debug)
 	rm ./linalg.c
 	rm ./linalg.h
+	rm ./tiff_process.c
+	rm ./tiff_process.h
 	rm -r ./$(OBJS_DIR)	
 
 ## OBJECTS
@@ -66,7 +74,7 @@ $(OBJS_DIR)/%-debug.o: %.c | $(OBJS_DIR)
 
 $(OBJS_DIR)/%-release.o: %.c | $(OBJS_DIR)
 	@mkdir -p $(basename $@)
-	$(CC) $(CFLAGS_RELEASE) $< -o $@
+	$(CC)  $(CFLAGS_RELEASE) $< -o $@
 
 ## EXES
 $(EXE_DIR)/$(EXE_FACEREC): $(OBJS_FACEREC:%.o=$(OBJS_DIR)/%-release.o)
