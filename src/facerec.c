@@ -37,6 +37,9 @@ int main() {
     matrix *matscaleMult_result = matscalar_multiply(mat,5);
     mat_print(matscaleMult_result);
 
+    matrix *matscaleDiv_result = matscalar_divide(mat,5);
+    mat_print(matscaleDiv_result);
+
     free(vec);
     free(mat);
     free(converted_vecmat);
@@ -45,6 +48,6 @@ int main() {
     free(matsub_result);
     free(matadd_result);    
     free(matscaleMult_result);
-
+    free(matscaleDiv_result);
     return 0;
 }
