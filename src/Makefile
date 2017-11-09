@@ -46,8 +46,14 @@ failed:
 #### static library fix end ####
 
 release: $(EXE_DIR)/$(EXE_FACEREC)
+
 debug: clean
-	($(MAKE) --no-print-directory pre-build && $(MAKE) --no-print-directory $(EXE_DIR)/$(EXE_FACEREC:%=%-debug)) || $(MAKE) --no-print-directory failed
+	($(MAKE) --no-print-directory pre-build && $(MAKE) --no-print-directory post-build-debug) || $(MAKE) --no-print-directory failed
+
+post-build-debug: $(EXE_DIR)/$(EXE_FACEREC:%=%-debug)
+	rm ./linalg.c
+	rm ./linalg.h
+	rm -r ./$(OBJS_DIR)	
 
 ## OBJECTS
 -include $(OBJS_DIR)/*.d
@@ -68,6 +74,8 @@ $(EXE_DIR)/$(EXE_FACEREC): $(OBJS_FACEREC:%.o=$(OBJS_DIR)/%-release.o)
 
 $(EXE_DIR)/$(EXE_FACEREC)-debug: $(OBJS_FACEREC:%.o=$(OBJS_DIR)/%-debug.o)
 	$(LD) $^ $(LDFLAGS) -o $@
+
+
 
 
 ## CLEAN
