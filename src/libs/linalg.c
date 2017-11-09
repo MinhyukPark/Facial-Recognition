@@ -153,7 +153,7 @@ void vec_print(const vector* vec) {
 }
 
  /**
- * @brief Performs  matrix * matrix
+ * @brief Performs  matrixA * matrixB
  * this function will malloc for the user a matrix*
  * @return a matrix*
  * @param matA
@@ -177,19 +177,27 @@ matrix* matmat_multiply(const matrix* matA, const matrix* matB)
 }
 
 //  /**
-//  * @brief Performs  matrix + matrix
+//  * @brief Performs  matrixA + matrixB
 //  * this function will malloc for the user a matrix*
 //  * @return a matrix*
 //  * @param matA
 //  * @param matB
 //  */
-// matrix* matmat_addition(const matrix* matA, const matrix* matB)
-// {
-
-// }
+matrix* matmat_addition(const matrix* matA, const matrix* matB)
+{
+    matrix *retVal = matrix_create(matA->row, matB->col);
+    for (size_t i = 0; i < matA->row; i++)
+    {
+        for (size_t j = 0; j < matB->col; j++)
+        {
+            MAT(retVal,i,j) = MAT(matA,i,j) + MAT(matB,i,j);
+        }
+    }
+    return retVal;
+}
 
  /**
- * @brief Performs  matrix - matrix
+ * @brief Performs  matrixA - matrixB
  * this function will malloc for the user a matrix*
  * @return a matrix*
  * @param matA
@@ -197,10 +205,10 @@ matrix* matmat_multiply(const matrix* matA, const matrix* matB)
  */
 matrix* matmat_subtraction(const matrix* matA, const matrix* matB)
 {
-    matrix *retVal = matrix_create(matA->row, matB->row);
+    matrix *retVal = matrix_create(matA->row, matB->col);
     for (size_t i = 0; i < matA->row; i++)
     {
-        for (size_t j = 0; j < matB->row; j++)
+        for (size_t j = 0; j < matB->col; j++)
         {
             MAT(retVal,i,j) = MAT(matA,i,j) - MAT(matB,i,j);
         }
