@@ -33,15 +33,21 @@ all:
 pre-build:
 	cp ./libs/linalg.c ./linalg.c
 	cp ./libs/linalg.h ./linalg.h
+	cp ./libs/tiff_process.c ./tiff_process.c
+	cp ./libs/tiff_process.h ./tiff_process.h
 
 post-build: release
 	rm ./linalg.c
 	rm ./linalg.h
+	rm ./tiff_process.c
+	rm ./tiff_process.h
 	rm -r ./$(OBJS_DIR)
 
 failed:	
 	-rm ./linalg.c
 	-rm ./linalg.h
+	-rm ./tiff_process.c
+	-rm ./tiff_process.h
 	-rm -r ./$(OBJS_DIR)
 #### static library fix end ####
 
@@ -53,6 +59,8 @@ debug: clean
 post-build-debug: $(EXE_DIR)/$(EXE_FACEREC:%=%-debug)
 	rm ./linalg.c
 	rm ./linalg.h
+	rm ./tiff_process.c
+	rm ./tiff_process.h
 	rm -r ./$(OBJS_DIR)	
 
 ## OBJECTS

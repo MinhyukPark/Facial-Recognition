@@ -7,6 +7,8 @@
 #pragma once
 
 #include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
 
 #define MAT(m, x, y) (m->data[(x * m->col) + y])
 #define VEC(v, x) (v->data[x])
