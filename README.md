@@ -25,30 +25,33 @@ to build for release
 `make debug`
 to build for debugging
 
+## Special Thanks to
+ - TJ Egbejimba @tj
+
+
 ## TODOs
 
 ### Design Decisions
-
-how to represent an image?
-double**?
 
 Catastrophic cancellation when normalizing?
 
 ### Linear Algebra functions
 
+matmat_add()
+
 matmat_subtract()
-
-matmat_multiply()
-
-vecmat_multiply()
-
-matvec_multiply()
 
 matscalar_multiply()
 
+matscalar_divide()
+
 mat_transpose()
+
+vec_append()
 
 ### Libtiff
 
+tiff_to_vec()
 
+vec_to_tiff()
 
