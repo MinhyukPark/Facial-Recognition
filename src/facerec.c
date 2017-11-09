@@ -27,11 +27,20 @@ int main() {
 
     matrix * matmat_result = matmat_multiply(mat,mat);
     mat_print(matmat_result);    
+    
+    matrix *matsub_result = matmat_subtraction(mat,mat);
+    mat_print(matsub_result);      
+
+    matrix *matadd_result = matmat_addition(mat,mat);
+    mat_print(matadd_result);   
+    mat_print(mat);   
     free(vec);
     free(mat);
     free(converted_vecmat);
     free(converted_matvec);
-    
+    free(matmat_result);
+    free(matsub_result);
+    free(matadd_result);    
 
     return 0;
 }
