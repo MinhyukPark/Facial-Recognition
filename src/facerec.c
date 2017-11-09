@@ -24,7 +24,9 @@ int main() {
 
     matrix* converted_matvec = vec_to_mat(matvec_result, 1);
     mat_print(converted_matvec);
-    
+
+    matrix * matmat_result = matmat_multiply(mat,mat);
+    mat_print(matmat_result);    
     free(vec);
     free(mat);
     free(converted_vecmat);
