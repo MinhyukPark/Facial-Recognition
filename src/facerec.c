@@ -40,6 +40,9 @@ int main() {
 
     matrix *matscaleDiv_result = matscalar_divide(mat,5);
     mat_print(matscaleDiv_result);
+  
+    matrix *mattranspose_result = mat_transpose(mat);
+    mat_print(mattranspose_result);
 
     TIFF* image = TIFFOpen("./dataset/jaffe/KA.AN1.39.tiff", "r");
     vector* image_vec = tiff_to_vec(image);
@@ -47,8 +50,6 @@ int main() {
     printf("sizeof vec %zu", image_vec->size);
     TIFFClose(image);
     TIFFClose(out);
-
-
 
     free(vec);
     free(mat);
@@ -59,5 +60,6 @@ int main() {
     free(matadd_result);    
     free(matscaleMult_result);
     free(matscaleDiv_result);
+    free(mattranspose_result);
     return 0;
 }

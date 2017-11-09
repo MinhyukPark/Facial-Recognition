@@ -253,3 +253,22 @@ matrix* matscalar_divide(const matrix* matA, const double scalar)
     }
     return retVal; 
 }
+
+ /**
+ * @brief Performs  transpose(mat)
+ * this function will malloc for the user a matrix*
+ * @return a matrix*
+ * @param matA
+ */
+matrix* mat_transpose(const matrix* mat)
+{
+    matrix *retVal = matrix_create(mat->col, mat->row);
+    for (size_t i = 0; i < mat->row; i++)
+    {
+        for (size_t j = 0; j < mat->col; j++)
+        {
+            MAT(retVal,j,i) = MAT(mat,i,j);
+        }
+    }
+    return retVal;
+}
