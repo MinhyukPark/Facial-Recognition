@@ -1,6 +1,7 @@
-#include "linalg.h"
 #include <stdio.h>
 #include <assert.h>
+#include "linalg.h"
+#include "tiff_util.h"
 
 int main() {
     vector* vec = vector_create(5);
@@ -39,6 +40,15 @@ int main() {
 
     matrix *matscaleDiv_result = matscalar_divide(mat,5);
     mat_print(matscaleDiv_result);
+
+    TIFF* image = TIFFOpen("./dataset/jaffe/KA.AN1.39.tiff", "r");
+    vector* image_vec = tiff_to_vec(image);
+    TIFF* out = vec_to_tiff("./dataset/jaffe/test.tiff", image_vec);
+    printf("sizeof vec %zu", image_vec->size);
+    TIFFClose(image);
+    TIFFClose(out);
+
+
 
     free(vec);
     free(mat);
