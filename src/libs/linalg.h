@@ -93,7 +93,7 @@ void mat_print(const matrix* mat);
 void vec_print (const vector* vec);
 
  /**
- * @brief Performs  matrix * matrix
+ * @brief Performs  matrixA * matrixB
  * this function will malloc for the user a matrix*
  * @return a matrix*
  * @param matA
@@ -102,7 +102,7 @@ void vec_print (const vector* vec);
 matrix* matmat_multiply(const matrix* matA, const matrix* matB);
 
  /**
- * @brief Performs  matrix + matrix
+ * @brief Performs  matrixA + matrixB
  * this function will malloc for the user a matrix*
  * @return a matrix*
  * @param matA
@@ -111,7 +111,7 @@ matrix* matmat_multiply(const matrix* matA, const matrix* matB);
 matrix* matmat_addition(const matrix* matA, const matrix* matB);
 
  /**
- * @brief Performs  matrix - matrix
+ * @brief Performs  matrixA - matrixB
  * this function will malloc for the user a matrix*
  * @return a matrix*
  * @param matA
