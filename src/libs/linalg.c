@@ -176,13 +176,13 @@ matrix* matmat_multiply(const matrix* matA, const matrix* matB)
     return retVal;
 }
 
-//  /**
-//  * @brief Performs  matrixA + matrixB
-//  * this function will malloc for the user a matrix*
-//  * @return a matrix*
-//  * @param matA
-//  * @param matB
-//  */
+ /**
+ * @brief Performs  matrixA + matrixB
+ * this function will malloc for the user a matrix*
+ * @return a matrix*
+ * @param matA
+ * @param matB
+ */
 matrix* matmat_addition(const matrix* matA, const matrix* matB)
 {
     matrix *retVal = matrix_create(matA->row, matB->col);
