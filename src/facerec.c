@@ -50,6 +50,8 @@ int main() {
     printf("sizeof vec %zu", image_vec->size);
     TIFFClose(image);
     TIFFClose(out);
+    free(image_vec);
+    remove("./dataset/jaffe/test.tiff");
 
     free(vec);
     free(mat);

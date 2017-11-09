@@ -30,6 +30,7 @@ vector* tiff_to_vec(TIFF* image) {
     for(size_t i = 0; i < num_pixels; i ++) {
         VEC(retvec, i) = *(raster + i);
     }
+    _TIFFfree(raster);
 
     retvec->padding = width;
     return retvec;
@@ -82,5 +83,7 @@ TIFF* vec_to_tiff(char* filename, vector* vec) {
             break;
         }
     }
+    _TIFFfree(buf);
+    free(image_char);
     return rettiff;
 }
