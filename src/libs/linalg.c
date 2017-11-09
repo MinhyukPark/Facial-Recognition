@@ -161,7 +161,31 @@ void vec_print(const vector* vec) {
  */
 matrix* matmat_multiply(const matrix* matA, const matrix* matB)
 {
-
+    // matrix mult_std(matrix a, matrix b) {
+    //     matrix c(a.dim(), false, false);
+    //     for (int i = 0; i < a.dim(); i++)
+    //      for (int j = 0; j < a.dim(); j++) {
+    //       int sum = 0;
+    //       for (int k = 0; k < a.dim(); k++)
+    //        sum += a(i,k) * b(k,j);
+    //       c(i,j) = sum;
+    //      }
+       
+    //     return c;
+    //    }
+    matrix *retVal = matrix_create(matA->row, matB->col);
+    for(size_t i =0; i<matA->row;i++)
+    {
+        for(size_t j=0; j<matB->col;j++)
+        {
+            MAT(retVal,i,j) = 0;
+            for(size_t k=0; k<matA->col;k++)
+            {
+                MAT(retVal,i,j) += MAT(matA,i,k)*MAT(matB,k,j);
+            }
+        }
+    }   
+    return retVal;
 }
 
  /**
@@ -185,5 +209,5 @@ matrix* matmat_addition(const matrix* matA, const matrix* matB)
  */
 matrix* matmat_subtraction(const matrix* matA, const matrix* matB)
 {
-    
+
 }
