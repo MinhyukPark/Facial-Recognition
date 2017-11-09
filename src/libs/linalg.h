@@ -120,3 +120,21 @@ matrix* matmat_addition(const matrix* matA, const matrix* matB);
  * @param matB
  */
 matrix* matmat_subtraction(const matrix* matA, const matrix* matB);
+
+ /**
+ * @brief Performs  matrixA * scaler
+ * this function will malloc for the user a matrix*
+ * @return a matrix*
+ * @param matA
+ * @param scalar
+ */
+matrix* matscalar_multiply(const matrix* matA, const double scalar);
+
+ /**
+ * @brief Performs  matrixA / scaler
+ * this function will malloc for the user a matrix*
+ * @return a matrix*
+ * @param matA
+ * @param scalar
+ */
+matrix* matscalar_divide(const matrix* matA, const double scalar);
