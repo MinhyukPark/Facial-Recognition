@@ -215,3 +215,44 @@ matrix* matmat_subtraction(const matrix* matA, const matrix* matB)
     }
     return retVal;
 }
+
+ /**
+ * @brief Performs  matrixA * scaler
+ * this function will malloc for the user a matrix*
+ * @return a matrix*
+ * @param matA
+ * @param scalar
+ */
+matrix* matscalar_multiply(const matrix* matA, const double scalar)
+{
+    matrix *retVal = matrix_create(matA->row, matA->col);
+    for (size_t i = 0; i < matA->row; i++)
+    {
+        for (size_t j = 0; j < matA->col; j++)
+        {
+            MAT(retVal,i,j) = MAT(matA,i,j) *scalar;
+        }
+    }
+    return retVal;
+}
+
+
+ /**
+ * @brief Performs  matrixA / scaler
+ * this function will malloc for the user a matrix*
+ * @return a matrix*
+ * @param matA
+ * @param scalar
+ */
+matrix* matscalar_divide(const matrix* matA, const double scalar)
+{
+    matrix *retVal = matrix_create(matA->row, matA->col);
+    for (size_t i = 0; i < matA->row; i++)
+    {
+        for (size_t j = 0; j < matA->col; j++)
+        {
+            MAT(retVal,i,j) = MAT(matA,i,j) /scalar;
+        }
+    }
+    return retVal; 
+}
