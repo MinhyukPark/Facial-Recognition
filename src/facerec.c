@@ -2,15 +2,12 @@
 #include <stdio.h>
 
 int main() {
-    vector* vec = malloc(sizeof(size_t) + (5 * sizeof(double)));
-    vec->size = 5;
+    vector* vec = vector_create(5);
+    matrix* mat = matrix_create(5, 5);
+
     for(int i = 0; i < 5; i ++) {
         vec->data[i] = i;
     }
-
-    matrix* mat = malloc((2 * sizeof(size_t)) + (25 * sizeof(double)));
-    mat->row = 5;
-    mat->col = 5;
 
     for(int i = 0; i < 25; i ++) {
         mat->data[i] = i;
@@ -18,7 +15,7 @@ int main() {
     
 
 
-    double** mat_result = vecmat_multiply(vec, mat);
+    matrix* mat_result = vecmat_multiply(vec, mat);
     printf("%p", mat_result);
     return 0;
 }

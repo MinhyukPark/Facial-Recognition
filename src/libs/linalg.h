@@ -21,6 +21,11 @@ typedef struct _matrix {
 } matrix;
 
 
+vector* vector_create(size_t size);
+
+matrix* matrix_create(size_t row, size_t col);
+
+
 
 /**
  * @brief Performs vector * matrix
@@ -29,5 +34,9 @@ typedef struct _matrix {
  * @param vec
  * @param mat
  */
- double** vecmat_multiply(const vector* vec, const matrix* mat);
+ matrix* vecmat_multiply(const vector* vec, const matrix* mat);
+
+
+
+
  
