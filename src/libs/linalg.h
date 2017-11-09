@@ -136,3 +136,11 @@ matrix* matscalar_multiply(const matrix* matA, const double scalar);
  * @param scalar
  */
 matrix* matscalar_divide(const matrix* matA, const double scalar);
+
+ /**
+ * @brief Performs  transpose(mat)
+ * this function will malloc for the user a matrix*
+ * @return a matrix*
+ * @param matA
+ */
+matrix* mat_transpose(const matrix* mat);
