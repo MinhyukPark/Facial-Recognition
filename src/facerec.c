@@ -40,6 +40,9 @@ int main() {
     matrix *matscaleDiv_result = matscalar_divide(mat,5);
     mat_print(matscaleDiv_result);
 
+    matrix *mattranspose_result = mat_transpose(mat);
+    mat_print(mattranspose_result);
+
     free(vec);
     free(mat);
     free(converted_vecmat);
@@ -49,5 +52,6 @@ int main() {
     free(matadd_result);    
     free(matscaleMult_result);
     free(matscaleDiv_result);
+    free(mattranspose_result);
     return 0;
 }
