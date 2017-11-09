@@ -6,6 +6,7 @@
  */
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 
 #include "linalg.h"
 
@@ -14,8 +15,9 @@ vector* vector_create(size_t size) {
     if(size <= 0) {
         return NULL;
     }
-    vector* retval = malloc((size * sizeof(double)) + sizeof(size_t));
+    vector* retval = malloc((size * sizeof(double)) + (2 * sizeof(size_t)));
     retval->size = size;
+    retval->padding  = 0;
     return retval;
 }
 
@@ -28,6 +30,39 @@ matrix* matrix_create(size_t row, size_t col) {
     retval->col = col;
     return retval;
 }
+
+/**
+ * @brief Converts vector into matrix
+ * this function will "cast" the vector into a matrix
+ * by using the fact that they both have the same size.
+ * when calling this function, calling free() on the matrix
+ * will free the vector and vice versa.
+ * @return a matrix*
+ * @param vector* to be converted
+ * @param int orientation where 1 is Row-wise and 0 is Column-wise
+ */
+matrix* vec_to_mat(vector* vec, int orientation) {
+    if(orientation == 1) {
+        vec->padding = vec->size;
+        vec->size = 1;
+    } else {
+        vec->padding = 1;
+    }
+    return (matrix*)vec;
+}
+
+/**
+ * @brief Reshapes the matrix
+ * this function will reshape the matrix in constant time
+ * @param matrix* to be reshaped
+ * @param size_t row for the new row
+ * @param size_t col for the new column
+ */
+void matrix_reshape(matrix* mat, size_t row, size_t col) {
+    mat->row = row;
+    mat->col = col;
+}
+
 /**
  * @brief Performs dot product on two arrays
  * this function will malloc for the user a double
@@ -42,7 +77,7 @@ double dot_product(const double* x, const double* y, int length)
     double retVal = 0.0;
     for(int i =0;i<length; i++)
     {
-        retVal+=x[i] *y[i];
+        retVal+=(x[i] *y[i]);
     }
     return retVal;
 }
@@ -59,8 +94,14 @@ double dot_product(const double* x, const double* y, int length)
     if(vec == NULL  || mat == NULL) {
         return NULL;
     }
-
-    return NULL;
+    vector* retvec = vector_create(vec->size);
+    memset(retvec->data, 0, sizeof(double) * vec->size);
+    for(size_t j = 0; j < mat->col; j ++) {
+        for(size_t i = 0; i < mat->row; i ++) {
+            VEC(retvec, j) += (VEC(vec, i) * MAT(mat, i, j));
+        }
+    }
+    return retvec;
 }
 
 
@@ -79,7 +120,34 @@ vector* matvec_multiply(const matrix* mat, const vector* vec)
     vector *retVec = vector_create(vec->size);
     for(size_t i =0; i< retVec->size; i++)
     { 
-        VEC(retVec,i) = dot_product((double*)((mat->data) + mat->row*i), (double*)vec, vec->size);
+        VEC(retVec,i) = dot_product(((double*)(mat->data) + (mat->col * i)), (double*)vec->data, vec->size);
     }
     return retVec;
+}
+
+/**
+ * @brief prints the matrix
+ * this function will not modify the matrix and print to stdout
+ * @param mat the matrix to be printed
+ */
+void mat_print(const matrix* mat) {
+    for(size_t i = 0; i < mat->row; i ++) {
+        for(size_t j = 0; j < mat->col; j ++) {
+            printf("%f, ", MAT(mat, i, j));
+        }
+        printf("\n");
+    }
+}
+
+/**
+ * @brief prints the vector
+ * this function will not modify the vector and print to stdout
+ * @param vec the vector to be printed
+ */
+void vec_print(const vector* vec) {
+    for(size_t i = 0; i < vec->size; i ++) {
+        // printf("%f, ", VEC(vec, i));
+        printf("%f", vec->data[i]);
+    }
+    printf("\n");
 }
