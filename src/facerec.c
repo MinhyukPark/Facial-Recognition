@@ -15,7 +15,9 @@ int main() {
     
 
 
-    matrix* mat_result = vecmat_multiply(vec, mat);
-    printf("%p", mat_result);
+    vector* vec_result = vecmat_multiply(vec, mat);
+    printf("%p", vec_result);
+    printf("%f", MAT(mat, 0, 0));
+    printf("%f", VEC(vec, 0));
     return 0;
 }

@@ -9,6 +9,7 @@
 
 #include "linalg.h"
 
+
 vector* vector_create(size_t size) {
     if(size <= 0) {
         return NULL;
@@ -30,23 +31,17 @@ matrix* matrix_create(size_t row, size_t col) {
 
 /**
  * @brief Performs vector * matrix
- * this function will malloc for the user a matrix*
- * @return a matrix*
+ * this function will malloc for the user a vector*
+ * @return a vector*
  * @param vec
  * @param mat
  */
- matrix* vecmat_multiply(const vector* vec, const matrix* mat) {
+ vector* vecmat_multiply(const vector* vec, const matrix* mat) {
     
     if(vec == NULL  || mat == NULL) {
         return NULL;
     }
-    
-    for(int i = 0; i < 5; i ++) {
-        printf("%f\n", vec->data[i]);
-    }
-    for(int i = 0; i < 25; i ++) {
-        printf("%f\n", mat->data[i]);
-    }
+
     return NULL;
 }
  
