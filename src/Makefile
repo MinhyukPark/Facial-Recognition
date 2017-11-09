@@ -1,5 +1,7 @@
+VPATH = ./libs
 OBJS_DIR = .objs
 EXE_DIR = ..
+LIBS_DIR = libs
 EXE_FACEREC=facerec
 # add more libraries here if necessary
 OBJS_FACEREC=$(EXE_FACEREC).o linalg.o tiff_util.o
@@ -28,26 +30,30 @@ LDFLAGS = -pthread -ltiff
 all:
 	($(MAKE) --no-print-directory pre-build && $(MAKE) --no-print-directory post-build) || $(MAKE) --no-print-directory failed
 
+### Update: 11/9/2017 using VPATH now ###
+# but keep the existing hierarchy sturcture in case
+# other commands need to be added
+# it would be nice to have echo "useful output" during make
 #### static library fix ####
 # without static libraries, this is the best solution I have
 pre-build:
-	cp ./libs/linalg.c ./linalg.c
-	cp ./libs/linalg.h ./linalg.h
-	cp ./libs/tiff_util.c ./tiff_util.c
-	cp ./libs/tiff_util.h ./tiff_util.h
+	# cp ./libs/linalg.c ./linalg.c
+	# cp ./libs/linalg.h ./linalg.h
+	# cp ./libs/tiff_util.c ./tiff_util.c
+	# cp ./libs/tiff_util.h ./tiff_util.h
 
 post-build: release
-	rm ./linalg.c
-	rm ./linalg.h
-	rm ./tiff_util.c
-	rm ./tiff_util.h
+	# rm ./linalg.c
+	# rm ./linalg.h
+	# rm ./tiff_util.c
+	# rm ./tiff_util.h
 	rm -r ./$(OBJS_DIR)
 
 failed:	
-	-rm ./linalg.c
-	-rm ./linalg.h
-	-rm ./tiff_util.c
-	-rm ./tiff_util.h
+	# -rm ./linalg.c
+	# -rm ./linalg.h
+	# -rm ./tiff_util.c
+	# -rm ./tiff_util.h
 	-rm -r ./$(OBJS_DIR)
 #### static library fix end ####
 
@@ -57,11 +63,11 @@ debug: clean
 	($(MAKE) --no-print-directory pre-build && $(MAKE) --no-print-directory post-build-debug) || $(MAKE) --no-print-directory failed
 
 post-build-debug: $(EXE_DIR)/$(EXE_FACEREC:%=%-debug)
-	rm ./linalg.c
-	rm ./linalg.h
-	rm ./tiff_process.c
-	rm ./tiff_process.h
-	rm -r ./$(OBJS_DIR)	
+	# rm ./linalg.c
+	# rm ./linalg.h
+	# rm ./tiff_process.c
+	# rm ./tiff_process.h
+	rm -r ./$(OBJS_DIR)
 
 ## OBJECTS
 -include $(OBJS_DIR)/*.d
