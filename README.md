@@ -17,7 +17,26 @@ Trying to apply what I learned in class about Principal Component Analysis and
 Singular Value Decomposition and create a C-library for a set of functions that
 will determine whether a given image contains a humanly-recognizable face or not,
 and if recognized if it is a face that is in the dataset.
+
+## Dependencies
+
+- [libtiff](http://www.libtiff.org/): TIFF Library and Utilities
+  - [source code](external_libraries/libtiff) is distributed with this repo
+  
+## Installation
+### libtiff
+
+Once inside the [directory](external_libraries/libtiff), navigate to the version
+of your choice and then run the following commands.
+```
+./configure --prefix=/usr --disable-static && make
+
+sudo make install
+```
+
 ## How to Run
+
+make sure all dependencies are satisfied before building
 
 `make`
 to build for release
