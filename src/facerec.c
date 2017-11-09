@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include <assert.h>
 #include "linalg.h"
 #include "tiff_util.h"
