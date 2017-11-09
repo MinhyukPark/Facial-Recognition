@@ -51,8 +51,12 @@ int main() {
     TIFFClose(out);
     free(image_vec);
     remove("./dataset/jaffe/test.tiff");
+    printf("\n\n");
+    vec_print(vec);    
+    vector *vecAppend_result = vec_append(vec,vec);
+    vec_print(vecAppend_result);
 
-    free(vec);
+    //free(vec);
     free(mat);
     free(converted_vecmat);
     free(converted_matvec);
@@ -62,5 +66,6 @@ int main() {
     free(matscaleMult_result);
     free(matscaleDiv_result);
     free(mattranspose_result);
+    //free(vecAppend_result);
     return 0;
 }
