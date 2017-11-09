@@ -26,7 +26,7 @@ to build for release
 to build for debugging
 
 ## Special Thanks to
- - TJ Egbejimba @tjegbejimba
+ - TJ Egbejimba
 
 
 ## TODOs
