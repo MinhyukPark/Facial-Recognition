@@ -151,3 +151,51 @@ void vec_print(const vector* vec) {
     }
     printf("\n");
 }
+
+ /**
+ * @brief Performs  matrix * matrix
+ * this function will malloc for the user a matrix*
+ * @return a matrix*
+ * @param matA
+ * @param matB
+ */
+matrix* matmat_multiply(const matrix* matA, const matrix* matB)
+{
+    matrix *retVal = matrix_create(matA->row, matB->col);
+    for(size_t i =0; i<matA->row;i++)
+    {
+        for(size_t j=0; j<matB->col;j++)
+        {
+            MAT(retVal,i,j) = 0;
+            for(size_t k=0; k<matA->col;k++)
+            {
+                MAT(retVal,i,j) += MAT(matA,i,k)*MAT(matB,k,j);
+            }
+        }
+    }   
+    return retVal;
+}
+
+//  /**
+//  * @brief Performs  matrix + matrix
+//  * this function will malloc for the user a matrix*
+//  * @return a matrix*
+//  * @param matA
+//  * @param matB
+//  */
+// matrix* matmat_addition(const matrix* matA, const matrix* matB)
+// {
+
+// }
+
+//  /**
+//  * @brief Performs  matrix - matrix
+//  * this function will malloc for the user a matrix*
+//  * @return a matrix*
+//  * @param matA
+//  * @param matB
+//  */
+// matrix* matmat_subtraction(const matrix* matA, const matrix* matB)
+// {
+
+// }
