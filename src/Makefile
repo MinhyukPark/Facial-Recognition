@@ -17,7 +17,7 @@ CFLAGS_RELEASE = -O2 $(WARNINGS) $(INC) -g -std=c99 -c -MMD -MP -D_GNU_SOURCE -p
 ## LINKER
 # eventually I would like to use a static library here
 LD = gcc
-LDFLAGS = -pthread -ltiff
+LDFLAGS = -pthread -ltiff -lm
 
 # PHONY declarations
 .PHONY: all
