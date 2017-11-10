@@ -144,7 +144,7 @@ void mat_print(const matrix* mat) {
 void vec_print(const vector* vec) {
     for(size_t i = 0; i < vec->size; i ++) {
         // printf("%f, ", VEC(vec, i));
-        printf("%f", vec->data[i]);
+        printf("%f ", vec->data[i]);
     }
     printf("\n");
 }
@@ -272,6 +272,31 @@ matrix* mat_transpose(const matrix* mat)
     }
     return retVal;
 }
+
+ /**
+ * @brief Performs  vec = vecA+vecB
+ * this function will malloc for the user a vector*
+ * and destroys vecA and vecB
+ * @return void
+ * @param vecA
+ * @param vecB
+ */
+vector* vec_append(vector* vecA, vector* vecB)
+{
+    size_t newSize = vecA->size + vecB->size;
+    vector* retVal = vector_create(newSize);
+    //vecA->data = (double*)realloc(vecA->data, sizeof(double)*(newSize));
+    memcpy(retVal->data, vecA->data, vecA->size *sizeof(double));    
+    memcpy(retVal->data + vecA->size, vecB->data, vecB->size *sizeof(double));
+    if(vecA == vecB)
+    {
+        free(vecA); 
+        return retVal;
+    }
+    free(vecB);
+    return retVal;
+}
+
 /**
  * @brief Performs Jacobi eigenvalue iteration
  * this function will 

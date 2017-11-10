@@ -149,6 +149,16 @@ matrix* matscalar_divide(const matrix* matA, const double scalar);
  */
 matrix* mat_transpose(const matrix* mat);
 
+ /**
+ * @brief Performs  vec = vecA+vecB
+ * this function will malloc for the user a vector*
+ * and destroys vecA and vecB
+ * @return void
+ * @param vecA
+ * @param vecB
+ */
+vector* vec_append(vector* vecA, vector* vecB);
+
 /**
  * @brief Performs Jacobi eigenvalue iteration
  * this function will 
@@ -189,5 +199,3 @@ void diag_vector(int n, double a[], double v[]);
  * @return double the frobenius norm of A * X - X * lambda
  */
 double frobenius_norm(int n, int k, double a[], double x[], double lambda[]);
-
-
