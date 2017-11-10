@@ -281,18 +281,23 @@ matrix* mat_transpose(const matrix* mat)
  * @param vecA
  * @param vecB
  */
-vector* vec_append(vector* vecA, vector* vecB)
+void vec_append(vector** vecA, vector* vecB)
 {
-    size_t newSize = vecA->size + vecB->size;
-    vector* retVal = vector_create(newSize);
-    //vecA->data = (double*)realloc(vecA->data, sizeof(double)*(newSize));
-    memcpy(retVal->data, vecA->data, vecA->size *sizeof(double));    
-    memcpy(retVal->data + vecA->size, vecB->data, vecB->size *sizeof(double));
-    if(vecA == vecB)
+    vector *buffer = vector_create(vecB->size);
+    memcpy(buffer, vecB, sizeof(double)*(vecB->size) + (2 * sizeof(size_t)));
+    size_t newSize = (*vecA)->size + buffer->size;
+    //vector* retVal = vector_create(newSize);
+    void *dest = *vecA;
+    void* arrv = NULL;
+    arrv = realloc(dest, sizeof(double)*(newSize) + (2 * sizeof(size_t)));
+    *vecA = arrv;
+    //memcpy(vecA->data, vecA->data, newSize *sizeof(double) + (2 * sizeof(size_t)));    
+    memcpy((*vecA)->data + (*vecA)->size, buffer->data, buffer->size *sizeof(double));
+    (*vecA)->size = newSize;
+    free(buffer);
+    if(*vecA==vecB)
     {
-        free(vecA); 
-        return retVal;
+        return;
     }
     free(vecB);
-    return retVal;
 }
