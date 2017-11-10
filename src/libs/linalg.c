@@ -286,8 +286,8 @@ vector* vec_append(vector* vecA, vector* vecB)
     size_t newSize = vecA->size + vecB->size;
     vector* retVal = vector_create(newSize);
     //vecA->data = (double*)realloc(vecA->data, sizeof(double)*(newSize));
-    memcpy(retVal, vecA->data, vecA->size *sizeof(double));    
-    memcpy(retVal + vecA->size, vecB->data, vecB->size *sizeof(double));
+    memcpy(retVal->data, vecA->data, vecA->size *sizeof(double));    
+    memcpy(retVal->data + vecA->size, vecB->data, vecB->size *sizeof(double));
     if(vecA == vecB)
     {
         free(vecA); 
