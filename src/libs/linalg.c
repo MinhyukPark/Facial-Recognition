@@ -284,29 +284,6 @@ matrix* mat_transpose(const matrix* mat)
  * @param rot_num output total number of rotations
 */
 void eigen(int n, double a[], int it_max, double v[], double d[], int* it_num, int* rot_num) {
-    // double *bw; 188
-    // double c; 233
-    // double g; 247
-    // double gapq; 199
-    // double h; 221
-    // int i; 191 201 276
-    // int j; 202 247
-    // int k; 288
-    // int l; 289
-    // int m; 290
-    // int p; 212
-    // int q; 213
-    // double s; 234
-    // double t; 224
-    // double tau; 235
-    // double term; 222
-    // double termp; 216
-    // double termq; 217
-    // double theta; 227
-    // double thresh; 198
-    // double w; 300
-    // double *zw; 189
-
     mat_identity(n, v); // create the identity matrix using what the caller allocated for us
     diag_vector(n, a, d); // get the diagonal values of a and store it in caller allocated vector d
 
