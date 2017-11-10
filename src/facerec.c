@@ -43,16 +43,20 @@ int main() {
     matrix *mattranspose_result = mat_transpose(mat);
     mat_print(mattranspose_result);
 
-    TIFF* image = TIFFOpen("./dataset/jaffe/KA.AN1.39.tiff", "r");
-    vector* image_vec = tiff_to_vec(image);
-    TIFF* out = vec_to_tiff("./dataset/jaffe/test.tiff", image_vec);
-    printf("sizeof vec %zu", image_vec->size);
-    TIFFClose(image);
-    TIFFClose(out);
-    free(image_vec);
-    remove("./dataset/jaffe/test.tiff");
+    // TIFF* image = TIFFOpen("./dataset/jaffe/KA.AN1.39.tiff", "r");
+    // vector* image_vec = tiff_to_vec(image);
+    // TIFF* out = vec_to_tiff("./dataset/jaffe/test.tiff", image_vec);
+    // printf("sizeof vec %zu", image_vec->size);
+    // TIFFClose(image);
+    // TIFFClose(out);
+    // free(image_vec);
+    // remove("./dataset/jaffe/test.tiff");
+    printf("\n\n");
+    vec_print(vec);    
+    vector *vecAppend_result = vec_append(vec,vec);
+    vec_print(vecAppend_result);
 
-    free(vec);
+    //free(vec);
     free(mat);
     free(converted_vecmat);
     free(converted_matvec);
@@ -62,5 +66,6 @@ int main() {
     free(matscaleMult_result);
     free(matscaleDiv_result);
     free(mattranspose_result);
+    free(vecAppend_result);
     return 0;
 }
