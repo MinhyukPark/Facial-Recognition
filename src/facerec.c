@@ -56,7 +56,33 @@ int main() {
     vec_append(&vec,vec);
     vec_print(vec);
 
-    //free(vec);
+    double a[25] = {
+        4,  4,    2,   3,     -2, 
+        4,  1,  -2,   -2,   2, 
+        2, -2,  11, 2,  -4, 
+        3,  -2, 2,   10, -6,
+        -2, 2, -4, -6, -3 };
+    double d[5];
+    int it_max = 100;
+    int it_num;
+    int n = 5;
+    int rot_num;
+    double v[25];
+    eigen( n, a, it_max, v, d, &it_num, &rot_num );
+
+    printf("num iter = %d\n", it_num);
+    printf("num rot = %d\n", rot_num);
+    printf("eigenvalues: ");
+    for(int i = 0; i < 5; i ++) {
+        printf("%f, ", d[i]);    
+    }
+    printf("\n");
+    
+    double error_frobenius = frobenius_norm(n, n, a, v, d);
+    printf("error of A * V - D * V = %g\n",  error_frobenius);
+
+    free(vec);
+
     free(mat);
     // free(converted_vecmat);
     // free(converted_matvec);

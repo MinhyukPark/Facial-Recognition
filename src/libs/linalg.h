@@ -9,6 +9,8 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <math.h>
+#include <time.h>
 
 #define MAT(m, x, y) (m->data[(x * m->col) + y])
 #define VEC(v, x) (v->data[x])
@@ -155,4 +157,45 @@ matrix* mat_transpose(const matrix* mat);
  * @param vecA
  * @param vecB
  */
-void vec_append(vector** vecA, vector* vecB);
+vector* vec_append(vector* vecA, vector* vecB);
+
+/**
+ * @brief Performs Jacobi eigenvalue iteration
+ * this function will 
+ * @param N the dimiension of the input matrix a, which is a N by N matrix
+ * @param a[] the input matrix which has to be square, real, and symmetric
+ * @param it_max maximum number of iterations to stop at
+ * @param v[] output matrix of eigenvectors, which is a N by N matrix
+ * @param d[] output matrix of eigenvalues, in descending order
+ * @param it_num output total number of iterations
+ * @param rot_num output total number of rotations
+*/
+void eigen(int N, double a[], int it_max, double v[], double d[], int* it_num, int* rot_num);
+
+/**
+ * @brief returns an identity matrix of size n
+ * @param n the dimension
+ * @param a[] output identity matrix
+ */
+void mat_identity(int n, double a[]);
+
+/**
+ * @brief gets the diagonal entries
+ * @param n the dimension
+ * @param a[] input the matrix, N by N
+ * @param v[] output the diagonal entries, N
+ */
+void diag_vector(int n, double a[], double v[]);
+
+
+
+/**
+ * @brief computes the Frobenius norm in a right eigensystem
+ * @param n the dimension of the matrix
+ * @param k the number of eigen vectors
+ * @param a[] input matrix of size n by n
+ * @param x[] input vector of eigenvectors of size k
+ * @param lamdba[] input vector of eigen values
+ * @return double the frobenius norm of A * X - X * lambda
+ */
+double frobenius_norm(int n, int k, double a[], double x[], double lambda[]);
