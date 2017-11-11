@@ -1,1 +1,2 @@
 external_libraries/* linguist-vendored
+# docs folder must be by default not parsed by linguist
