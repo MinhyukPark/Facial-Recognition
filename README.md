@@ -11,6 +11,8 @@ built with :heartpulse:
 
 Facial Detection using Eigenfaces
 
+[Documentation](https://cdn.rawgit.com/minpark815/Facial-Recognition/e06db672/docs/html/index.html)
+
 ## Motivation
 
 Trying to apply what I learned in class about Principal Component Analysis and 
