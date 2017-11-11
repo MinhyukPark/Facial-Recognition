@@ -301,3 +301,218 @@ void vec_append(vector** vecA, vector* vecB)
     }
     free(vecB);
 }
+/**
+ * @brief Performs Jacobi eigenvalue iteration
+ * this function will 
+ * @param N the dimiension of the input matrix a, which is a N by N matrix
+ * @param a[] the input matrix which has to be square, real, and symmetric
+ * @param it_max maximum number of iterations to stop at
+ * @param v[] output matrix of eigenvectors, which is a N by N matrix
+ * @param d[] output matrix of eigenvalues, in descending order
+ * @param it_num output total number of iterations
+ * @param rot_num output total number of rotations
+*/
+void eigen(int n, double a[], int it_max, double v[], double d[], int* it_num, int* rot_num) {
+    mat_identity(n, v); // create the identity matrix using what the caller allocated for us
+    diag_vector(n, a, d); // get the diagonal values of a and store it in caller allocated vector d
+
+    double* bw = (double*) malloc(n * sizeof(double));
+    double* zw = (double*) malloc(n * sizeof(double));
+
+    for(int i = 0; i < n; i ++) {
+        bw[i] = d[i];
+        zw[i] = 0.0;
+    }
+    *it_num = 0;
+    *rot_num = 0;
+
+    double thresh = 0.0;
+    double gapq = 0.0;
+    while(*it_num < it_max) {
+        *it_num += 1;
+        thresh = 0.0;
+        // set up the convergence threshold
+        // based on the size of strict upper triangle
+        for(int i = 0; i < n; i ++) {
+            for(int j = 0; j < i; j ++) {
+                thresh += (a[j + i * n] * a[j + i * n]);
+            }
+        }
+        // PASS 1
+        thresh = sqrt(thresh) / (double)(4 * n);
+        if(thresh == 0.0) {
+            break;
+        }
+        // PASS 2
+        for(int p = 0; p < n; p ++) {
+            for(int q = p + 1; q < n; q ++) {
+                gapq = 10.0 * fabs(a[p + q * n]);
+                double termp = gapq + fabs(d[p]);
+                double termq = gapq + fabs(d[q]);
+                if(4 < *it_num && termp == fabs(d[p]) && termq == fabs(d[q])) {
+                    a[p + q * n] = 0.0;
+                // apply rotation otherwise
+                // PASS 3
+                } else if(thresh <= fabs(a[p + q * n])) {
+                    double h = d[q] - d[p];
+                    double term = fabs(h) + gapq;
+                    double t = 0.0;
+                    if(term == fabs(h)) {
+                        t = a[p + q * n] / h;
+                    } else {
+                        double theta = 0.5 * h / a[p + q * n];
+                        t = 1.0 / (fabs(theta) + sqrt(1.0 + theta * theta));
+                        if(theta < 0.0) {
+                            t = -t;
+                        }
+                    }
+                    // PASS 4
+                    double c = 1.0 / sqrt(1.0 + t * t);
+                    double s = t * c;
+                    double tau = s / (1.0 + c);
+                    h = t * a[p + q * n];
+
+                    zw[p] -= h;
+                    zw[q] += h;
+                    d[p] -= h;
+                    d[q] += h;
+                    a[p + q * n] = 0.0;
+                    // PASS 5
+                    // rotate
+                    double g = 0.0;
+                    for(int j = 0; j < p; j ++) {
+                        g = a[j + p * n];
+                        h = a[j + q * n];
+                        a[j + p * n] = g - s * (h + g * tau);
+                        a[j + q * n] = h + s * (g - h * tau);
+                    }
+                    for(int j = p + 1; j < q; j ++) {
+                        g = a[p + j * n];
+                        h = a[j + q * n];
+                        a[p + j * n] = g - s * (h + g * tau);
+                        a[j + q * n] = h + s * (g - h * tau);
+                    }
+                    for(int j = q + 1; j < n; j ++) {
+                        g = a[p + j * n];
+                        h = a[q + j * n];
+                        a[p + j * n] = g - s * (h + g * tau);
+                        a[q + j * n] = h + s * (g - h * tau);
+                    }
+                    // PASS 6
+                    // store to eigenvector matrix v
+                    for(int j = 0; j < n; j ++) {
+                        g = v[j + p * n];
+                        h = v[j + q * n];
+                        v[j + p * n] = g - s * (h + g * tau);
+                        v[j + q * n] = h + s * (g - h * tau);
+                    }
+                    *rot_num += 1;
+                }
+            }
+        }
+        for(int i = 0; i < n; i ++) {
+            bw[i] += zw[i];
+            d[i] = bw[i];
+            zw[i] = 0.0;
+        }
+    }
+    // PASS 7
+    // restore upper triangle
+    for(int i = 0; i < n; i ++) {
+        for(int j = 0; j < i; j ++) {
+            a[j + i * n] = a [i + j * n];
+        }
+    }
+    for(int k = 0; k < n - 1; k ++) {
+        int m = k;
+        for(int l = k + 1; l < n; l ++) {
+            if(d[l] < d[m]) {
+                m = l;
+            }
+        }
+        if(m != k) {
+            double t = d[m];
+            d[m] = d[k];
+            d[k] = t;
+            for(int i = 0; i < n; i ++) {
+                double w = v[i + m * n];
+                v[i + m * n] = v[i + k * n];
+                v[i + k * n] = w;
+            }
+        }
+    }
+    free(bw);
+    free(zw);
+    return;
+}
+
+
+/**
+ * @brief returns an identity matrix of size n
+ * @param n the dimension
+ * @param a[] output identity matrix
+ */
+void mat_identity(int n, double a[]) {
+    int k = 0;
+    for (int j = 0; j < n; j ++ ) {
+        for (int i = 0; i < n; i ++ ) {
+            if ( i == j ) {
+                a[k] = 1.0;
+            } else {
+                a[k] = 0.0;
+            }
+            k += 1;
+        }
+    }
+    return;
+}
+
+/**
+ * @brief gets the diagonal entries
+ * @param n the dimension
+ * @param a[] input the matrix, N by N
+ * @param v[] output the diagonal entries, N
+ */
+void diag_vector(int n, double a[], double v[]) {
+    for(int i = 0; i < n; i ++) {
+        v[i] = a[i + i * n];
+    }
+    return;
+}
+
+/**
+ * @brief computes the Frobenius norm in a right eigensystem
+ * @param n the dimension of the matrix
+ * @param k the number of eigen vectors
+ * @param a[] input matrix of size n by n
+ * @param x[] input vector of eigenvectors of size k
+ * @param lamdba[] input vector of eigen values
+ * @return double the frobenius norm of A * X - X * lambda
+ */
+double frobenius_norm(int n, int k, double a[], double x[], double lambda[]) {
+    double* c = (double*) malloc(n * k * sizeof(double));
+    for(int i = 0; i < k; i ++) {
+        for(int j = 0; j < n; j ++) {
+            c[j + i * n] = 0.0;
+            for(int l = 0; l < n; l ++) {
+                c[j + i * n] = c[j + i * n] + a[j + l * n] * x[l + i * n];
+            }
+        }
+    }
+    for(int i = 0; i < k; i ++) {
+        for(int j = 0; j < n; j ++) {
+            c[j + i * n] = c[j + i * n] - lambda[i] * x[j + i * n];
+        }
+    }
+    // n k c
+    // m n a
+    double retval = 0.0;
+    for(int i = 0; i < k; i ++) {
+        for(int j = 0; j < n; j ++) {
+            retval += pow(c[j + i * n], 2);
+        }
+    }
+    retval = sqrt(retval);
+    free(c);
+    return retval;
+}
