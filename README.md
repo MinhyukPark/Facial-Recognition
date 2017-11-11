@@ -32,7 +32,13 @@ of your choice and then run the following commands.
 ./configure --prefix=/usr --disable-static && make
 
 sudo make install
+
+make clean
+make distclean
 ```
+make sure to clean up the .tar file it creates or any other files
+not cleaned up by the set of make clean commands to prevent
+false commits/pull requests to master.
 
 ## How to Run
 
@@ -52,25 +58,38 @@ to build for debugging
 
 ### Design Decisions
 
+When to malloc, realloc, free?
+
+Does jacobi approximation provide enough accuracy?
+
 Catastrophic cancellation when normalizing?
 
 ### Linear Algebra functions
 
-matmat_add()
+~matmat_add()~
 
-matmat_subtract()
+~matmat_subtract()~
 
-matscalar_multiply()
+~matscalar_multiply()~
 
-matscalar_divide()
+~matscalar_divide()~
 
-mat_transpose()
+~mat_transpose()~
 
-vec_append()
+~vec_append()~
+
+mat_average()
 
 ### Libtiff
 
-tiff_to_vec()
+~tiff_to_vec()~
 
-vec_to_tiff()
+~vec_to_tiff()~
 
+get_all_tiff_files()
+
+### Optimizations (for the UIUC linux cluster)
+
+prefetching for large linear algebra operations
+
+optimizing cache behavior
