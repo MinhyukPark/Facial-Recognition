@@ -1,5 +1,12 @@
+/**
+ * @file facerec.c
+ * @authon Minhyuk Park
+ * @date 7 Nov 2017
+ * @brief File containing the main function
+ */
+
 #include <assert.h>
-#include "linalg.h"
+#include "linalg.h" // unnecessary because tiff_util.h includes linalg.h
 #include "tiff_util.h"
 
 int main() {
@@ -43,11 +50,9 @@ int main() {
     // matrix *mattranspose_result = mat_transpose(mat);
     // mat_print(mattranspose_result);
 
-    // TIFF* image = TIFFOpen("./dataset/jaffe/KA.AN1.39.tiff", "r");
-    // vector* image_vec = tiff_to_vec(image);
+    // vector* image_vec = tiff_to_vec(./dataset/jaffe/KA.AN1.39.tiff);
     // TIFF* out = vec_to_tiff("./dataset/jaffe/test.tiff", image_vec);
     // printf("sizeof vec %zu", image_vec->size);
-    // TIFFClose(image);
     // TIFFClose(out);
     // free(image_vec);
     // remove("./dataset/jaffe/test.tiff");

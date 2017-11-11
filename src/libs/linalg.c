@@ -7,7 +7,6 @@
  
 #include "linalg.h"
 
-
 vector* vector_create(size_t size) {
     if(size <= 0) {
         return NULL;
@@ -17,6 +16,7 @@ vector* vector_create(size_t size) {
     retval->padding  = 0;
     return retval;
 }
+
 
 matrix* matrix_create(size_t row, size_t col) {
     if(row <= 0 || col <= 0) {
@@ -28,16 +28,7 @@ matrix* matrix_create(size_t row, size_t col) {
     return retval;
 }
 
-/**
- * @brief Converts vector into matrix
- * this function will "cast" the vector into a matrix
- * by using the fact that they both have the same size.
- * when calling this function, calling free() on the matrix
- * will free the vector and vice versa.
- * @return a matrix*
- * @param vector* to be converted
- * @param int orientation where 1 is Row-wise and 0 is Column-wise
- */
+
 matrix* vec_to_mat(vector* vec, int orientation) {
     if(orientation == 1) {
         vec->padding = vec->size;
@@ -48,27 +39,13 @@ matrix* vec_to_mat(vector* vec, int orientation) {
     return (matrix*)vec;
 }
 
-/**
- * @brief Reshapes the matrix
- * this function will reshape the matrix in constant time
- * @param matrix* to be reshaped
- * @param size_t row for the new row
- * @param size_t col for the new column
- */
+
 void matrix_reshape(matrix* mat, size_t row, size_t col) {
     mat->row = row;
     mat->col = col;
 }
 
-/**
- * @brief Performs dot product on two arrays
- * this function will malloc for the user a double
- * arrays must be of same size
- * @return a double
- * @param first array
- * @param second array
- * @param length of arrays
- */
+
 double dot_product(const double* x, const double* y, int length)
 {
     double retVal = 0.0;
@@ -79,13 +56,7 @@ double dot_product(const double* x, const double* y, int length)
     return retVal;
 }
 
-/**
- * @brief Performs vector * matrix
- * this function will malloc for the user a vector*
- * @return a vector*
- * @param vec
- * @param mat
- */
+
  vector* vecmat_multiply(const vector* vec, const matrix* mat) {
     
     if(vec == NULL  || mat == NULL) {
@@ -102,13 +73,6 @@ double dot_product(const double* x, const double* y, int length)
 }
 
 
- /**
- * @brief Performs  matrix * vector
- * this function will malloc for the user a vector*
- * @return a vector*
- * @param mat
- * @param vec
- */
 vector* matvec_multiply(const matrix* mat, const vector* vec)
 {
     if(vec == NULL  || mat == NULL) {
@@ -122,11 +86,7 @@ vector* matvec_multiply(const matrix* mat, const vector* vec)
     return retVec;
 }
 
-/**
- * @brief prints the matrix
- * this function will not modify the matrix and print to stdout
- * @param mat the matrix to be printed
- */
+
 void mat_print(const matrix* mat) {
     for(size_t i = 0; i < mat->row; i ++) {
         for(size_t j = 0; j < mat->col; j ++) {
@@ -136,11 +96,7 @@ void mat_print(const matrix* mat) {
     }
 }
 
-/**
- * @brief prints the vector
- * this function will not modify the vector and print to stdout
- * @param vec the vector to be printed
- */
+
 void vec_print(const vector* vec) {
     for(size_t i = 0; i < vec->size; i ++) {
         // printf("%f, ", VEC(vec, i));
@@ -149,13 +105,7 @@ void vec_print(const vector* vec) {
     printf("\n");
 }
 
- /**
- * @brief Performs  matrixA * matrixB
- * this function will malloc for the user a matrix*
- * @return a matrix*
- * @param matA
- * @param matB
- */
+
 matrix* matmat_multiply(const matrix* matA, const matrix* matB)
 {
     matrix *retVal = matrix_create(matA->row, matB->col);
@@ -173,13 +123,7 @@ matrix* matmat_multiply(const matrix* matA, const matrix* matB)
     return retVal;
 }
 
- /**
- * @brief Performs  matrixA + matrixB
- * this function will malloc for the user a matrix*
- * @return a matrix*
- * @param matA
- * @param matB
- */
+
 matrix* matmat_addition(const matrix* matA, const matrix* matB)
 {
     matrix *retVal = matrix_create(matA->row, matB->col);
@@ -193,13 +137,7 @@ matrix* matmat_addition(const matrix* matA, const matrix* matB)
     return retVal;
 }
 
- /**
- * @brief Performs  matrixA - matrixB
- * this function will malloc for the user a matrix*
- * @return a matrix*
- * @param matA
- * @param matB
- */
+
 matrix* matmat_subtraction(const matrix* matA, const matrix* matB)
 {
     matrix *retVal = matrix_create(matA->row, matB->col);
@@ -213,13 +151,7 @@ matrix* matmat_subtraction(const matrix* matA, const matrix* matB)
     return retVal;
 }
 
- /**
- * @brief Performs  matrixA * scaler
- * this function will malloc for the user a matrix*
- * @return a matrix*
- * @param matA
- * @param scalar
- */
+
 matrix* matscalar_multiply(const matrix* matA, const double scalar)
 {
     matrix *retVal = matrix_create(matA->row, matA->col);
@@ -234,13 +166,6 @@ matrix* matscalar_multiply(const matrix* matA, const double scalar)
 }
 
 
- /**
- * @brief Performs  matrixA / scaler
- * this function will malloc for the user a matrix*
- * @return a matrix*
- * @param matA
- * @param scalar
- */
 matrix* matscalar_divide(const matrix* matA, const double scalar)
 {
     matrix *retVal = matrix_create(matA->row, matA->col);
@@ -254,12 +179,7 @@ matrix* matscalar_divide(const matrix* matA, const double scalar)
     return retVal; 
 }
 
- /**
- * @brief Performs  transpose(mat)
- * this function will malloc for the user a matrix*
- * @return a matrix*
- * @param matA
- */
+
 matrix* mat_transpose(const matrix* mat)
 {
     matrix *retVal = matrix_create(mat->col, mat->row);
@@ -273,14 +193,7 @@ matrix* mat_transpose(const matrix* mat)
     return retVal;
 }
 
- /**
- * @brief Performs  vec = vec_a+vec_b
- * this function will realloc vec_a
- * and free vec_b
- * @return void
- * @param vec_a
- * @param vec_b
- */
+
 void vec_append(vector** vec_a, vector* vec_b)
 {
     void* saved_vec_a = *vec_a;
@@ -299,17 +212,8 @@ void vec_append(vector** vec_a, vector* vec_b)
         free(vec_b);
     }
 }
-/**
- * @brief Performs Jacobi eigenvalue iteration
- * this function will 
- * @param N the dimiension of the input matrix a, which is a N by N matrix
- * @param a[] the input matrix which has to be square, real, and symmetric
- * @param it_max maximum number of iterations to stop at
- * @param v[] output matrix of eigenvectors, which is a N by N matrix
- * @param d[] output matrix of eigenvalues, in descending order
- * @param it_num output total number of iterations
- * @param rot_num output total number of rotations
-*/
+
+
 void eigen(int n, double a[], int it_max, double v[], double d[], int* it_num, int* rot_num) {
     mat_identity(n, v); // create the identity matrix using what the caller allocated for us
     diag_vector(n, a, d); // get the diagonal values of a and store it in caller allocated vector d
@@ -445,11 +349,6 @@ void eigen(int n, double a[], int it_max, double v[], double d[], int* it_num, i
 }
 
 
-/**
- * @brief returns an identity matrix of size n
- * @param n the dimension
- * @param a[] output identity matrix
- */
 void mat_identity(int n, double a[]) {
     int k = 0;
     for (int j = 0; j < n; j ++ ) {
@@ -465,12 +364,7 @@ void mat_identity(int n, double a[]) {
     return;
 }
 
-/**
- * @brief gets the diagonal entries
- * @param n the dimension
- * @param a[] input the matrix, N by N
- * @param v[] output the diagonal entries, N
- */
+
 void diag_vector(int n, double a[], double v[]) {
     for(int i = 0; i < n; i ++) {
         v[i] = a[i + i * n];
@@ -478,15 +372,7 @@ void diag_vector(int n, double a[], double v[]) {
     return;
 }
 
-/**
- * @brief computes the Frobenius norm in a right eigensystem
- * @param n the dimension of the matrix
- * @param k the number of eigen vectors
- * @param a[] input matrix of size n by n
- * @param x[] input vector of eigenvectors of size k
- * @param lamdba[] input vector of eigen values
- * @return double the frobenius norm of A * X - X * lambda
- */
+
 double frobenius_norm(int n, int k, double a[], double x[], double lambda[]) {
     double* c = (double*) malloc(n * k * sizeof(double));
     for(int i = 0; i < k; i ++) {
@@ -502,8 +388,6 @@ double frobenius_norm(int n, int k, double a[], double x[], double lambda[]) {
             c[j + i * n] = c[j + i * n] - lambda[i] * x[j + i * n];
         }
     }
-    // n k c
-    // m n a
     double retval = 0.0;
     for(int i = 0; i < k; i ++) {
         for(int j = 0; j < n; j ++) {
@@ -515,12 +399,6 @@ double frobenius_norm(int n, int k, double a[], double x[], double lambda[]) {
     return retval;
 }
 
-/**
- * @brief computes the variance covariance matrix
- * this function will malloc a new matrix
- * @param matrix* mat the input matrix of deviation scores of size n by k 
- * @return matrix* the output variance-covariance matrix 
- */
 matrix* covmat(matrix* mat) {
     size_t n = mat->row;
     matrix* mat_T = mat_transpose(mat);

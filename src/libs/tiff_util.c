@@ -8,14 +8,8 @@
 #include "tiff_util.h"
 #include <math.h>
 
-/**
- * @brief Converts tiff to vector
- * this function will take a TIFF file and
- * return a vector with every element corresponding to pixel
- * @return a vector*
- * @param TIFF* tiff image
- */
-vector* tiff_to_vec(TIFF* image) {
+vector* tiff_to_vec(char* filename) {
+    TIFF* image = TIFFOpen(filename, "r");
     uint32 width;
     uint32 height;
     TIFFGetField(image, TIFFTAG_IMAGEWIDTH, &width);
@@ -33,17 +27,11 @@ vector* tiff_to_vec(TIFF* image) {
     _TIFFfree(raster);
 
     retvec->padding = width;
+    TIFFClose(image);
     return retvec;
 }
 
-/**
- * @brief Converts vector to tiff
- * this function will take a vector and
- * return a TIFF* with every element corresponding to pixel
- * @return a TIFF*
- * @param char* the output filename
- * @param vector* vector representing the image
- */
+
 TIFF* vec_to_tiff(char* filename, vector* vec) {
     TIFF* rettiff = TIFFOpen(filename, "w");
     uint32 width = vec->padding;

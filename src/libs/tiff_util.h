@@ -12,19 +12,20 @@
 
 /**
  * @brief Converts tiff to vector
- * this function will take a TIFF file and
- * return a vector with every element corresponding to pixel
- * @return a vector*
- * @param TIFF* tiff image
+ * this function will take a TIFF filename and
+ * return a vector* with every element corresponding to pixel
+ * @return vector* newly malloced representing the image
+ * @param filename char* the input filename
  */
-vector* tiff_to_vec(TIFF* image);
+vector* tiff_to_vec(char* filename);
 
 /**
  * @brief Converts vector to tiff
  * this function will take a vector and
  * return a TIFF* with every element corresponding to pixel
- * @return a TIFF*
- * @param char* the output filename
- * @param vector* vector representing the image
+ * @return TIFF* opened tiff file stream with necessary data written to from the
+ * vector
+ * @param filename char* the output filename
+ * @param vec vector* vector representing the image
  */
 TIFF* vec_to_tiff(char* filename, vector* vec);

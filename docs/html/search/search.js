@@ -7,10 +7,13 @@
 
 var indexSectionsWithContent =
 {
-  0: "_cdeflmtv",
+  0: "_cdeflmprstv",
   1: "_",
-  2: "lt",
-  3: "cdefmtv"
+  2: "flt",
+  3: "cdefmtv",
+  4: "cdprs",
+  5: "mv",
+  6: "mv"
 };
 
 var indexSectionNames =
@@ -18,7 +21,10 @@ var indexSectionNames =
   0: "all",
   1: "classes",
   2: "files",
-  3: "functions"
+  3: "functions",
+  4: "variables",
+  5: "typedefs",
+  6: "defines"
 };
 
 function convertToId(search)
