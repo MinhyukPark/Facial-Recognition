@@ -150,9 +150,9 @@ matrix* matscalar_divide(const matrix* matA, const double scalar);
 matrix* mat_transpose(const matrix* mat);
 
  /**
- * @brief Performs  vecA = vecA+vecB
- * this function will realloc for the user vectorA
- * and destroys vecB
+ * @brief Performs  vec = vecA+vecB
+ * this function will malloc for the user a vector*
+ * and destroys vecA and vecB
  * @return void
  * @param vecA
  * @param vecB
@@ -199,3 +199,5 @@ void diag_vector(int n, double a[], double v[]);
  * @return double the frobenius norm of A * X - X * lambda
  */
 double frobenius_norm(int n, int k, double a[], double x[], double lambda[]);
+
+matrix * compute_average();
