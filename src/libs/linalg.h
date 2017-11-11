@@ -150,14 +150,14 @@ matrix* matscalar_divide(const matrix* matA, const double scalar);
 matrix* mat_transpose(const matrix* mat);
 
  /**
- * @brief Performs  vec = vecA+vecB
- * this function will malloc for the user a vector*
- * and destroys vecA and vecB
+ * @brief Performs  vecA = vecA+vecB
+ * this function will realloc for the user vectorA
+ * and destroys vecB
  * @return void
  * @param vecA
  * @param vecB
  */
-vector* vec_append(vector* vecA, vector* vecB);
+void vec_append(vector** vecA, vector* vecB);
 
 /**
  * @brief Performs Jacobi eigenvalue iteration

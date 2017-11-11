@@ -13,35 +13,35 @@ int main() {
         mat->data[i] = i;
     }
 
-    vector* vecmat_result = matvec_multiply(mat, vec);
-    vec_print(vecmat_result);
+    // vector* vecmat_result = matvec_multiply(mat, vec);
+    // vec_print(vecmat_result);
 
-    vector* matvec_result = matvec_multiply(mat,vec);
-    vec_print(matvec_result);
+    // vector* matvec_result = matvec_multiply(mat,vec);
+    // vec_print(matvec_result);
 
-    matrix* converted_vecmat = vec_to_mat(vecmat_result, 0);
-    mat_print(converted_vecmat);
+    // matrix* converted_vecmat = vec_to_mat(vecmat_result, 0);
+    // mat_print(converted_vecmat);
 
-    matrix* converted_matvec = vec_to_mat(matvec_result, 1);
-    mat_print(converted_matvec);
+    // matrix* converted_matvec = vec_to_mat(matvec_result, 1);
+    // mat_print(converted_matvec);
 
-    matrix * matmat_result = matmat_multiply(mat,mat);
-    mat_print(matmat_result);    
+    // matrix * matmat_result = matmat_multiply(mat,mat);
+    // mat_print(matmat_result);    
     
-    matrix *matsub_result = matmat_subtraction(mat,mat);
-    mat_print(matsub_result);      
+    // matrix *matsub_result = matmat_subtraction(mat,mat);
+    // mat_print(matsub_result);      
 
-    matrix *matadd_result = matmat_addition(mat,mat);
-    mat_print(matadd_result);   
+    // matrix *matadd_result = matmat_addition(mat,mat);
+    // mat_print(matadd_result);   
 
-    matrix *matscaleMult_result = matscalar_multiply(mat,5);
-    mat_print(matscaleMult_result);
+    // matrix *matscaleMult_result = matscalar_multiply(mat,5);
+    // mat_print(matscaleMult_result);
 
-    matrix *matscaleDiv_result = matscalar_divide(mat,5);
-    mat_print(matscaleDiv_result);
+    // matrix *matscaleDiv_result = matscalar_divide(mat,5);
+    // mat_print(matscaleDiv_result);
   
-    matrix *mattranspose_result = mat_transpose(mat);
-    mat_print(mattranspose_result);
+    // matrix *mattranspose_result = mat_transpose(mat);
+    // mat_print(mattranspose_result);
 
     // TIFF* image = TIFFOpen("./dataset/jaffe/KA.AN1.39.tiff", "r");
     // vector* image_vec = tiff_to_vec(image);
@@ -53,8 +53,8 @@ int main() {
     // remove("./dataset/jaffe/test.tiff");
     printf("\n\n");
     vec_print(vec);    
-    vector *vecAppend_result = vec_append(vec,vec);
-    vec_print(vecAppend_result);
+    vec_append(&vec,vec);
+    vec_print(vec);
 
     double a[25] = {
         4,  4,    2,   3,     -2, 
@@ -84,14 +84,13 @@ int main() {
     free(vec);
 
     free(mat);
-    free(converted_vecmat);
-    free(converted_matvec);
-    free(matmat_result);
-    free(matsub_result);
-    free(matadd_result);    
-    free(matscaleMult_result);
-    free(matscaleDiv_result);
-    free(mattranspose_result);
-    free(vecAppend_result);
+    // free(converted_vecmat);
+    // free(converted_matvec);
+    // free(matmat_result);
+    // free(matsub_result);
+    // free(matadd_result);    
+    // free(matscaleMult_result);
+    // free(matscaleDiv_result);
+    // free(mattranspose_result);
     return 0;
 }
