@@ -157,7 +157,11 @@ matrix* mat_transpose(const matrix* mat);
  * @param vecA
  * @param vecB
  */
+<<<<<<< HEAD
 vector* vec_append(vector* vecA, vector* vecB);
+=======
+void vec_append(vector** vecA, vector* vecB);
+>>>>>>> fefabadd97f5f2b265c04c8a6acc878183032c21
 
 /**
  * @brief Performs Jacobi eigenvalue iteration
@@ -198,6 +202,10 @@ void diag_vector(int n, double a[], double v[]);
  * @param lamdba[] input vector of eigen values
  * @return double the frobenius norm of A * X - X * lambda
  */
+<<<<<<< HEAD
 double frobenius_norm(int n, int k, double a[], double x[], double lambda[]);
 
 matrix * compute_average();
+=======
+double frobenius_norm(int n, int k, double a[], double x[], double lambda[]);
+>>>>>>> fefabadd97f5f2b265c04c8a6acc878183032c21
