@@ -274,32 +274,30 @@ matrix* mat_transpose(const matrix* mat)
 }
 
  /**
- * @brief Performs  vec = vecA+vecB
- * this function will malloc for the user a vector*
- * and destroys vecA and vecB
+ * @brief Performs  vec = vec_a+vec_b
+ * this function will realloc vec_a
+ * and free vec_b
  * @return void
- * @param vecA
- * @param vecB
+ * @param vec_a
+ * @param vec_b
  */
-void vec_append(vector** vecA, vector* vecB)
+void vec_append(vector** vec_a, vector* vec_b)
 {
-    vector *buffer = vector_create(vecB->size);
-    memcpy(buffer, vecB, sizeof(double)*(vecB->size) + (2 * sizeof(size_t)));
-    size_t newSize = (*vecA)->size + buffer->size;
-    //vector* retVal = vector_create(newSize);
-    void *dest = *vecA;
+    void* saved_vec_a = *vec_a;
+    vector* buffer = vector_create(vec_b->size);
+    memcpy(buffer, vec_b, sizeof(double) * vec_b->size + (2 * sizeof(size_t)));
+    size_t newSize = (*vec_a)->size + buffer->size;
+    void* dest = *vec_a;
     void* arrv = NULL;
-    arrv = realloc(dest, sizeof(double)*(newSize) + (2 * sizeof(size_t)));
-    *vecA = arrv;
-    //memcpy(vecA->data, vecA->data, newSize *sizeof(double) + (2 * sizeof(size_t)));    
-    memcpy((*vecA)->data + (*vecA)->size, buffer->data, buffer->size *sizeof(double));
-    (*vecA)->size = newSize;
+    arrv = realloc(dest, sizeof(double) * newSize + (2 * sizeof(size_t)));
+    *vec_a = arrv;    
+    memcpy((*vec_a)->data + (*vec_a)->size, buffer->data, buffer->size *sizeof(double));
+    (*vec_a)->size = newSize;
     free(buffer);
-    if(*vecA==vecB)
+    if(saved_vec_a != vec_b)
     {
-        return;
+        free(vec_b);
     }
-    free(vecB);
 }
 /**
  * @brief Performs Jacobi eigenvalue iteration
