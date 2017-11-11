@@ -3,15 +3,15 @@
 #include "tiff_util.h"
 
 int main() {
-    vector* vec = vector_create(5);
-    matrix* mat = matrix_create(5, 5);
-    for(size_t i = 0; i < vec->size; i ++) {
-        vec->data[i] = i;
-    }
+    // vector* vec = vector_create(5);
+    // matrix* mat = matrix_create(5, 5);
+    // for(size_t i = 0; i < vec->size; i ++) {
+    //     vec->data[i] = i;
+    // }
 
-    for(size_t i = 0; i < mat->row * mat->col ; i ++) {
-        mat->data[i] = i;
-    }
+    // for(size_t i = 0; i < mat->row * mat->col ; i ++) {
+    //     mat->data[i] = i;
+    // }
 
     // vector* vecmat_result = matvec_multiply(mat, vec);
     // vec_print(vecmat_result);
@@ -51,39 +51,53 @@ int main() {
     // TIFFClose(out);
     // free(image_vec);
     // remove("./dataset/jaffe/test.tiff");
-    printf("\n\n");
-    vec_print(vec);    
-    vec_append(&vec,vec);
-    vec_print(vec);
+    // printf("\n\n");
+    // vec_print(vec);    
+    // vec_append(&vec,vec);
+    // vec_print(vec);
 
-    double a[25] = {
-        4,  4,    2,   3,     -2, 
-        4,  1,  -2,   -2,   2, 
-        2, -2,  11, 2,  -4, 
-        3,  -2, 2,   10, -6,
-        -2, 2, -4, -6, -3 };
-    double d[5];
-    int it_max = 100;
-    int it_num;
-    int n = 5;
-    int rot_num;
-    double v[25];
-    eigen( n, a, it_max, v, d, &it_num, &rot_num );
+    // double a[25] = {
+    //     4,  4,    2,   3,     -2, 
+    //     4,  1,  -2,   -2,   2, 
+    //     2, -2,  11, 2,  -4, 
+    //     3,  -2, 2,   10, -6,
+    //     -2, 2, -4, -6, -3 };
+    // double d[5];
+    // int it_max = 100;
+    // int it_num;
+    // int n = 5;
+    // int rot_num;
+    // double v[25];
+    // eigen( n, a, it_max, v, d, &it_num, &rot_num );
 
-    printf("num iter = %d\n", it_num);
-    printf("num rot = %d\n", rot_num);
-    printf("eigenvalues: ");
-    for(int i = 0; i < 5; i ++) {
-        printf("%f, ", d[i]);    
-    }
-    printf("\n");
+    // printf("num iter = %d\n", it_num);
+    // printf("num rot = %d\n", rot_num);
+    // printf("eigenvalues: ");
+    // for(int i = 0; i < 5; i ++) {
+    //     printf("%f, ", d[i]);    
+    // }
+    // printf("\n");
     
-    double error_frobenius = frobenius_norm(n, n, a, v, d);
-    printf("error of A * V - D * V = %g\n",  error_frobenius);
+    // double error_frobenius = frobenius_norm(n, n, a, v, d);
+    // printf("error of A * V - D * V = %g\n",  error_frobenius);
 
-    free(vec);
+    matrix* mat = matrix_create(5, 3);
+
+     double b[15] = {
+         24, 0, 30,
+         24, 30, -30,
+         -6, 0, 0,
+         -6, 0, 30,
+         -36, -30, -30 };
+
+    for(size_t i = 0; i < mat->row * mat->col ; i ++) {
+        mat->data[i] = b[i];
+    }
+    matrix* variance_covariance_mat = covmat(mat);
+    mat_print(variance_covariance_mat);
 
     free(mat);
+    free(variance_covariance_mat);
     // free(converted_vecmat);
     // free(converted_matvec);
     // free(matmat_result);
