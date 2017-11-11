@@ -514,3 +514,19 @@ double frobenius_norm(int n, int k, double a[], double x[], double lambda[]) {
     free(c);
     return retval;
 }
+
+/**
+ * @brief computes the variance covariance matrix
+ * this function will malloc a new matrix
+ * @param matrix* mat the input matrix of deviation scores of size n by k 
+ * @return matrix* the output variance-covariance matrix 
+ */
+matrix* covmat(matrix* mat) {
+    size_t n = mat->row;
+    matrix* mat_T = mat_transpose(mat);
+    matrix* x_T_x = matmat_multiply(mat_T, mat);
+    matrix* retmat = matscalar_divide(x_T_x, n);
+    free(x_T_x);
+    free(mat_T);
+    return retmat;
+}

@@ -187,8 +187,6 @@ void mat_identity(int n, double a[]);
  */
 void diag_vector(int n, double a[], double v[]);
 
-
-
 /**
  * @brief computes the Frobenius norm in a right eigensystem
  * @param n the dimension of the matrix
@@ -199,3 +197,11 @@ void diag_vector(int n, double a[], double v[]);
  * @return double the frobenius norm of A * X - X * lambda
  */
 double frobenius_norm(int n, int k, double a[], double x[], double lambda[]);
+
+/**
+ * @brief computes the variance covariance matrix
+ * this function will malloc a new matrix
+ * @param matrix* mat the input matrix of deviation scores of size n by k 
+ * @return matrix* the output variance-covariance matrix 
+ */
+matrix* covmat(matrix* mat);
