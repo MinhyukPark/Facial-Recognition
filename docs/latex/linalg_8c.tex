@@ -1,0 +1,1048 @@
+\hypertarget{linalg_8c}{\section{/mnt/c/\-A\-B\-C/\-C\-S/github/\-Facial-\/\-Recognition/src/libs/linalg.c File Reference}
+\label{linalg_8c}\index{/mnt/c/\-A\-B\-C/\-C\-S/github/\-Facial-\/\-Recognition/src/libs/linalg.\-c@{/mnt/c/\-A\-B\-C/\-C\-S/github/\-Facial-\/\-Recognition/src/libs/linalg.\-c}}
+}
+
+
+File containing common linear algebra functions.  
+
+
+{\ttfamily \#include \char`\"{}linalg.\-h\char`\"{}}\\*
+Include dependency graph for linalg.\-c\-:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{linalg_8c__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{linalg_8h_a07a01529159cc35e78c1f7731ac7bda6}{vector} $\ast$ \hyperlink{linalg_8c_a7040be230e99648e77b0932600bf55ef}{vector\-\_\-create} (size\-\_\-t size)
+\begin{DoxyCompactList}\small\item\em Creates a vector this function will malloc the exact space for the required dimensions. \end{DoxyCompactList}\item 
+\hyperlink{linalg_8h_abc75382643898dd572498a574bf891c7}{matrix} $\ast$ \hyperlink{linalg_8c_a7821976cc30bc3131f3646bec1992d91}{matrix\-\_\-create} (size\-\_\-t row, size\-\_\-t col)
+\begin{DoxyCompactList}\small\item\em Creates a matrix this function will malloc the exact space for the required dimensions. \end{DoxyCompactList}\item 
+\hyperlink{linalg_8h_abc75382643898dd572498a574bf891c7}{matrix} $\ast$ \hyperlink{linalg_8c_a8a5d3412faa2267345b3a7d1ca6f58c1}{vec\-\_\-to\-\_\-mat} (\hyperlink{linalg_8h_a07a01529159cc35e78c1f7731ac7bda6}{vector} $\ast$vec, int orientation)
+\begin{DoxyCompactList}\small\item\em Converts vector into matrix this function will \char`\"{}cast\char`\"{} the vector into a matrix by using the fact that they both have the same size. when calling this function, calling free() on the matrix will free the vector and vice versa. \end{DoxyCompactList}\item 
+void \hyperlink{linalg_8c_a41ab46fdaa678c67aef38d873870a98d}{matrix\-\_\-reshape} (\hyperlink{linalg_8h_abc75382643898dd572498a574bf891c7}{matrix} $\ast$mat, size\-\_\-t row, size\-\_\-t col)
+\begin{DoxyCompactList}\small\item\em Reshapes the matrix this function will reshape the matrix in constant time. \end{DoxyCompactList}\item 
+double \hyperlink{linalg_8c_abb2106d12022de4436ca036630b72c4a}{dot\-\_\-product} (const double $\ast$x, const double $\ast$y, int length)
+\begin{DoxyCompactList}\small\item\em Performs dot product on two double$\ast$ this function will malloc for the user a double arrays must be of same size. \end{DoxyCompactList}\item 
+\hyperlink{linalg_8h_a07a01529159cc35e78c1f7731ac7bda6}{vector} $\ast$ \hyperlink{linalg_8c_a4af2cd71186eeb14f970f97a27fbcef0}{vecmat\-\_\-multiply} (const \hyperlink{linalg_8h_a07a01529159cc35e78c1f7731ac7bda6}{vector} $\ast$vec, const \hyperlink{linalg_8h_abc75382643898dd572498a574bf891c7}{matrix} $\ast$mat)
+\begin{DoxyCompactList}\small\item\em Performs vector matrix multiplication this function will malloc for the user a vector$\ast$ if the vector is of size M and the matrix size M by N, the resulting column vector will be of size N. \end{DoxyCompactList}\item 
+\hyperlink{linalg_8h_a07a01529159cc35e78c1f7731ac7bda6}{vector} $\ast$ \hyperlink{linalg_8c_af88415d8996030537851e2c48d5337c4}{matvec\-\_\-multiply} (const \hyperlink{linalg_8h_abc75382643898dd572498a574bf891c7}{matrix} $\ast$mat, const \hyperlink{linalg_8h_a07a01529159cc35e78c1f7731ac7bda6}{vector} $\ast$vec)
+\begin{DoxyCompactList}\small\item\em Performs matrix vector multiplication this function will malloc for the user a vector$\ast$ if the matrix is of size M by N and the vector N, the resulting row vector will be of size M. \end{DoxyCompactList}\item 
+void \hyperlink{linalg_8c_a3c4e05af95e01c11963c912837d0d35b}{mat\-\_\-print} (const \hyperlink{linalg_8h_abc75382643898dd572498a574bf891c7}{matrix} $\ast$mat)
+\begin{DoxyCompactList}\small\item\em prints the matrix this function will not modify the matrix and print to stdout \end{DoxyCompactList}\item 
+void \hyperlink{linalg_8c_a1d2e72678bf82c44ba57020fc8588868}{vec\-\_\-print} (const \hyperlink{linalg_8h_a07a01529159cc35e78c1f7731ac7bda6}{vector} $\ast$vec)
+\begin{DoxyCompactList}\small\item\em prints the vector this function will not modify the vector and print to stdout \end{DoxyCompactList}\item 
+\hyperlink{linalg_8h_abc75382643898dd572498a574bf891c7}{matrix} $\ast$ \hyperlink{linalg_8c_a8c6dcaba2cba934fe253ad89a84c0c73}{matmat\-\_\-multiply} (const \hyperlink{linalg_8h_abc75382643898dd572498a574bf891c7}{matrix} $\ast$mat\-A, const \hyperlink{linalg_8h_abc75382643898dd572498a574bf891c7}{matrix} $\ast$mat\-B)
+\begin{DoxyCompactList}\small\item\em Performs standard matrix multiplication this function will malloc for the user a matrix$\ast$. \end{DoxyCompactList}\item 
+\hyperlink{linalg_8h_abc75382643898dd572498a574bf891c7}{matrix} $\ast$ \hyperlink{linalg_8c_aa1d82d4991b3650fb19f0a7cf288d69b}{matmat\-\_\-addition} (const \hyperlink{linalg_8h_abc75382643898dd572498a574bf891c7}{matrix} $\ast$mat\-A, const \hyperlink{linalg_8h_abc75382643898dd572498a574bf891c7}{matrix} $\ast$mat\-B)
+\begin{DoxyCompactList}\small\item\em Performs standard matrix addition this function will malloc for the user a matrix$\ast$. \end{DoxyCompactList}\item 
+\hyperlink{linalg_8h_abc75382643898dd572498a574bf891c7}{matrix} $\ast$ \hyperlink{linalg_8c_ac34c4704704c8d0a87c5d7cb8fc81b90}{matmat\-\_\-subtraction} (const \hyperlink{linalg_8h_abc75382643898dd572498a574bf891c7}{matrix} $\ast$mat\-A, const \hyperlink{linalg_8h_abc75382643898dd572498a574bf891c7}{matrix} $\ast$mat\-B)
+\begin{DoxyCompactList}\small\item\em Performs standard matrix subtration this function will malloc for the user a matrix$\ast$. \end{DoxyCompactList}\item 
+\hyperlink{linalg_8h_abc75382643898dd572498a574bf891c7}{matrix} $\ast$ \hyperlink{linalg_8c_a37448fe86f1e35687bef6f05839a9b62}{matscalar\-\_\-multiply} (const \hyperlink{linalg_8h_abc75382643898dd572498a574bf891c7}{matrix} $\ast$mat\-A, const double scalar)
+\begin{DoxyCompactList}\small\item\em Performs scalar multiplication of a matrix this function will malloc for the user a matrix$\ast$. \end{DoxyCompactList}\item 
+\hyperlink{linalg_8h_abc75382643898dd572498a574bf891c7}{matrix} $\ast$ \hyperlink{linalg_8c_a7d62975b718a8e11cbfbca42a408e49e}{matscalar\-\_\-divide} (const \hyperlink{linalg_8h_abc75382643898dd572498a574bf891c7}{matrix} $\ast$mat\-A, const double scalar)
+\begin{DoxyCompactList}\small\item\em Performs scalar division of a matrix this function will malloc for the user a matrix$\ast$. \end{DoxyCompactList}\item 
+\hyperlink{linalg_8h_abc75382643898dd572498a574bf891c7}{matrix} $\ast$ \hyperlink{linalg_8c_a2ac4400497d3a421f3f631d6329010b6}{mat\-\_\-transpose} (const \hyperlink{linalg_8h_abc75382643898dd572498a574bf891c7}{matrix} $\ast$mat)
+\begin{DoxyCompactList}\small\item\em Performs matrix transpose this function will malloc for the user a matrix$\ast$. \end{DoxyCompactList}\item 
+void \hyperlink{linalg_8c_adbfad21fe7e851455d625173e67b8504}{vec\-\_\-append} (\hyperlink{linalg_8h_a07a01529159cc35e78c1f7731ac7bda6}{vector} $\ast$$\ast$vec\-\_\-a, \hyperlink{linalg_8h_a07a01529159cc35e78c1f7731ac7bda6}{vector} $\ast$vec\-\_\-b)
+\begin{DoxyCompactList}\small\item\em Appends vector b to vector a this function will realloc for the user vector a and free vector b. \end{DoxyCompactList}\item 
+void \hyperlink{linalg_8c_a5a1e9091382fa5e859255c55177ec401}{eigen} (int n, double a\mbox{[}$\,$\mbox{]}, int it\-\_\-max, double v\mbox{[}$\,$\mbox{]}, double d\mbox{[}$\,$\mbox{]}, int $\ast$it\-\_\-num, int $\ast$rot\-\_\-num)
+\begin{DoxyCompactList}\small\item\em Performs Jacobi eigenvalue iteration this function will required the user to pass in non-\/null it\-\_\-num and rot\-\_\-num it does not malloc but rather requires the caller to malloc space for it. \end{DoxyCompactList}\item 
+void \hyperlink{linalg_8c_a97f97bfa6f100928e8d6c9f085bd9d12}{mat\-\_\-identity} (int n, double a\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em modifies a matrix to be the identity matrix of size n \end{DoxyCompactList}\item 
+void \hyperlink{linalg_8c_abc4918a0c6b295404ebfadfe78b26bdd}{diag\-\_\-vector} (int n, double a\mbox{[}$\,$\mbox{]}, double v\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em gets the diagonal entries \end{DoxyCompactList}\item 
+double \hyperlink{linalg_8c_a948f2b3da29647be0bcb62e717dfec2d}{frobenius\-\_\-norm} (int n, int k, double a\mbox{[}$\,$\mbox{]}, double x\mbox{[}$\,$\mbox{]}, double lambda\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em computes the Frobenius norm in a right eigensystem \end{DoxyCompactList}\item 
+\hyperlink{linalg_8h_abc75382643898dd572498a574bf891c7}{matrix} $\ast$ \hyperlink{linalg_8c_ad41ec0281d3766f40963b77520ce600d}{covmat} (\hyperlink{linalg_8h_abc75382643898dd572498a574bf891c7}{matrix} $\ast$mat)
+\begin{DoxyCompactList}\small\item\em computes the variance covariance matrix \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+File containing common linear algebra functions. Minhyuk Park \begin{DoxyDate}{Date}
+7 Nov 2017 
+\end{DoxyDate}
+
+
+\subsection{Function Documentation}
+\hypertarget{linalg_8c_ad41ec0281d3766f40963b77520ce600d}{\index{linalg.\-c@{linalg.\-c}!covmat@{covmat}}
+\index{covmat@{covmat}!linalg.c@{linalg.\-c}}
+\subsubsection[{covmat}]{\setlength{\rightskip}{0pt plus 5cm}{\bf matrix}$\ast$ covmat (
+\begin{DoxyParamCaption}
+\item[{{\bf matrix} $\ast$}]{mat}
+\end{DoxyParamCaption}
+)}}\label{linalg_8c_ad41ec0281d3766f40963b77520ce600d}
+
+
+computes the variance covariance matrix 
+
+\begin{DoxyReturn}{Returns}
+matrix$\ast$ the output variance-\/covariance matrix this function will malloc a new matrix 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em mat} & a matrix$\ast$ representing the input matrix of deviation scores of size n by k \\
+\hline
+\end{DoxyParams}
+
+
+References mat\-\_\-transpose(), matmat\-\_\-multiply(), matscalar\-\_\-divide(), and \-\_\-matrix\-::row.
+
+
+\begin{DoxyCode}
+402                             \{
+403     \textcolor{keywordtype}{size\_t} n = mat->\hyperlink{struct__matrix_a1087bec6a11b0773b4852c4ca49fc32a}{row};
+404     \hyperlink{struct__matrix}{matrix}* mat\_T = \hyperlink{linalg_8c_a2ac4400497d3a421f3f631d6329010b6}{mat\_transpose}(mat);
+405     \hyperlink{struct__matrix}{matrix}* x\_T\_x = \hyperlink{linalg_8c_a8c6dcaba2cba934fe253ad89a84c0c73}{matmat\_multiply}(mat\_T, mat);
+406     \hyperlink{struct__matrix}{matrix}* retmat = \hyperlink{linalg_8c_a7d62975b718a8e11cbfbca42a408e49e}{matscalar\_divide}(x\_T\_x, n);
+407     free(x\_T\_x);
+408     free(mat\_T);
+409     \textcolor{keywordflow}{return} retmat;
+410 \}
+\end{DoxyCode}
+\hypertarget{linalg_8c_abc4918a0c6b295404ebfadfe78b26bdd}{\index{linalg.\-c@{linalg.\-c}!diag\-\_\-vector@{diag\-\_\-vector}}
+\index{diag\-\_\-vector@{diag\-\_\-vector}!linalg.c@{linalg.\-c}}
+\subsubsection[{diag\-\_\-vector}]{\setlength{\rightskip}{0pt plus 5cm}void diag\-\_\-vector (
+\begin{DoxyParamCaption}
+\item[{int}]{n, }
+\item[{double}]{a\mbox{[}$\,$\mbox{]}, }
+\item[{double}]{v\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}}\label{linalg_8c_abc4918a0c6b295404ebfadfe78b26bdd}
+
+
+gets the diagonal entries 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & int the dimension \\
+\hline
+{\em a\mbox{[}$\,$\mbox{]}} & double\mbox{[}\mbox{]} input the matrix, N by N \\
+\hline
+{\em v\mbox{[}$\,$\mbox{]}} & double\mbox{[}\mbox{]} output the diagonal entries, N \\
+\hline
+\end{DoxyParams}
+
+
+Referenced by eigen().
+
+
+\begin{DoxyCode}
+368                                                 \{
+369     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i = 0; i < n; i ++) \{
+370         v[i] = a[i + i * n];
+371     \}
+372     \textcolor{keywordflow}{return};
+373 \}
+\end{DoxyCode}
+\hypertarget{linalg_8c_abb2106d12022de4436ca036630b72c4a}{\index{linalg.\-c@{linalg.\-c}!dot\-\_\-product@{dot\-\_\-product}}
+\index{dot\-\_\-product@{dot\-\_\-product}!linalg.c@{linalg.\-c}}
+\subsubsection[{dot\-\_\-product}]{\setlength{\rightskip}{0pt plus 5cm}double dot\-\_\-product (
+\begin{DoxyParamCaption}
+\item[{const double $\ast$}]{x, }
+\item[{const double $\ast$}]{y, }
+\item[{int}]{length}
+\end{DoxyParamCaption}
+)}}\label{linalg_8c_abb2106d12022de4436ca036630b72c4a}
+
+
+Performs dot product on two double$\ast$ this function will malloc for the user a double arrays must be of same size. 
+
+\begin{DoxyReturn}{Returns}
+a double representing the inner product 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em x} & const double$\ast$ the first vector \\
+\hline
+{\em y} & const double$\ast$ the second vector \\
+\hline
+{\em length} & int the size of the vectors \\
+\hline
+\end{DoxyParams}
+
+
+Referenced by matvec\-\_\-multiply().
+
+
+\begin{DoxyCode}
+50 \{
+51     \textcolor{keywordtype}{double} retVal = 0.0;
+52     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i =0;i<length; i++)
+53     \{
+54         retVal+=(x[i] *y[i]);
+55     \}
+56     \textcolor{keywordflow}{return} retVal;
+57 \}
+\end{DoxyCode}
+\hypertarget{linalg_8c_a5a1e9091382fa5e859255c55177ec401}{\index{linalg.\-c@{linalg.\-c}!eigen@{eigen}}
+\index{eigen@{eigen}!linalg.c@{linalg.\-c}}
+\subsubsection[{eigen}]{\setlength{\rightskip}{0pt plus 5cm}void eigen (
+\begin{DoxyParamCaption}
+\item[{int}]{N, }
+\item[{double}]{a\mbox{[}$\,$\mbox{]}, }
+\item[{int}]{it\-\_\-max, }
+\item[{double}]{v\mbox{[}$\,$\mbox{]}, }
+\item[{double}]{d\mbox{[}$\,$\mbox{]}, }
+\item[{int $\ast$}]{it\-\_\-num, }
+\item[{int $\ast$}]{rot\-\_\-num}
+\end{DoxyParamCaption}
+)}}\label{linalg_8c_a5a1e9091382fa5e859255c55177ec401}
+
+
+Performs Jacobi eigenvalue iteration this function will required the user to pass in non-\/null it\-\_\-num and rot\-\_\-num it does not malloc but rather requires the caller to malloc space for it. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em N} & int the dimiension of the input matrix a, which is a N by N matrix \\
+\hline
+{\em a\mbox{[}$\,$\mbox{]}} & double\mbox{[}\mbox{]} the input matrix which has to be square, real, and symmetric \\
+\hline
+{\em it\-\_\-max} & int maximum number of iterations to stop at \\
+\hline
+{\em v\mbox{[}$\,$\mbox{]}} & double\mbox{[}\mbox{]}output matrix of eigenvectors, which is a N by N matrix \\
+\hline
+{\em d\mbox{[}$\,$\mbox{]}} & double\mbox{[}\mbox{]} output matrix of eigenvalues, in descending order \\
+\hline
+{\em it\-\_\-num} & int$\ast$ output total number of iterations \\
+\hline
+{\em rot\-\_\-num} & int$\ast$ output total number of rotations \\
+\hline
+\end{DoxyParams}
+
+
+References diag\-\_\-vector(), and mat\-\_\-identity().
+
+
+\begin{DoxyCode}
+217                                                                                              \{
+218     \hyperlink{linalg_8c_a97f97bfa6f100928e8d6c9f085bd9d12}{mat\_identity}(n, v); \textcolor{comment}{// create the identity matrix using what the caller allocated for us}
+219     \hyperlink{linalg_8c_abc4918a0c6b295404ebfadfe78b26bdd}{diag\_vector}(n, a, d); \textcolor{comment}{// get the diagonal values of a and store it in caller allocated
+       vector d}
+220 
+221     \textcolor{keywordtype}{double}* bw = (\textcolor{keywordtype}{double}*) malloc(n * \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{double}));
+222     \textcolor{keywordtype}{double}* zw = (\textcolor{keywordtype}{double}*) malloc(n * \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{double}));
+223 
+224     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i = 0; i < n; i ++) \{
+225         bw[i] = d[i];
+226         zw[i] = 0.0;
+227     \}
+228     *it\_num = 0;
+229     *rot\_num = 0;
+230 
+231     \textcolor{keywordtype}{double} thresh = 0.0;
+232     \textcolor{keywordtype}{double} gapq = 0.0;
+233     \textcolor{keywordflow}{while}(*it\_num < it\_max) \{
+234         *it\_num += 1;
+235         thresh = 0.0;
+236         \textcolor{comment}{// set up the convergence threshold}
+237         \textcolor{comment}{// based on the size of strict upper triangle}
+238         \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i = 0; i < n; i ++) \{
+239             \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} j = 0; j < i; j ++) \{
+240                 thresh += (a[j + i * n] * a[j + i * n]);
+241             \}
+242         \}
+243         \textcolor{comment}{// PASS 1}
+244         thresh = sqrt(thresh) / (double)(4 * n);
+245         \textcolor{keywordflow}{if}(thresh == 0.0) \{
+246             \textcolor{keywordflow}{break};
+247         \}
+248         \textcolor{comment}{// PASS 2}
+249         \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} p = 0; p < n; p ++) \{
+250             \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} q = p + 1; q < n; q ++) \{
+251                 gapq = 10.0 * fabs(a[p + q * n]);
+252                 \textcolor{keywordtype}{double} termp = gapq + fabs(d[p]);
+253                 \textcolor{keywordtype}{double} termq = gapq + fabs(d[q]);
+254                 \textcolor{keywordflow}{if}(4 < *it\_num && termp == fabs(d[p]) && termq == fabs(d[q])) \{
+255                     a[p + q * n] = 0.0;
+256                 \textcolor{comment}{// apply rotation otherwise}
+257                 \textcolor{comment}{// PASS 3}
+258                 \} \textcolor{keywordflow}{else} \textcolor{keywordflow}{if}(thresh <= fabs(a[p + q * n])) \{
+259                     \textcolor{keywordtype}{double} h = d[q] - d[p];
+260                     \textcolor{keywordtype}{double} term = fabs(h) + gapq;
+261                     \textcolor{keywordtype}{double} t = 0.0;
+262                     \textcolor{keywordflow}{if}(term == fabs(h)) \{
+263                         t = a[p + q * n] / h;
+264                     \} \textcolor{keywordflow}{else} \{
+265                         \textcolor{keywordtype}{double} theta = 0.5 * h / a[p + q * n];
+266                         t = 1.0 / (fabs(theta) + sqrt(1.0 + theta * theta));
+267                         \textcolor{keywordflow}{if}(theta < 0.0) \{
+268                             t = -t;
+269                         \}
+270                     \}
+271                     \textcolor{comment}{// PASS 4}
+272                     \textcolor{keywordtype}{double} c = 1.0 / sqrt(1.0 + t * t);
+273                     \textcolor{keywordtype}{double} s = t * c;
+274                     \textcolor{keywordtype}{double} tau = s / (1.0 + c);
+275                     h = t * a[p + q * n];
+276 
+277                     zw[p] -= h;
+278                     zw[q] += h;
+279                     d[p] -= h;
+280                     d[q] += h;
+281                     a[p + q * n] = 0.0;
+282                     \textcolor{comment}{// PASS 5}
+283                     \textcolor{comment}{// rotate}
+284                     \textcolor{keywordtype}{double} g = 0.0;
+285                     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} j = 0; j < p; j ++) \{
+286                         g = a[j + p * n];
+287                         h = a[j + q * n];
+288                         a[j + p * n] = g - s * (h + g * tau);
+289                         a[j + q * n] = h + s * (g - h * tau);
+290                     \}
+291                     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} j = p + 1; j < q; j ++) \{
+292                         g = a[p + j * n];
+293                         h = a[j + q * n];
+294                         a[p + j * n] = g - s * (h + g * tau);
+295                         a[j + q * n] = h + s * (g - h * tau);
+296                     \}
+297                     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} j = q + 1; j < n; j ++) \{
+298                         g = a[p + j * n];
+299                         h = a[q + j * n];
+300                         a[p + j * n] = g - s * (h + g * tau);
+301                         a[q + j * n] = h + s * (g - h * tau);
+302                     \}
+303                     \textcolor{comment}{// PASS 6}
+304                     \textcolor{comment}{// store to eigenvector matrix v}
+305                     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} j = 0; j < n; j ++) \{
+306                         g = v[j + p * n];
+307                         h = v[j + q * n];
+308                         v[j + p * n] = g - s * (h + g * tau);
+309                         v[j + q * n] = h + s * (g - h * tau);
+310                     \}
+311                     *rot\_num += 1;
+312                 \}
+313             \}
+314         \}
+315         \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i = 0; i < n; i ++) \{
+316             bw[i] += zw[i];
+317             d[i] = bw[i];
+318             zw[i] = 0.0;
+319         \}
+320     \}
+321     \textcolor{comment}{// PASS 7}
+322     \textcolor{comment}{// restore upper triangle}
+323     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i = 0; i < n; i ++) \{
+324         \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} j = 0; j < i; j ++) \{
+325             a[j + i * n] = a [i + j * n];
+326         \}
+327     \}
+328     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} k = 0; k < n - 1; k ++) \{
+329         \textcolor{keywordtype}{int} m = k;
+330         \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} l = k + 1; l < n; l ++) \{
+331             \textcolor{keywordflow}{if}(d[l] < d[m]) \{
+332                 m = l;
+333             \}
+334         \}
+335         \textcolor{keywordflow}{if}(m != k) \{
+336             \textcolor{keywordtype}{double} t = d[m];
+337             d[m] = d[k];
+338             d[k] = t;
+339             \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i = 0; i < n; i ++) \{
+340                 \textcolor{keywordtype}{double} w = v[i + m * n];
+341                 v[i + m * n] = v[i + k * n];
+342                 v[i + k * n] = w;
+343             \}
+344         \}
+345     \}
+346     free(bw);
+347     free(zw);
+348     \textcolor{keywordflow}{return};
+349 \}
+\end{DoxyCode}
+\hypertarget{linalg_8c_a948f2b3da29647be0bcb62e717dfec2d}{\index{linalg.\-c@{linalg.\-c}!frobenius\-\_\-norm@{frobenius\-\_\-norm}}
+\index{frobenius\-\_\-norm@{frobenius\-\_\-norm}!linalg.c@{linalg.\-c}}
+\subsubsection[{frobenius\-\_\-norm}]{\setlength{\rightskip}{0pt plus 5cm}double frobenius\-\_\-norm (
+\begin{DoxyParamCaption}
+\item[{int}]{n, }
+\item[{int}]{k, }
+\item[{double}]{a\mbox{[}$\,$\mbox{]}, }
+\item[{double}]{x\mbox{[}$\,$\mbox{]}, }
+\item[{double}]{lambda\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}}\label{linalg_8c_a948f2b3da29647be0bcb62e717dfec2d}
+
+
+computes the Frobenius norm in a right eigensystem 
+
+\begin{DoxyReturn}{Returns}
+double the frobenius norm of A $\ast$ X -\/ X $\ast$ lambda 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em n} & int the dimension of the matrix \\
+\hline
+{\em k} & int the number of eigen vectors \\
+\hline
+{\em a\mbox{[}$\,$\mbox{]}} & double\mbox{[}\mbox{]} input matrix of size n by n \\
+\hline
+{\em x\mbox{[}$\,$\mbox{]}} & double\mbox{[}\mbox{]} input vector of eigenvectors of size k \\
+\hline
+{\em lamdba\mbox{[}$\,$\mbox{]}} & double\mbox{[}\mbox{]} input vector of eigen values \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+376                                                                              \{
+377     \textcolor{keywordtype}{double}* c = (\textcolor{keywordtype}{double}*) malloc(n * k * \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{double}));
+378     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i = 0; i < k; i ++) \{
+379         \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} j = 0; j < n; j ++) \{
+380             c[j + i * n] = 0.0;
+381             \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} l = 0; l < n; l ++) \{
+382                 c[j + i * n] = c[j + i * n] + a[j + l * n] * x[l + i * n];
+383             \}
+384         \}
+385     \}
+386     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i = 0; i < k; i ++) \{
+387         \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} j = 0; j < n; j ++) \{
+388             c[j + i * n] = c[j + i * n] - lambda[i] * x[j + i * n];
+389         \}
+390     \}
+391     \textcolor{keywordtype}{double} retval = 0.0;
+392     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} i = 0; i < k; i ++) \{
+393         \textcolor{keywordflow}{for}(\textcolor{keywordtype}{int} j = 0; j < n; j ++) \{
+394             retval += pow(c[j + i * n], 2);
+395         \}
+396     \}
+397     retval = sqrt(retval);
+398     free(c);
+399     \textcolor{keywordflow}{return} retval;
+400 \}
+\end{DoxyCode}
+\hypertarget{linalg_8c_a97f97bfa6f100928e8d6c9f085bd9d12}{\index{linalg.\-c@{linalg.\-c}!mat\-\_\-identity@{mat\-\_\-identity}}
+\index{mat\-\_\-identity@{mat\-\_\-identity}!linalg.c@{linalg.\-c}}
+\subsubsection[{mat\-\_\-identity}]{\setlength{\rightskip}{0pt plus 5cm}void mat\-\_\-identity (
+\begin{DoxyParamCaption}
+\item[{int}]{n, }
+\item[{double}]{a\mbox{[}$\,$\mbox{]}}
+\end{DoxyParamCaption}
+)}}\label{linalg_8c_a97f97bfa6f100928e8d6c9f085bd9d12}
+
+
+modifies a matrix to be the identity matrix of size n 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & int the dimension \\
+\hline
+{\em a\mbox{[}$\,$\mbox{]}} & double output identity matrix \\
+\hline
+\end{DoxyParams}
+
+
+Referenced by eigen().
+
+
+\begin{DoxyCode}
+352                                      \{
+353     \textcolor{keywordtype}{int} k = 0;
+354     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} j = 0; j < n; j ++ ) \{
+355         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{int} i = 0; i < n; i ++ ) \{
+356             \textcolor{keywordflow}{if} ( i == j ) \{
+357                 a[k] = 1.0;
+358             \} \textcolor{keywordflow}{else} \{
+359                 a[k] = 0.0;
+360             \}
+361             k += 1;
+362         \}
+363     \}
+364     \textcolor{keywordflow}{return};
+365 \}
+\end{DoxyCode}
+\hypertarget{linalg_8c_a3c4e05af95e01c11963c912837d0d35b}{\index{linalg.\-c@{linalg.\-c}!mat\-\_\-print@{mat\-\_\-print}}
+\index{mat\-\_\-print@{mat\-\_\-print}!linalg.c@{linalg.\-c}}
+\subsubsection[{mat\-\_\-print}]{\setlength{\rightskip}{0pt plus 5cm}void mat\-\_\-print (
+\begin{DoxyParamCaption}
+\item[{const {\bf matrix} $\ast$}]{mat}
+\end{DoxyParamCaption}
+)}}\label{linalg_8c_a3c4e05af95e01c11963c912837d0d35b}
+
+
+prints the matrix this function will not modify the matrix and print to stdout 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mat} & const matrix$\ast$ the matrix to be printed \\
+\hline
+\end{DoxyParams}
+
+
+References \-\_\-matrix\-::col, M\-A\-T, and \-\_\-matrix\-::row.
+
+
+\begin{DoxyCode}
+90                                   \{
+91     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{size\_t} i = 0; i < mat->\hyperlink{struct__matrix_a1087bec6a11b0773b4852c4ca49fc32a}{row}; i ++) \{
+92         \textcolor{keywordflow}{for}(\textcolor{keywordtype}{size\_t} j = 0; j < mat->\hyperlink{struct__matrix_a7e9feb52cfc0a9d7cba5320abcaa997a}{col}; j ++) \{
+93             printf(\textcolor{stringliteral}{"%f, "}, \hyperlink{linalg_8h_ae0e32e641b8137c777d52988864296e3}{MAT}(mat, i, j));
+94         \}
+95         printf(\textcolor{stringliteral}{"\(\backslash\)n"});
+96     \}
+97 \}
+\end{DoxyCode}
+\hypertarget{linalg_8c_a2ac4400497d3a421f3f631d6329010b6}{\index{linalg.\-c@{linalg.\-c}!mat\-\_\-transpose@{mat\-\_\-transpose}}
+\index{mat\-\_\-transpose@{mat\-\_\-transpose}!linalg.c@{linalg.\-c}}
+\subsubsection[{mat\-\_\-transpose}]{\setlength{\rightskip}{0pt plus 5cm}{\bf matrix}$\ast$ mat\-\_\-transpose (
+\begin{DoxyParamCaption}
+\item[{const {\bf matrix} $\ast$}]{mat}
+\end{DoxyParamCaption}
+)}}\label{linalg_8c_a2ac4400497d3a421f3f631d6329010b6}
+
+
+Performs matrix transpose this function will malloc for the user a matrix$\ast$. 
+
+\begin{DoxyReturn}{Returns}
+matrix$\ast$ the newly transposed and malloced matrix 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em mat} & const matrix$\ast$ the matrix to be transposed \\
+\hline
+\end{DoxyParams}
+
+
+References \-\_\-matrix\-::col, M\-A\-T, matrix\-\_\-create(), and \-\_\-matrix\-::row.
+
+
+
+Referenced by covmat().
+
+
+\begin{DoxyCode}
+184 \{
+185     \hyperlink{struct__matrix}{matrix} *retVal = \hyperlink{linalg_8c_a7821976cc30bc3131f3646bec1992d91}{matrix\_create}(mat->\hyperlink{struct__matrix_a7e9feb52cfc0a9d7cba5320abcaa997a}{col}, mat->\hyperlink{struct__matrix_a1087bec6a11b0773b4852c4ca49fc32a}{row});
+186     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < mat->\hyperlink{struct__matrix_a1087bec6a11b0773b4852c4ca49fc32a}{row}; i++)
+187     \{
+188         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} j = 0; j < mat->\hyperlink{struct__matrix_a7e9feb52cfc0a9d7cba5320abcaa997a}{col}; j++)
+189         \{
+190             \hyperlink{linalg_8h_ae0e32e641b8137c777d52988864296e3}{MAT}(retVal,j,i) = \hyperlink{linalg_8h_ae0e32e641b8137c777d52988864296e3}{MAT}(mat,i,j);
+191         \}
+192     \}
+193     \textcolor{keywordflow}{return} retVal;
+194 \}
+\end{DoxyCode}
+\hypertarget{linalg_8c_aa1d82d4991b3650fb19f0a7cf288d69b}{\index{linalg.\-c@{linalg.\-c}!matmat\-\_\-addition@{matmat\-\_\-addition}}
+\index{matmat\-\_\-addition@{matmat\-\_\-addition}!linalg.c@{linalg.\-c}}
+\subsubsection[{matmat\-\_\-addition}]{\setlength{\rightskip}{0pt plus 5cm}{\bf matrix}$\ast$ matmat\-\_\-addition (
+\begin{DoxyParamCaption}
+\item[{const {\bf matrix} $\ast$}]{mat\-\_\-a, }
+\item[{const {\bf matrix} $\ast$}]{mat\-\_\-b}
+\end{DoxyParamCaption}
+)}}\label{linalg_8c_aa1d82d4991b3650fb19f0a7cf288d69b}
+
+
+Performs standard matrix addition this function will malloc for the user a matrix$\ast$. 
+
+\begin{DoxyReturn}{Returns}
+matrix$\ast$ newly malloced result of mat\-\_\-a plus mat\-\_\-b 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em mat\-\_\-a} & const matrix$\ast$ the matrix to be added to \\
+\hline
+{\em mat\-\_\-b} & const matrix$\ast$ the matrix to be added \\
+\hline
+\end{DoxyParams}
+
+
+References \-\_\-matrix\-::col, M\-A\-T, matrix\-\_\-create(), and \-\_\-matrix\-::row.
+
+
+\begin{DoxyCode}
+128 \{
+129     \hyperlink{struct__matrix}{matrix} *retVal = \hyperlink{linalg_8c_a7821976cc30bc3131f3646bec1992d91}{matrix\_create}(matA->\hyperlink{struct__matrix_a1087bec6a11b0773b4852c4ca49fc32a}{row}, matB->\hyperlink{struct__matrix_a7e9feb52cfc0a9d7cba5320abcaa997a}{col});
+130     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < matA->\hyperlink{struct__matrix_a1087bec6a11b0773b4852c4ca49fc32a}{row}; i++)
+131     \{
+132         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} j = 0; j < matB->\hyperlink{struct__matrix_a7e9feb52cfc0a9d7cba5320abcaa997a}{col}; j++)
+133         \{
+134             \hyperlink{linalg_8h_ae0e32e641b8137c777d52988864296e3}{MAT}(retVal,i,j) = \hyperlink{linalg_8h_ae0e32e641b8137c777d52988864296e3}{MAT}(matA,i,j) + \hyperlink{linalg_8h_ae0e32e641b8137c777d52988864296e3}{MAT}(matB,i,j);
+135         \}
+136     \}
+137     \textcolor{keywordflow}{return} retVal;
+138 \}
+\end{DoxyCode}
+\hypertarget{linalg_8c_a8c6dcaba2cba934fe253ad89a84c0c73}{\index{linalg.\-c@{linalg.\-c}!matmat\-\_\-multiply@{matmat\-\_\-multiply}}
+\index{matmat\-\_\-multiply@{matmat\-\_\-multiply}!linalg.c@{linalg.\-c}}
+\subsubsection[{matmat\-\_\-multiply}]{\setlength{\rightskip}{0pt plus 5cm}{\bf matrix}$\ast$ matmat\-\_\-multiply (
+\begin{DoxyParamCaption}
+\item[{const {\bf matrix} $\ast$}]{mat\-\_\-a, }
+\item[{const {\bf matrix} $\ast$}]{mat\-\_\-b}
+\end{DoxyParamCaption}
+)}}\label{linalg_8c_a8c6dcaba2cba934fe253ad89a84c0c73}
+
+
+Performs standard matrix multiplication this function will malloc for the user a matrix$\ast$. 
+
+\begin{DoxyReturn}{Returns}
+matrix$\ast$ newly malloced result of mat\-\_\-a times mat\-\_\-b 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em mat\-\_\-a} & const matrix$\ast$ the matrix to be multiplied to \\
+\hline
+{\em mat\-\_\-b} & const matrix$\ast$ the matrix to be multiplied \\
+\hline
+\end{DoxyParams}
+
+
+References \-\_\-matrix\-::col, M\-A\-T, matrix\-\_\-create(), and \-\_\-matrix\-::row.
+
+
+
+Referenced by covmat().
+
+
+\begin{DoxyCode}
+110 \{
+111     \hyperlink{struct__matrix}{matrix} *retVal = \hyperlink{linalg_8c_a7821976cc30bc3131f3646bec1992d91}{matrix\_create}(matA->\hyperlink{struct__matrix_a1087bec6a11b0773b4852c4ca49fc32a}{row}, matB->\hyperlink{struct__matrix_a7e9feb52cfc0a9d7cba5320abcaa997a}{col});
+112     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{size\_t} i =0; i<matA->\hyperlink{struct__matrix_a1087bec6a11b0773b4852c4ca49fc32a}{row};i++)
+113     \{
+114         \textcolor{keywordflow}{for}(\textcolor{keywordtype}{size\_t} j=0; j<matB->\hyperlink{struct__matrix_a7e9feb52cfc0a9d7cba5320abcaa997a}{col};j++)
+115         \{
+116             \hyperlink{linalg_8h_ae0e32e641b8137c777d52988864296e3}{MAT}(retVal,i,j) = 0;
+117             \textcolor{keywordflow}{for}(\textcolor{keywordtype}{size\_t} k=0; k<matA->\hyperlink{struct__matrix_a7e9feb52cfc0a9d7cba5320abcaa997a}{col};k++)
+118             \{
+119                 \hyperlink{linalg_8h_ae0e32e641b8137c777d52988864296e3}{MAT}(retVal,i,j) += \hyperlink{linalg_8h_ae0e32e641b8137c777d52988864296e3}{MAT}(matA,i,k)*\hyperlink{linalg_8h_ae0e32e641b8137c777d52988864296e3}{MAT}(matB,k,j);
+120             \}
+121         \}
+122     \}   
+123     \textcolor{keywordflow}{return} retVal;
+124 \}
+\end{DoxyCode}
+\hypertarget{linalg_8c_ac34c4704704c8d0a87c5d7cb8fc81b90}{\index{linalg.\-c@{linalg.\-c}!matmat\-\_\-subtraction@{matmat\-\_\-subtraction}}
+\index{matmat\-\_\-subtraction@{matmat\-\_\-subtraction}!linalg.c@{linalg.\-c}}
+\subsubsection[{matmat\-\_\-subtraction}]{\setlength{\rightskip}{0pt plus 5cm}{\bf matrix}$\ast$ matmat\-\_\-subtraction (
+\begin{DoxyParamCaption}
+\item[{const {\bf matrix} $\ast$}]{mat\-\_\-a, }
+\item[{const {\bf matrix} $\ast$}]{mat\-\_\-b}
+\end{DoxyParamCaption}
+)}}\label{linalg_8c_ac34c4704704c8d0a87c5d7cb8fc81b90}
+
+
+Performs standard matrix subtration this function will malloc for the user a matrix$\ast$. 
+
+\begin{DoxyReturn}{Returns}
+matrix$\ast$ newly malloced result of mat\-\_\-a minus mat\-\_\-b 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em mat\-\_\-a} & const matrix$\ast$ the matrix to be subtracted from \\
+\hline
+{\em mat\-\_\-b} & const matrix$\ast$ the matrix to be subtrated \\
+\hline
+\end{DoxyParams}
+
+
+References \-\_\-matrix\-::col, M\-A\-T, matrix\-\_\-create(), and \-\_\-matrix\-::row.
+
+
+\begin{DoxyCode}
+142 \{
+143     \hyperlink{struct__matrix}{matrix} *retVal = \hyperlink{linalg_8c_a7821976cc30bc3131f3646bec1992d91}{matrix\_create}(matA->\hyperlink{struct__matrix_a1087bec6a11b0773b4852c4ca49fc32a}{row}, matB->\hyperlink{struct__matrix_a7e9feb52cfc0a9d7cba5320abcaa997a}{col});
+144     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < matA->\hyperlink{struct__matrix_a1087bec6a11b0773b4852c4ca49fc32a}{row}; i++)
+145     \{
+146         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} j = 0; j < matB->\hyperlink{struct__matrix_a7e9feb52cfc0a9d7cba5320abcaa997a}{col}; j++)
+147         \{
+148             \hyperlink{linalg_8h_ae0e32e641b8137c777d52988864296e3}{MAT}(retVal,i,j) = \hyperlink{linalg_8h_ae0e32e641b8137c777d52988864296e3}{MAT}(matA,i,j) - \hyperlink{linalg_8h_ae0e32e641b8137c777d52988864296e3}{MAT}(matB,i,j);
+149         \}
+150     \}
+151     \textcolor{keywordflow}{return} retVal;
+152 \}
+\end{DoxyCode}
+\hypertarget{linalg_8c_a7821976cc30bc3131f3646bec1992d91}{\index{linalg.\-c@{linalg.\-c}!matrix\-\_\-create@{matrix\-\_\-create}}
+\index{matrix\-\_\-create@{matrix\-\_\-create}!linalg.c@{linalg.\-c}}
+\subsubsection[{matrix\-\_\-create}]{\setlength{\rightskip}{0pt plus 5cm}{\bf matrix}$\ast$ matrix\-\_\-create (
+\begin{DoxyParamCaption}
+\item[{size\-\_\-t}]{row, }
+\item[{size\-\_\-t}]{col}
+\end{DoxyParamCaption}
+)}}\label{linalg_8c_a7821976cc30bc3131f3646bec1992d91}
+
+
+Creates a matrix this function will malloc the exact space for the required dimensions. 
+
+\begin{DoxyReturn}{Returns}
+matrix$\ast$ the newly malloced matrix 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em row} & size\-\_\-t the desired number of rows in the matrix \\
+\hline
+{\em col} & size\-\_\-t the desired number of columns in the matrix \\
+\hline
+\end{DoxyParams}
+
+
+References \-\_\-matrix\-::col, and \-\_\-matrix\-::row.
+
+
+
+Referenced by mat\-\_\-transpose(), matmat\-\_\-addition(), matmat\-\_\-multiply(), matmat\-\_\-subtraction(), matscalar\-\_\-divide(), and matscalar\-\_\-multiply().
+
+
+\begin{DoxyCode}
+21                                               \{
+22     \textcolor{keywordflow}{if}(row <= 0 || col <= 0) \{
+23         \textcolor{keywordflow}{return} NULL;
+24     \}
+25     \hyperlink{struct__matrix}{matrix}* retval =  malloc((row * col * \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{double})) + (2 * \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{size\_t})));
+26     retval->\hyperlink{struct__matrix_a1087bec6a11b0773b4852c4ca49fc32a}{row} = row;
+27     retval->\hyperlink{struct__matrix_a7e9feb52cfc0a9d7cba5320abcaa997a}{col} = col;
+28     \textcolor{keywordflow}{return} retval;
+29 \}
+\end{DoxyCode}
+\hypertarget{linalg_8c_a41ab46fdaa678c67aef38d873870a98d}{\index{linalg.\-c@{linalg.\-c}!matrix\-\_\-reshape@{matrix\-\_\-reshape}}
+\index{matrix\-\_\-reshape@{matrix\-\_\-reshape}!linalg.c@{linalg.\-c}}
+\subsubsection[{matrix\-\_\-reshape}]{\setlength{\rightskip}{0pt plus 5cm}void matrix\-\_\-reshape (
+\begin{DoxyParamCaption}
+\item[{{\bf matrix} $\ast$}]{mat, }
+\item[{size\-\_\-t}]{row, }
+\item[{size\-\_\-t}]{col}
+\end{DoxyParamCaption}
+)}}\label{linalg_8c_a41ab46fdaa678c67aef38d873870a98d}
+
+
+Reshapes the matrix this function will reshape the matrix in constant time. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mat} & matrix$\ast$ to be reshaped \\
+\hline
+{\em row} & size\-\_\-t the new row \\
+\hline
+{\em col} & size\-\_\-t the new column \\
+\hline
+\end{DoxyParams}
+
+
+References \-\_\-matrix\-::col, and \-\_\-matrix\-::row.
+
+
+\begin{DoxyCode}
+43                                                          \{
+44     mat->\hyperlink{struct__matrix_a1087bec6a11b0773b4852c4ca49fc32a}{row} = row;
+45     mat->\hyperlink{struct__matrix_a7e9feb52cfc0a9d7cba5320abcaa997a}{col} = col;
+46 \}
+\end{DoxyCode}
+\hypertarget{linalg_8c_a7d62975b718a8e11cbfbca42a408e49e}{\index{linalg.\-c@{linalg.\-c}!matscalar\-\_\-divide@{matscalar\-\_\-divide}}
+\index{matscalar\-\_\-divide@{matscalar\-\_\-divide}!linalg.c@{linalg.\-c}}
+\subsubsection[{matscalar\-\_\-divide}]{\setlength{\rightskip}{0pt plus 5cm}{\bf matrix}$\ast$ matscalar\-\_\-divide (
+\begin{DoxyParamCaption}
+\item[{const {\bf matrix} $\ast$}]{mat, }
+\item[{const double}]{scalar}
+\end{DoxyParamCaption}
+)}}\label{linalg_8c_a7d62975b718a8e11cbfbca42a408e49e}
+
+
+Performs scalar division of a matrix this function will malloc for the user a matrix$\ast$. 
+
+\begin{DoxyReturn}{Returns}
+matrix$\ast$ that is the result of element wise division of the matrix by the scalar 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em mat} & const matrix$\ast$ the input matrix \\
+\hline
+{\em scalar} & const double the input scalar \\
+\hline
+\end{DoxyParams}
+
+
+References \-\_\-matrix\-::col, M\-A\-T, matrix\-\_\-create(), and \-\_\-matrix\-::row.
+
+
+
+Referenced by covmat().
+
+
+\begin{DoxyCode}
+170 \{
+171     \hyperlink{struct__matrix}{matrix} *retVal = \hyperlink{linalg_8c_a7821976cc30bc3131f3646bec1992d91}{matrix\_create}(matA->\hyperlink{struct__matrix_a1087bec6a11b0773b4852c4ca49fc32a}{row}, matA->\hyperlink{struct__matrix_a7e9feb52cfc0a9d7cba5320abcaa997a}{col});
+172     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < matA->\hyperlink{struct__matrix_a1087bec6a11b0773b4852c4ca49fc32a}{row}; i++)
+173     \{
+174         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} j = 0; j < matA->\hyperlink{struct__matrix_a7e9feb52cfc0a9d7cba5320abcaa997a}{col}; j++)
+175         \{
+176             \hyperlink{linalg_8h_ae0e32e641b8137c777d52988864296e3}{MAT}(retVal,i,j) = \hyperlink{linalg_8h_ae0e32e641b8137c777d52988864296e3}{MAT}(matA,i,j) /scalar;
+177         \}
+178     \}
+179     \textcolor{keywordflow}{return} retVal; 
+180 \}
+\end{DoxyCode}
+\hypertarget{linalg_8c_a37448fe86f1e35687bef6f05839a9b62}{\index{linalg.\-c@{linalg.\-c}!matscalar\-\_\-multiply@{matscalar\-\_\-multiply}}
+\index{matscalar\-\_\-multiply@{matscalar\-\_\-multiply}!linalg.c@{linalg.\-c}}
+\subsubsection[{matscalar\-\_\-multiply}]{\setlength{\rightskip}{0pt plus 5cm}{\bf matrix}$\ast$ matscalar\-\_\-multiply (
+\begin{DoxyParamCaption}
+\item[{const {\bf matrix} $\ast$}]{mat\-\_\-a, }
+\item[{const double}]{scalar}
+\end{DoxyParamCaption}
+)}}\label{linalg_8c_a37448fe86f1e35687bef6f05839a9b62}
+
+
+Performs scalar multiplication of a matrix this function will malloc for the user a matrix$\ast$. 
+
+\begin{DoxyReturn}{Returns}
+matrix$\ast$ that is the result of element wise multiplication of the matrix by the scalar 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em mat} & const matrix$\ast$ the input matrix \\
+\hline
+{\em scalar} & const double the input scalar \\
+\hline
+\end{DoxyParams}
+
+
+References \-\_\-matrix\-::col, M\-A\-T, matrix\-\_\-create(), and \-\_\-matrix\-::row.
+
+
+\begin{DoxyCode}
+156 \{
+157     \hyperlink{struct__matrix}{matrix} *retVal = \hyperlink{linalg_8c_a7821976cc30bc3131f3646bec1992d91}{matrix\_create}(matA->\hyperlink{struct__matrix_a1087bec6a11b0773b4852c4ca49fc32a}{row}, matA->\hyperlink{struct__matrix_a7e9feb52cfc0a9d7cba5320abcaa997a}{col});
+158     \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} i = 0; i < matA->\hyperlink{struct__matrix_a1087bec6a11b0773b4852c4ca49fc32a}{row}; i++)
+159     \{
+160         \textcolor{keywordflow}{for} (\textcolor{keywordtype}{size\_t} j = 0; j < matA->\hyperlink{struct__matrix_a7e9feb52cfc0a9d7cba5320abcaa997a}{col}; j++)
+161         \{
+162             \hyperlink{linalg_8h_ae0e32e641b8137c777d52988864296e3}{MAT}(retVal,i,j) = \hyperlink{linalg_8h_ae0e32e641b8137c777d52988864296e3}{MAT}(matA,i,j) *scalar;
+163         \}
+164     \}
+165     \textcolor{keywordflow}{return} retVal;
+166 \}
+\end{DoxyCode}
+\hypertarget{linalg_8c_af88415d8996030537851e2c48d5337c4}{\index{linalg.\-c@{linalg.\-c}!matvec\-\_\-multiply@{matvec\-\_\-multiply}}
+\index{matvec\-\_\-multiply@{matvec\-\_\-multiply}!linalg.c@{linalg.\-c}}
+\subsubsection[{matvec\-\_\-multiply}]{\setlength{\rightskip}{0pt plus 5cm}{\bf vector}$\ast$ matvec\-\_\-multiply (
+\begin{DoxyParamCaption}
+\item[{const {\bf matrix} $\ast$}]{mat, }
+\item[{const {\bf vector} $\ast$}]{vec}
+\end{DoxyParamCaption}
+)}}\label{linalg_8c_af88415d8996030537851e2c48d5337c4}
+
+
+Performs matrix vector multiplication this function will malloc for the user a vector$\ast$ if the matrix is of size M by N and the vector N, the resulting row vector will be of size M. 
+
+\begin{DoxyReturn}{Returns}
+vector$\ast$ newly malloced result of matrix vector multiplication 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em mat} & const matrix$\ast$ the input matrix \\
+\hline
+{\em vec} & const vector$\ast$ the input vector \\
+\hline
+\end{DoxyParams}
+
+
+References \-\_\-matrix\-::col, \-\_\-vector\-::data, \-\_\-matrix\-::data, dot\-\_\-product(), \-\_\-vector\-::size, V\-E\-C, and vector\-\_\-create().
+
+
+\begin{DoxyCode}
+77 \{
+78     \textcolor{keywordflow}{if}(vec == NULL  || mat == NULL) \{
+79         \textcolor{keywordflow}{return} NULL;
+80     \}
+81     \hyperlink{struct__vector}{vector} *retVec = \hyperlink{linalg_8c_a7040be230e99648e77b0932600bf55ef}{vector\_create}(vec->\hyperlink{struct__vector_a1ed8dca78f3e589deb8dad9b53aec3fa}{size});
+82     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{size\_t} i =0; i< retVec->\hyperlink{struct__vector_a1ed8dca78f3e589deb8dad9b53aec3fa}{size}; i++)
+83     \{ 
+84         \hyperlink{linalg_8h_a03e904294c904b01194a25323fc2f6ec}{VEC}(retVec,i) = \hyperlink{linalg_8c_abb2106d12022de4436ca036630b72c4a}{dot\_product}(((\textcolor{keywordtype}{double}*)(mat->\hyperlink{struct__matrix_ab0c92b382e007327a4cc5fc6818c77a9}{data}) + (mat->
+      \hyperlink{struct__matrix_a7e9feb52cfc0a9d7cba5320abcaa997a}{col} * i)), (\textcolor{keywordtype}{double}*)vec->\hyperlink{struct__vector_abcf7d1342126a90769b2a05126897859}{data}, vec->\hyperlink{struct__vector_a1ed8dca78f3e589deb8dad9b53aec3fa}{size});
+85     \}
+86     \textcolor{keywordflow}{return} retVec;
+87 \}
+\end{DoxyCode}
+\hypertarget{linalg_8c_adbfad21fe7e851455d625173e67b8504}{\index{linalg.\-c@{linalg.\-c}!vec\-\_\-append@{vec\-\_\-append}}
+\index{vec\-\_\-append@{vec\-\_\-append}!linalg.c@{linalg.\-c}}
+\subsubsection[{vec\-\_\-append}]{\setlength{\rightskip}{0pt plus 5cm}void vec\-\_\-append (
+\begin{DoxyParamCaption}
+\item[{{\bf vector} $\ast$$\ast$}]{vec\-\_\-a, }
+\item[{{\bf vector} $\ast$}]{vec\-\_\-b}
+\end{DoxyParamCaption}
+)}}\label{linalg_8c_adbfad21fe7e851455d625173e67b8504}
+
+
+Appends vector b to vector a this function will realloc for the user vector a and free vector b. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vec\-\_\-a} & vector$\ast$$\ast$ the vector to be realloced \\
+\hline
+{\em vec\-\_\-b} & vector$\ast$ the vector to be appended and freed thereafter \\
+\hline
+\end{DoxyParams}
+
+
+References \-\_\-vector\-::data, \-\_\-vector\-::size, and vector\-\_\-create().
+
+
+\begin{DoxyCode}
+198 \{
+199     \textcolor{keywordtype}{void}* saved\_vec\_a = *vec\_a;
+200     \hyperlink{struct__vector}{vector}* buffer = \hyperlink{linalg_8c_a7040be230e99648e77b0932600bf55ef}{vector\_create}(vec\_b->\hyperlink{struct__vector_a1ed8dca78f3e589deb8dad9b53aec3fa}{size});
+201     memcpy(buffer, vec\_b, \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{double}) * vec\_b->\hyperlink{struct__vector_a1ed8dca78f3e589deb8dad9b53aec3fa}{size} + (2 * \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{size\_t})));
+202     \textcolor{keywordtype}{size\_t} newSize = (*vec\_a)->size + buffer->\hyperlink{struct__vector_a1ed8dca78f3e589deb8dad9b53aec3fa}{size};
+203     \textcolor{keywordtype}{void}* dest = *vec\_a;
+204     \textcolor{keywordtype}{void}* arrv = NULL;
+205     arrv = realloc(dest, \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{double}) * newSize + (2 * \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{size\_t})));
+206     *vec\_a = arrv;    
+207     memcpy((*vec\_a)->data + (*vec\_a)->size, buffer->\hyperlink{struct__vector_abcf7d1342126a90769b2a05126897859}{data}, buffer->\hyperlink{struct__vector_a1ed8dca78f3e589deb8dad9b53aec3fa}{size} *\textcolor{keyword}{sizeof}(\textcolor{keywordtype}{double}));
+208     (*vec\_a)->size = newSize;
+209     free(buffer);
+210     \textcolor{keywordflow}{if}(saved\_vec\_a != vec\_b)
+211     \{
+212         free(vec\_b);
+213     \}
+214 \}
+\end{DoxyCode}
+\hypertarget{linalg_8c_a1d2e72678bf82c44ba57020fc8588868}{\index{linalg.\-c@{linalg.\-c}!vec\-\_\-print@{vec\-\_\-print}}
+\index{vec\-\_\-print@{vec\-\_\-print}!linalg.c@{linalg.\-c}}
+\subsubsection[{vec\-\_\-print}]{\setlength{\rightskip}{0pt plus 5cm}void vec\-\_\-print (
+\begin{DoxyParamCaption}
+\item[{const {\bf vector} $\ast$}]{vec}
+\end{DoxyParamCaption}
+)}}\label{linalg_8c_a1d2e72678bf82c44ba57020fc8588868}
+
+
+prints the vector this function will not modify the vector and print to stdout 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vec} & const vector$\ast$ the vector to be printed \\
+\hline
+\end{DoxyParams}
+
+
+References \-\_\-vector\-::data, and \-\_\-vector\-::size.
+
+
+\begin{DoxyCode}
+100                                   \{
+101     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{size\_t} i = 0; i < vec->\hyperlink{struct__vector_a1ed8dca78f3e589deb8dad9b53aec3fa}{size}; i ++) \{
+102         \textcolor{comment}{// printf("%f, ", VEC(vec, i));}
+103         printf(\textcolor{stringliteral}{"%f "}, vec->\hyperlink{struct__vector_abcf7d1342126a90769b2a05126897859}{data}[i]);
+104     \}
+105     printf(\textcolor{stringliteral}{"\(\backslash\)n"});
+106 \}
+\end{DoxyCode}
+\hypertarget{linalg_8c_a8a5d3412faa2267345b3a7d1ca6f58c1}{\index{linalg.\-c@{linalg.\-c}!vec\-\_\-to\-\_\-mat@{vec\-\_\-to\-\_\-mat}}
+\index{vec\-\_\-to\-\_\-mat@{vec\-\_\-to\-\_\-mat}!linalg.c@{linalg.\-c}}
+\subsubsection[{vec\-\_\-to\-\_\-mat}]{\setlength{\rightskip}{0pt plus 5cm}{\bf matrix}$\ast$ vec\-\_\-to\-\_\-mat (
+\begin{DoxyParamCaption}
+\item[{{\bf vector} $\ast$}]{vec, }
+\item[{int}]{orientation}
+\end{DoxyParamCaption}
+)}}\label{linalg_8c_a8a5d3412faa2267345b3a7d1ca6f58c1}
+
+
+Converts vector into matrix this function will \char`\"{}cast\char`\"{} the vector into a matrix by using the fact that they both have the same size. when calling this function, calling free() on the matrix will free the vector and vice versa. 
+
+\begin{DoxyReturn}{Returns}
+matrix$\ast$ the new pointer for input vector$\ast$ 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em vec} & vector$\ast$ to be converted \\
+\hline
+{\em orientation} & int 1 is Row-\/wise and 0 is Column-\/wise in terms of the newly formed matrix \\
+\hline
+\end{DoxyParams}
+
+
+References \-\_\-vector\-::padding, and \-\_\-vector\-::size.
+
+
+\begin{DoxyCode}
+32                                                  \{
+33     \textcolor{keywordflow}{if}(orientation == 1) \{
+34         vec->\hyperlink{struct__vector_a4165a40cc39bfd874677299c943b290f}{padding} = vec->\hyperlink{struct__vector_a1ed8dca78f3e589deb8dad9b53aec3fa}{size};
+35         vec->\hyperlink{struct__vector_a1ed8dca78f3e589deb8dad9b53aec3fa}{size} = 1;
+36     \} \textcolor{keywordflow}{else} \{
+37         vec->\hyperlink{struct__vector_a4165a40cc39bfd874677299c943b290f}{padding} = 1;
+38     \}
+39     \textcolor{keywordflow}{return} (\hyperlink{struct__matrix}{matrix}*)vec;
+40 \}
+\end{DoxyCode}
+\hypertarget{linalg_8c_a4af2cd71186eeb14f970f97a27fbcef0}{\index{linalg.\-c@{linalg.\-c}!vecmat\-\_\-multiply@{vecmat\-\_\-multiply}}
+\index{vecmat\-\_\-multiply@{vecmat\-\_\-multiply}!linalg.c@{linalg.\-c}}
+\subsubsection[{vecmat\-\_\-multiply}]{\setlength{\rightskip}{0pt plus 5cm}{\bf vector}$\ast$ vecmat\-\_\-multiply (
+\begin{DoxyParamCaption}
+\item[{const {\bf vector} $\ast$}]{vec, }
+\item[{const {\bf matrix} $\ast$}]{mat}
+\end{DoxyParamCaption}
+)}}\label{linalg_8c_a4af2cd71186eeb14f970f97a27fbcef0}
+
+
+Performs vector matrix multiplication this function will malloc for the user a vector$\ast$ if the vector is of size M and the matrix size M by N, the resulting column vector will be of size N. 
+
+\begin{DoxyReturn}{Returns}
+vector$\ast$ newly malloced result of vector matrix multiplication 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em vec} & const vector$\ast$ the input vector \\
+\hline
+{\em mat} & const matrix$\ast$ the input matrix \\
+\hline
+\end{DoxyParams}
+
+
+References \-\_\-matrix\-::col, \-\_\-vector\-::data, M\-A\-T, \-\_\-matrix\-::row, \-\_\-vector\-::size, V\-E\-C, and vector\-\_\-create().
+
+
+\begin{DoxyCode}
+60                                                                \{
+61     
+62     \textcolor{keywordflow}{if}(vec == NULL  || mat == NULL) \{
+63         \textcolor{keywordflow}{return} NULL;
+64     \}
+65     \hyperlink{struct__vector}{vector}* retvec = \hyperlink{linalg_8c_a7040be230e99648e77b0932600bf55ef}{vector\_create}(vec->\hyperlink{struct__vector_a1ed8dca78f3e589deb8dad9b53aec3fa}{size});
+66     memset(retvec->\hyperlink{struct__vector_abcf7d1342126a90769b2a05126897859}{data}, 0, \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{double}) * vec->\hyperlink{struct__vector_a1ed8dca78f3e589deb8dad9b53aec3fa}{size});
+67     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{size\_t} j = 0; j < mat->\hyperlink{struct__matrix_a7e9feb52cfc0a9d7cba5320abcaa997a}{col}; j ++) \{
+68         \textcolor{keywordflow}{for}(\textcolor{keywordtype}{size\_t} i = 0; i < mat->\hyperlink{struct__matrix_a1087bec6a11b0773b4852c4ca49fc32a}{row}; i ++) \{
+69             \hyperlink{linalg_8h_a03e904294c904b01194a25323fc2f6ec}{VEC}(retvec, j) += (\hyperlink{linalg_8h_a03e904294c904b01194a25323fc2f6ec}{VEC}(vec, i) * \hyperlink{linalg_8h_ae0e32e641b8137c777d52988864296e3}{MAT}(mat, i, j));
+70         \}
+71     \}
+72     \textcolor{keywordflow}{return} retvec;
+73 \}
+\end{DoxyCode}
+\hypertarget{linalg_8c_a7040be230e99648e77b0932600bf55ef}{\index{linalg.\-c@{linalg.\-c}!vector\-\_\-create@{vector\-\_\-create}}
+\index{vector\-\_\-create@{vector\-\_\-create}!linalg.c@{linalg.\-c}}
+\subsubsection[{vector\-\_\-create}]{\setlength{\rightskip}{0pt plus 5cm}{\bf vector}$\ast$ vector\-\_\-create (
+\begin{DoxyParamCaption}
+\item[{size\-\_\-t}]{size}
+\end{DoxyParamCaption}
+)}}\label{linalg_8c_a7040be230e99648e77b0932600bf55ef}
+
+
+Creates a vector this function will malloc the exact space for the required dimensions. 
+
+\begin{DoxyReturn}{Returns}
+vector$\ast$ the newly malloced vector 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em size} & size\-\_\-t the desired number of elements in the vecrtor \\
+\hline
+\end{DoxyParams}
+
+
+References \-\_\-vector\-::padding, and \-\_\-vector\-::size.
+
+
+
+Referenced by matvec\-\_\-multiply(), tiff\-\_\-to\-\_\-vec(), vec\-\_\-append(), and vecmat\-\_\-multiply().
+
+
+\begin{DoxyCode}
+10                                    \{
+11     \textcolor{keywordflow}{if}(size <= 0) \{
+12         \textcolor{keywordflow}{return} NULL;
+13     \}
+14     \hyperlink{struct__vector}{vector}* retval = malloc((size * \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{double})) + (2 * \textcolor{keyword}{sizeof}(\textcolor{keywordtype}{size\_t})));
+15     retval->\hyperlink{struct__vector_a1ed8dca78f3e589deb8dad9b53aec3fa}{size} = size;
+16     retval->\hyperlink{struct__vector_a4165a40cc39bfd874677299c943b290f}{padding}  = 0;
+17     \textcolor{keywordflow}{return} retval;
+18 \}
+\end{DoxyCode}
