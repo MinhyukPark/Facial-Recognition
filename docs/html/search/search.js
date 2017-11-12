@@ -7,10 +7,10 @@
 
 var indexSectionsWithContent =
 {
-  0: "_cdeflmprstv",
+  0: "_cdefglmprstv",
   1: "_",
   2: "flt",
-  3: "cdefmtv",
+  3: "cdefgmtv",
   4: "cdprs",
   5: "mv",
   6: "mv"
