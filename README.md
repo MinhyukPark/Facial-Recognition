@@ -17,7 +17,7 @@ Facial Detection using Eigenfaces
 
 [Documentation Backup](https://minpark815.github.io/Facial-Recognition/)
 - rendered using Github Pages
-- last updated 11/11/2017 5:05 am CST
+- last updated 11/11/2017 8:57 pm CST
 
 ## Motivation
 
