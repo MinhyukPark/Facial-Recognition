@@ -8,6 +8,7 @@
 
 #include <stdlib.h>
 #include <tiffio.h>
+#include <unistd.h>
 #include "linalg.h"
 
 /**
@@ -29,3 +30,23 @@ vector* tiff_to_vec(char* filename);
  * @param vec vector* vector representing the image
  */
 TIFF* vec_to_tiff(char* filename, vector* vec);
+
+/**
+ * @brief Recursively earches the path for all files of .tiff type
+ * the search relies on being able to run the commands
+ * find and ls
+ * @return FILE* the stream containing all the files separated by
+ * new line characters
+ * @param path char* the path containing the files
+ * @param num_files int* outputs the number of files read
+ */
+FILE* get_all_tiff(char* path, int* num_files);
+
+/**
+ * @brief Converts FILE* tiff stream into a vector
+ * the images are appended row-wise
+ * @return vector* newly malloced vector* containing all the images
+ * from the stream
+ * @param stream FILE* returned from get_all_tiff()
+ */
+vector* tiff_stream_to_vec(FILE* stream);

@@ -75,3 +75,43 @@ TIFF* vec_to_tiff(char* filename, vector* vec) {
     free(image_char);
     return rettiff;
 }
+
+
+FILE* get_all_tiff(char* path, int* num_files) {
+    char* command = malloc(strlen(path) + 100);
+    sprintf(command, "%s%s%s", "find ", path, "*.tiff -type f -exec ls {} \\;");
+     
+    
+    printf("%s\n", command);
+    FILE* retval = popen(command, "r");
+
+    sprintf(command, "%s%s%s", "find ", path, "*.tiff -type f -exec ls {} \\; | wc -l");
+    
+    printf("%s\n", command);
+    FILE* num_files_fp = popen(command, "r");
+    if(fgets(command, sizeof(command), num_files_fp) != NULL) {
+        *num_files = atoi(command);
+    }
+    pclose(num_files_fp);
+    free(command);
+    return retval;
+}
+
+vector* tiff_stream_to_vec(FILE* stream) {
+    char* image_filename;
+    char buffer[4096];
+
+    vector* cumulative_image = NULL;
+    while(fgets(buffer, sizeof(buffer), stream) != NULL) {
+        image_filename = malloc(100);
+        strcpy(image_filename, buffer);
+        image_filename[strlen(image_filename) - 1] = '\0';
+        if(cumulative_image == NULL) {
+            cumulative_image = tiff_to_vec(image_filename);
+        } else {
+            vec_append(&cumulative_image, tiff_to_vec(image_filename));
+        }
+        free(image_filename);
+    }
+    return cumulative_image;
+}
