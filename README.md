@@ -72,6 +72,8 @@ Does jacobi approximation provide enough accuracy?
 
 Catastrophic cancellation when normalizing?
 
+SVD or A * Eigenvectors of AAT?
+
 ### Linear Algebra functions
 
 ~matmat_add()~
