@@ -12,9 +12,8 @@ built with :heartpulse:
 Facial Detection using Eigenfaces
 
 ## Documentation
-[Documentation](https://cdn.rawgit.com/minpark815/Facial-Recognition/e06db672/docs/html/index.html)
+[Documentation](https://cdn.rawgit.com/minpark815/Facial-Recognition/gh-pages/index.html)
 - RawGit
-- commit id: e06db672
 
 [Documentation Backup](https://minpark815.github.io/Facial-Recognition/)
 - rendered using Github Pages
