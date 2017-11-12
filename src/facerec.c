@@ -50,7 +50,7 @@ int main() {
     // matrix *mattranspose_result = mat_transpose(mat);
     // mat_print(mattranspose_result);
 
-    // vector* image_vec = tiff_to_vec(./dataset/jaffe/KA.AN1.39.tiff);
+    // vector* image_vec = tiff_to_vec("./dataset/jaffe/KA.AN1.39.tiff");
     // TIFF* out = vec_to_tiff("./dataset/jaffe/test.tiff", image_vec);
     // printf("sizeof vec %zu", image_vec->size);
     // TIFFClose(out);
@@ -103,6 +103,13 @@ int main() {
 
     free(mat);
     free(variance_covariance_mat);
+
+    int num_files;
+    FILE* out_pipe = get_all_tiff("./dataset/jaffe/", &num_files);
+    vector* image_vector = tiff_stream_to_vec(out_pipe);
+    free(image_vector);
+    pclose(out_pipe);
+
     // free(converted_vecmat);
     // free(converted_matvec);
     // free(matmat_result);
