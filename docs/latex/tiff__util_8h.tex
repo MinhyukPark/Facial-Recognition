@@ -10,8 +10,7 @@ File containing common libtiff wrapper functions.
 {\ttfamily \#include $<$tiffio.\-h$>$}\\*
 {\ttfamily \#include $<$unistd.\-h$>$}\\*
 {\ttfamily \#include \char`\"{}linalg.\-h\char`\"{}}\\*
-Include dependency graph for tiff\-\_\-util.\-h\-:
-\nopagebreak
+Include dependency graph for tiff\-\_\-util.\-h\-:\nopagebreak
 \begin{figure}[H]
 \begin{center}
 \leavevmode
@@ -114,24 +113,24 @@ References tiff\-\_\-to\-\_\-vec(), and vec\-\_\-append().
 
 
 \begin{DoxyCode}
-100                                          \{
-101     \textcolor{keywordtype}{char}* image\_filename;
-102     \textcolor{keywordtype}{char} buffer[4096];
-103 
-104     \hyperlink{struct__vector}{vector}* cumulative\_image = NULL;
-105     \textcolor{keywordflow}{while}(fgets(buffer, \textcolor{keyword}{sizeof}(buffer), stream) != NULL) \{
-106         image\_filename = malloc(100);
-107         strcpy(image\_filename, buffer);
-108         image\_filename[strlen(image\_filename) - 1] = \textcolor{charliteral}{'\(\backslash\)0'};
-109         \textcolor{keywordflow}{if}(cumulative\_image == NULL) \{
-110             cumulative\_image = \hyperlink{tiff__util_8c_a62e9f072f6cc2973ba744946e6a4c5c3}{tiff\_to\_vec}(image\_filename);
-111         \} \textcolor{keywordflow}{else} \{
-112             \hyperlink{linalg_8c_adbfad21fe7e851455d625173e67b8504}{vec\_append}(&cumulative\_image, \hyperlink{tiff__util_8c_a62e9f072f6cc2973ba744946e6a4c5c3}{tiff\_to\_vec}(image\_filename));
-113         \}
-114         free(image\_filename);
-115     \}
-116     \textcolor{keywordflow}{return} cumulative\_image;
-117 \}\end{DoxyCode}
+101                                          \{
+102     \textcolor{keywordtype}{char}* image\_filename;
+103     \textcolor{keywordtype}{char} buffer[4096];
+104 
+105     \hyperlink{struct__vector}{vector}* cumulative\_image = NULL;
+106     \textcolor{keywordflow}{while}(fgets(buffer, \textcolor{keyword}{sizeof}(buffer), stream) != NULL) \{
+107         image\_filename = malloc(100);
+108         strcpy(image\_filename, buffer);
+109         image\_filename[strlen(image\_filename) - 1] = \textcolor{charliteral}{'\(\backslash\)0'};
+110         \textcolor{keywordflow}{if}(cumulative\_image == NULL) \{
+111             cumulative\_image = \hyperlink{tiff__util_8c_a62e9f072f6cc2973ba744946e6a4c5c3}{tiff\_to\_vec}(image\_filename);
+112         \} \textcolor{keywordflow}{else} \{
+113             \hyperlink{linalg_8c_adbfad21fe7e851455d625173e67b8504}{vec\_append}(&cumulative\_image, \hyperlink{tiff__util_8c_a62e9f072f6cc2973ba744946e6a4c5c3}{tiff\_to\_vec}(image\_filename));
+114         \}
+115         free(image\_filename);
+116     \}
+117     \textcolor{keywordflow}{return} cumulative\_image;
+118 \}\end{DoxyCode}
 \hypertarget{tiff__util_8h_a62e9f072f6cc2973ba744946e6a4c5c3}{\index{tiff\-\_\-util.\-h@{tiff\-\_\-util.\-h}!tiff\-\_\-to\-\_\-vec@{tiff\-\_\-to\-\_\-vec}}
 \index{tiff\-\_\-to\-\_\-vec@{tiff\-\_\-to\-\_\-vec}!tiff_util.h@{tiff\-\_\-util.\-h}}
 \subsubsection[{tiff\-\_\-to\-\_\-vec}]{\setlength{\rightskip}{0pt plus 5cm}{\bf vector}$\ast$ tiff\-\_\-to\-\_\-vec (

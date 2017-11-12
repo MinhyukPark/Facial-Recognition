@@ -97,6 +97,7 @@ FILE* get_all_tiff(char* path, int* num_files) {
     return retval;
 }
 
+
 vector* tiff_stream_to_vec(FILE* stream) {
     char* image_filename;
     char buffer[4096];
