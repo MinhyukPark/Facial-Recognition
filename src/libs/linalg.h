@@ -157,11 +157,7 @@ matrix* mat_transpose(const matrix* mat);
  * @param vecA
  * @param vecB
  */
-<<<<<<< HEAD
-vector* vec_append(vector* vecA, vector* vecB);
-=======
 void vec_append(vector** vecA, vector* vecB);
->>>>>>> fefabadd97f5f2b265c04c8a6acc878183032c21
 
 /**
  * @brief Performs Jacobi eigenvalue iteration

@@ -514,3 +514,23 @@ double frobenius_norm(int n, int k, double a[], double x[], double lambda[]) {
     free(c);
     return retval;
 }
+
+matrix * compute_average()
+{
+    //turn all tiffs into vector then append them to one vector
+    tiff[] presets;
+    size_t number_of_tiffs;
+    vector *tiffList = tiff_to_vec(presets[0]);
+    size_t columns = tiffList->size;
+    for(size_t i =1; i < number_of_tiffs; i++)
+    {
+        vec_append(tiffList,tiff_to_vec(presets[i]););
+    }
+    //turn vector list into a matrix then reshape it
+    matrix *tiff_matrix = vec_to_mat(tiffList, 1);
+    matrix_reshape(tiffList, number_of_tiffs, columns);
+    tiff_matrix = mat_transpose(tiff_matrix);
+    transposed_tiff_matrix = mat_transpose(tiff_matrix);
+    one_matrix = matrix_create(1,transposed_tiff_matrix->row);
+    for(size_t i =0; i <)
+}
