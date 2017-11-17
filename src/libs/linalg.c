@@ -532,5 +532,19 @@ matrix * compute_average()
     tiff_matrix = mat_transpose(tiff_matrix);
     transposed_tiff_matrix = mat_transpose(tiff_matrix);
     one_matrix = matrix_create(1,transposed_tiff_matrix->row);
-    for(size_t i =0; i <)
+    for(size_t i =0; i <number_of_tiffs; i++)
+    {
+        MAT(one_matrix, 0,i) = 1;
+    }
+    multiplyMat = matmat_multiply(one_matrix, transposed_tiff_matrix);
+    free(one_matrix);
+    one_matrix = matrix_create(transposed_tiff_matrix->col, 1);
+    for(size_t i =0; i < transposed_tiff_matrix->col, i++)
+    {
+        MAT(one_matrix, i, 0) = 1;
+    }
+    multiplyMat = matmat_multiply(one_matrix, multiplyMat);
+    multiplyMat = mat_transpose(multiplyMat);
+    multiplyMat = matscalar_divide(multiplyMat, number_of_tiffs);
+    return matmat_subtraction(tiff_matrix, multiplyMat);
 }
