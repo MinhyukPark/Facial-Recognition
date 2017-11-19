@@ -243,3 +243,10 @@ double frobenius_norm(int n, int k, double a[], double x[], double lambda[]);
  * @param mat a matrix* representing the input matrix of deviation scores of size n by k 
  */
 matrix* covmat(matrix* mat);
+
+/**
+ * @brief computes the average matrix of all the tiff images
+ * @return matrix* the average matrix 
+ */
+matrix * compute_average();
+
