@@ -248,5 +248,7 @@ matrix* covmat(matrix* mat);
  * @brief computes the average matrix of all the tiff images
  * @return matrix* the average matrix 
  */
-matrix * compute_average();
+matrix * compute_average(vector* images, int num_images);
+
+
 

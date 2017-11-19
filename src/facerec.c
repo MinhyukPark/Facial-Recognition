@@ -85,9 +85,9 @@ int main() {
     
     // double error_frobenius = frobenius_norm(n, n, a, v, d);
     // printf("error of A * V - D * V = %g\n",  error_frobenius);
-    matrix* compute_average_test = compute_average();
-    mat_print(compute_average_test);
-    free(compute_average_test);
+    // matrix* compute_average_test = compute_average();
+    // mat_print(compute_average_test);
+    // free(compute_average_test);
     matrix* mat = matrix_create(5, 3);
 
      double b[15] = {

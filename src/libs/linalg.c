@@ -421,38 +421,39 @@ matrix* covmat(matrix* mat) {
  * @brief computes the average matrix of all the tiff images
  * @return matrix* the average matrix 
  */
-matrix * compute_average()
+matrix * compute_average(vector* images, int num_images)
 {
     //turn all tiffs into vector then append them to one vector
-    vector * testMat1 = vector_create(3);
-    vector * testMat2 = vector_create(3);
-    vector * testMat3 = vector_create(3); 
-    vector * testMat4 = vector_create(3);           
-    for(size_t i =0; i < 3; i++)
-    {
-       VEC(testMat1,i) = 5*i;
-       VEC(testMat2,i) = 10*i;
-       VEC(testMat3,i) = 15*i;
-       VEC(testMat4,i) = 20*i;       
-    }
-    size_t number_of_tiffs = 4;
-    vector *tiffList = NULL;
+    // vector * testMat1 = vector_create(3);
+    // vector * testMat2 = vector_create(3);
+    // vector * testMat3 = vector_create(3); 
+    // vector * testMat4 = vector_create(3);           
+    // for(size_t i =0; i < 3; i++)
+    // {
+    //    VEC(testMat1,i) = 5*i;
+    //    VEC(testMat2,i) = 10*i;
+    //    VEC(testMat3,i) = 15*i;
+    //    VEC(testMat4,i) = 20*i;       
+    // }
+    // size_t number_of_tiffs = 4;
+    // vector *tiffList = NULL;
     //tiffList = tiff_to_vec(testMat[0]);
-    tiffList = testMat1;
-    vec_append(&tiffList,testMat2);
-    vec_append(&tiffList,testMat3);
-    vec_append(&tiffList,testMat4);                            
-    size_t columns = 3;
+    // tiffList = testMat1;
+    // vec_append(&tiffList,testMat2);
+    //vec_append(&tiffList,testMat3);
+    //vec_append(&tiffList,testMat4);                            
+    //size_t columns = 3;
     // for(size_t i =1; i < number_of_tiffs; i++)
     // {
     //     vec_append(tiffList,tiff_to_vec(testMat[i]));      
     // }
     //turn vector list into a matrix then reshape it
-    matrix *tiff_matrix = vec_to_mat(tiffList, 1);
-    matrix_reshape(tiff_matrix, number_of_tiffs, columns);    
+    size_t number_of_tiffs = images->size;
+    matrix *tiff_matrix = vec_to_mat(images, 1);
+    matrix_reshape(tiff_matrix, number_of_tiffs, num_images);    
     matrix *transposed_tiff_matrix = mat_transpose(tiff_matrix);
     matrix* one_matrix = matrix_create(1,transposed_tiff_matrix->row);
-    for(size_t i =0; i <columns; i++)
+    for(int i =0; i <num_images; i++)
     {
         MAT(one_matrix, 0,i) = 1;
     }
@@ -467,10 +468,9 @@ matrix * compute_average()
     free(multiplyMat);
     matrix *multiplyMat3 = mat_transpose(multiplyMat2);
     free(multiplyMat2);    
-    matrix *multiplyMat4 = matscalar_divide(multiplyMat3, columns);
+    matrix *multiplyMat4 = matscalar_divide(multiplyMat3, num_images);
     free(multiplyMat3);    
     free(one_matrix);
     free(transposed_tiff_matrix);
-    free(tiffList);
     return multiplyMat4;
 }
