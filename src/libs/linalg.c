@@ -6,6 +6,7 @@
  */
  
 #include "linalg.h"
+#include "tiff_util.h"
 
 
 vector* vector_create(size_t size) {
@@ -130,7 +131,14 @@ vector* matvec_multiply(const matrix* mat, const vector* vec)
 void mat_print(const matrix* mat) {
     for(size_t i = 0; i < mat->row; i ++) {
         for(size_t j = 0; j < mat->col; j ++) {
-            printf("%f, ", MAT(mat, i, j));
+            if(j==mat->col-1)
+            {
+                printf("%f ", MAT(mat, i, j));                
+            }
+            else
+            {
+                printf("%f, ", MAT(mat, i, j));
+            }
         }
         printf("\n");
     }
@@ -515,36 +523,60 @@ double frobenius_norm(int n, int k, double a[], double x[], double lambda[]) {
     return retval;
 }
 
+/**
+ * @brief computes the average matrix of all the tiff images
+ * @return matrix* the average matrix 
+ */
 matrix * compute_average()
 {
     //turn all tiffs into vector then append them to one vector
-    tiff[] presets;
-    size_t number_of_tiffs;
-    vector *tiffList = tiff_to_vec(presets[0]);
-    size_t columns = tiffList->size;
-    for(size_t i =1; i < number_of_tiffs; i++)
+    vector * testMat1 = vector_create(3);
+    vector * testMat2 = vector_create(3);
+    vector * testMat3 = vector_create(3); 
+    vector * testMat4 = vector_create(3);           
+    for(size_t i =0; i < 3; i++)
     {
-        vec_append(tiffList,tiff_to_vec(presets[i]););
+       VEC(testMat1,i) = 5*i;
+       VEC(testMat2,i) = 10*i;
+       VEC(testMat3,i) = 15*i;
+       VEC(testMat4,i) = 20*i;       
     }
+    size_t number_of_tiffs = 4;
+    vector *tiffList = NULL;
+    //tiffList = tiff_to_vec(testMat[0]);
+    tiffList = testMat1;
+    vec_append(&tiffList,testMat2);
+    vec_append(&tiffList,testMat3);
+    vec_append(&tiffList,testMat4);                            
+    size_t columns = 3;
+    // for(size_t i =1; i < number_of_tiffs; i++)
+    // {
+    //     vec_append(tiffList,tiff_to_vec(testMat[i]));      
+    // }
     //turn vector list into a matrix then reshape it
     matrix *tiff_matrix = vec_to_mat(tiffList, 1);
-    matrix_reshape(tiffList, number_of_tiffs, columns);
-    tiff_matrix = mat_transpose(tiff_matrix);
-    transposed_tiff_matrix = mat_transpose(tiff_matrix);
-    one_matrix = matrix_create(1,transposed_tiff_matrix->row);
-    for(size_t i =0; i <number_of_tiffs; i++)
+    matrix_reshape(tiff_matrix, number_of_tiffs, columns);    
+    matrix *transposed_tiff_matrix = mat_transpose(tiff_matrix);
+    matrix* one_matrix = matrix_create(1,transposed_tiff_matrix->row);
+    for(size_t i =0; i <columns; i++)
     {
         MAT(one_matrix, 0,i) = 1;
     }
-    multiplyMat = matmat_multiply(one_matrix, transposed_tiff_matrix);
+    matrix *multiplyMat = matmat_multiply(one_matrix, transposed_tiff_matrix);
     free(one_matrix);
-    one_matrix = matrix_create(transposed_tiff_matrix->col, 1);
-    for(size_t i =0; i < transposed_tiff_matrix->col, i++)
+    one_matrix = matrix_create(transposed_tiff_matrix->row, 1);
+    for(size_t i =0; i < transposed_tiff_matrix->row; i++)
     {
         MAT(one_matrix, i, 0) = 1;
     }
-    multiplyMat = matmat_multiply(one_matrix, multiplyMat);
-    multiplyMat = mat_transpose(multiplyMat);
-    multiplyMat = matscalar_divide(multiplyMat, number_of_tiffs);
-    return matmat_subtraction(tiff_matrix, multiplyMat);
+    matrix *multiplyMat2 = matmat_multiply(one_matrix, multiplyMat);
+    free(multiplyMat);
+    matrix *multiplyMat3 = mat_transpose(multiplyMat2);
+    free(multiplyMat2);    
+    matrix *multiplyMat4 = matscalar_divide(multiplyMat3, columns);
+    free(multiplyMat3);    
+    free(one_matrix);
+    free(transposed_tiff_matrix);
+    free(tiffList);
+    return multiplyMat4;
 }

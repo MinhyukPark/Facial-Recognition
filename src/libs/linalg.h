@@ -200,4 +200,9 @@ void diag_vector(int n, double a[], double v[]);
  */
 double frobenius_norm(int n, int k, double a[], double x[], double lambda[]);
 
+
+/**
+ * @brief computes the average matrix of all the tiff images
+ * @return matrix* the average matrix 
+ */
 matrix * compute_average();
