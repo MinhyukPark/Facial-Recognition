@@ -8,14 +8,8 @@
 #include "tiff_util.h"
 #include <math.h>
 
-/**
- * @brief Converts tiff to vector
- * this function will take a TIFF file and
- * return a vector with every element corresponding to pixel
- * @return a vector*
- * @param TIFF* tiff image
- */
-vector* tiff_to_vec(TIFF* image) {
+vector* tiff_to_vec(char* filename) {
+    TIFF* image = TIFFOpen(filename, "r");
     uint32 width;
     uint32 height;
     TIFFGetField(image, TIFFTAG_IMAGEWIDTH, &width);
@@ -33,17 +27,11 @@ vector* tiff_to_vec(TIFF* image) {
     _TIFFfree(raster);
 
     retvec->padding = width;
+    TIFFClose(image);
     return retvec;
 }
 
-/**
- * @brief Converts vector to tiff
- * this function will take a vector and
- * return a TIFF* with every element corresponding to pixel
- * @return a TIFF*
- * @param char* the output filename
- * @param vector* vector representing the image
- */
+
 TIFF* vec_to_tiff(char* filename, vector* vec) {
     TIFF* rettiff = TIFFOpen(filename, "w");
     uint32 width = vec->padding;
@@ -86,4 +74,45 @@ TIFF* vec_to_tiff(char* filename, vector* vec) {
     _TIFFfree(buf);
     free(image_char);
     return rettiff;
+}
+
+
+FILE* get_all_tiff(char* path, int* num_files) {
+    char* command = malloc(strlen(path) + 100);
+    sprintf(command, "%s%s%s", "find ", path, "*.tiff -type f -exec ls {} \\;");
+     
+    
+    printf("%s\n", command);
+    FILE* retval = popen(command, "r");
+
+    sprintf(command, "%s%s%s", "find ", path, "*.tiff -type f -exec ls {} \\; | wc -l");
+    
+    printf("%s\n", command);
+    FILE* num_files_fp = popen(command, "r");
+    if(fgets(command, sizeof(command), num_files_fp) != NULL) {
+        *num_files = atoi(command);
+    }
+    pclose(num_files_fp);
+    free(command);
+    return retval;
+}
+
+
+vector* tiff_stream_to_vec(FILE* stream) {
+    char* image_filename;
+    char buffer[4096];
+
+    vector* cumulative_image = NULL;
+    while(fgets(buffer, sizeof(buffer), stream) != NULL) {
+        image_filename = malloc(100);
+        strcpy(image_filename, buffer);
+        image_filename[strlen(image_filename) - 1] = '\0';
+        if(cumulative_image == NULL) {
+            cumulative_image = tiff_to_vec(image_filename);
+        } else {
+            vec_append(&cumulative_image, tiff_to_vec(image_filename));
+        }
+        free(image_filename);
+    }
+    return cumulative_image;
 }

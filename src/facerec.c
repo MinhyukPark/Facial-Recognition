@@ -1,17 +1,24 @@
+/**
+ * @file facerec.c
+ * @authon Minhyuk Park
+ * @date 7 Nov 2017
+ * @brief File containing the main function
+ */
+
 #include <assert.h>
-#include "linalg.h"
+#include "linalg.h" // unnecessary because tiff_util.h includes linalg.h
 #include "tiff_util.h"
 
 int main() {
-    vector* vec = vector_create(5);
-    matrix* mat = matrix_create(5, 5);
-    for(size_t i = 0; i < vec->size; i ++) {
-        vec->data[i] = i;
-    }
+    // vector* vec = vector_create(5);
+    // matrix* mat = matrix_create(5, 5);
+    // for(size_t i = 0; i < vec->size; i ++) {
+    //     vec->data[i] = i;
+    // }
 
-    for(size_t i = 0; i < mat->row * mat->col ; i ++) {
-        mat->data[i] = i;
-    }
+    // for(size_t i = 0; i < mat->row * mat->col ; i ++) {
+    //     mat->data[i] = i;
+    // }
 
     // vector* vecmat_result = matvec_multiply(mat, vec);
     // vec_print(vecmat_result);
@@ -43,16 +50,14 @@ int main() {
     // matrix *mattranspose_result = mat_transpose(mat);
     // mat_print(mattranspose_result);
 
-    // TIFF* image = TIFFOpen("./dataset/jaffe/KA.AN1.39.tiff", "r");
-    // vector* image_vec = tiff_to_vec(image);
+    // vector* image_vec = tiff_to_vec("./dataset/jaffe/KA.AN1.39.tiff");
     // TIFF* out = vec_to_tiff("./dataset/jaffe/test.tiff", image_vec);
     // printf("sizeof vec %zu", image_vec->size);
-    // TIFFClose(image);
     // TIFFClose(out);
     // free(image_vec);
     // remove("./dataset/jaffe/test.tiff");
-    vec_print(vec);    
-    printf("\n\n");    
+    // printf("\n\n");
+    // vec_print(vec);    
     // vec_append(&vec,vec);
     // vec_print(vec);
 
@@ -82,9 +87,31 @@ int main() {
     // printf("error of A * V - D * V = %g\n",  error_frobenius);
     matrix* compute_average_test = compute_average();
     mat_print(compute_average_test);
-    free(vec);
     free(compute_average_test);
+    matrix* mat = matrix_create(5, 3);
+
+     double b[15] = {
+         24, 0, 30,
+         24, 30, -30,
+         -6, 0, 0,
+         -6, 0, 30,
+         -36, -30, -30 };
+
+    for(size_t i = 0; i < mat->row * mat->col ; i ++) {
+        mat->data[i] = b[i];
+    }
+    matrix* variance_covariance_mat = covmat(mat);
+    mat_print(variance_covariance_mat);
+
     free(mat);
+    free(variance_covariance_mat);
+
+    int num_files;
+    FILE* out_pipe = get_all_tiff("./dataset/jaffe/", &num_files);
+    vector* image_vector = tiff_stream_to_vec(out_pipe);
+    free(image_vector);
+    pclose(out_pipe);
+
     // free(converted_vecmat);
     // free(converted_matvec);
     // free(matmat_result);

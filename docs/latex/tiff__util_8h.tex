@@ -1,0 +1,257 @@
+\hypertarget{tiff__util_8h}{\section{/mnt/c/\-A\-B\-C/\-C\-S/github/\-Facial-\/\-Recognition/src/libs/tiff\-\_\-util.h File Reference}
+\label{tiff__util_8h}\index{/mnt/c/\-A\-B\-C/\-C\-S/github/\-Facial-\/\-Recognition/src/libs/tiff\-\_\-util.\-h@{/mnt/c/\-A\-B\-C/\-C\-S/github/\-Facial-\/\-Recognition/src/libs/tiff\-\_\-util.\-h}}
+}
+
+
+File containing common libtiff wrapper functions.  
+
+
+{\ttfamily \#include $<$stdlib.\-h$>$}\\*
+{\ttfamily \#include $<$tiffio.\-h$>$}\\*
+{\ttfamily \#include $<$unistd.\-h$>$}\\*
+{\ttfamily \#include \char`\"{}linalg.\-h\char`\"{}}\\*
+Include dependency graph for tiff\-\_\-util.\-h\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{tiff__util_8h__incl}
+\end{center}
+\end{figure}
+This graph shows which files directly or indirectly include this file\-:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=331pt]{tiff__util_8h__dep__incl}
+\end{center}
+\end{figure}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{linalg_8h_a07a01529159cc35e78c1f7731ac7bda6}{vector} $\ast$ \hyperlink{tiff__util_8h_a62e9f072f6cc2973ba744946e6a4c5c3}{tiff\-\_\-to\-\_\-vec} (char $\ast$filename)
+\begin{DoxyCompactList}\small\item\em Converts tiff to vector this function will take a T\-I\-F\-F filename and return a vector$\ast$ with every element corresponding to pixel. \end{DoxyCompactList}\item 
+T\-I\-F\-F $\ast$ \hyperlink{tiff__util_8h_aa0f92f2f91378e3700ee3eb5802444b5}{vec\-\_\-to\-\_\-tiff} (char $\ast$filename, \hyperlink{linalg_8h_a07a01529159cc35e78c1f7731ac7bda6}{vector} $\ast$vec)
+\begin{DoxyCompactList}\small\item\em Converts vector to tiff this function will take a vector and return a T\-I\-F\-F$\ast$ with every element corresponding to pixel. \end{DoxyCompactList}\item 
+F\-I\-L\-E $\ast$ \hyperlink{tiff__util_8h_a20075269ff8a00284dd35725029d4428}{get\-\_\-all\-\_\-tiff} (char $\ast$path, int $\ast$num\-\_\-files)
+\begin{DoxyCompactList}\small\item\em Recursively earches the path for all files of .tiff type the search relies on being able to run the commands find and ls. \end{DoxyCompactList}\item 
+\hyperlink{linalg_8h_a07a01529159cc35e78c1f7731ac7bda6}{vector} $\ast$ \hyperlink{tiff__util_8h_a8f8b0a0f74bb3416dd0214aa0a68130e}{tiff\-\_\-stream\-\_\-to\-\_\-vec} (F\-I\-L\-E $\ast$stream)
+\begin{DoxyCompactList}\small\item\em Converts F\-I\-L\-E$\ast$ tiff stream into a vector the images are appended row-\/wise. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+File containing common libtiff wrapper functions. Minhyuk Park \begin{DoxyDate}{Date}
+9 Nov 2017 
+\end{DoxyDate}
+
+
+\subsection{Function Documentation}
+\hypertarget{tiff__util_8h_a20075269ff8a00284dd35725029d4428}{\index{tiff\-\_\-util.\-h@{tiff\-\_\-util.\-h}!get\-\_\-all\-\_\-tiff@{get\-\_\-all\-\_\-tiff}}
+\index{get\-\_\-all\-\_\-tiff@{get\-\_\-all\-\_\-tiff}!tiff_util.h@{tiff\-\_\-util.\-h}}
+\subsubsection[{get\-\_\-all\-\_\-tiff}]{\setlength{\rightskip}{0pt plus 5cm}F\-I\-L\-E$\ast$ get\-\_\-all\-\_\-tiff (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{path, }
+\item[{int $\ast$}]{num\-\_\-files}
+\end{DoxyParamCaption}
+)}}\label{tiff__util_8h_a20075269ff8a00284dd35725029d4428}
+
+
+Recursively earches the path for all files of .tiff type the search relies on being able to run the commands find and ls. 
+
+\begin{DoxyReturn}{Returns}
+F\-I\-L\-E$\ast$ the stream containing all the files separated by new line characters 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em path} & char$\ast$ the path containing the files \\
+\hline
+{\em num\-\_\-files} & int$\ast$ outputs the number of files read \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyCode}
+80                                                \{
+81     \textcolor{keywordtype}{char}* command = malloc(strlen(path) + 100);
+82     sprintf(command, \textcolor{stringliteral}{"%s%s%s"}, \textcolor{stringliteral}{"find "}, path, \textcolor{stringliteral}{"*.tiff -type f -exec ls \{\} \(\backslash\)\(\backslash\);"});
+83      
+84     
+85     printf(\textcolor{stringliteral}{"%s\(\backslash\)n"}, command);
+86     FILE* retval = popen(command, \textcolor{stringliteral}{"r"});
+87 
+88     sprintf(command, \textcolor{stringliteral}{"%s%s%s"}, \textcolor{stringliteral}{"find "}, path, \textcolor{stringliteral}{"*.tiff -type f -exec ls \{\} \(\backslash\)\(\backslash\); | wc -l"});
+89     
+90     printf(\textcolor{stringliteral}{"%s\(\backslash\)n"}, command);
+91     FILE* num\_files\_fp = popen(command, \textcolor{stringliteral}{"r"});
+92     \textcolor{keywordflow}{if}(fgets(command, \textcolor{keyword}{sizeof}(command), num\_files\_fp) != NULL) \{
+93         *num\_files = atoi(command);
+94     \}
+95     pclose(num\_files\_fp);
+96     free(command);
+97     \textcolor{keywordflow}{return} retval;
+98 \}
+\end{DoxyCode}
+\hypertarget{tiff__util_8h_a8f8b0a0f74bb3416dd0214aa0a68130e}{\index{tiff\-\_\-util.\-h@{tiff\-\_\-util.\-h}!tiff\-\_\-stream\-\_\-to\-\_\-vec@{tiff\-\_\-stream\-\_\-to\-\_\-vec}}
+\index{tiff\-\_\-stream\-\_\-to\-\_\-vec@{tiff\-\_\-stream\-\_\-to\-\_\-vec}!tiff_util.h@{tiff\-\_\-util.\-h}}
+\subsubsection[{tiff\-\_\-stream\-\_\-to\-\_\-vec}]{\setlength{\rightskip}{0pt plus 5cm}{\bf vector}$\ast$ tiff\-\_\-stream\-\_\-to\-\_\-vec (
+\begin{DoxyParamCaption}
+\item[{F\-I\-L\-E $\ast$}]{stream}
+\end{DoxyParamCaption}
+)}}\label{tiff__util_8h_a8f8b0a0f74bb3416dd0214aa0a68130e}
+
+
+Converts F\-I\-L\-E$\ast$ tiff stream into a vector the images are appended row-\/wise. 
+
+\begin{DoxyReturn}{Returns}
+vector$\ast$ newly malloced vector$\ast$ containing all the images from the stream 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em stream} & F\-I\-L\-E$\ast$ returned from \hyperlink{tiff__util_8h_a20075269ff8a00284dd35725029d4428}{get\-\_\-all\-\_\-tiff()} \\
+\hline
+\end{DoxyParams}
+
+
+References tiff\-\_\-to\-\_\-vec(), and vec\-\_\-append().
+
+
+\begin{DoxyCode}
+101                                          \{
+102     \textcolor{keywordtype}{char}* image\_filename;
+103     \textcolor{keywordtype}{char} buffer[4096];
+104 
+105     \hyperlink{struct__vector}{vector}* cumulative\_image = NULL;
+106     \textcolor{keywordflow}{while}(fgets(buffer, \textcolor{keyword}{sizeof}(buffer), stream) != NULL) \{
+107         image\_filename = malloc(100);
+108         strcpy(image\_filename, buffer);
+109         image\_filename[strlen(image\_filename) - 1] = \textcolor{charliteral}{'\(\backslash\)0'};
+110         \textcolor{keywordflow}{if}(cumulative\_image == NULL) \{
+111             cumulative\_image = \hyperlink{tiff__util_8c_a62e9f072f6cc2973ba744946e6a4c5c3}{tiff\_to\_vec}(image\_filename);
+112         \} \textcolor{keywordflow}{else} \{
+113             \hyperlink{linalg_8c_adbfad21fe7e851455d625173e67b8504}{vec\_append}(&cumulative\_image, \hyperlink{tiff__util_8c_a62e9f072f6cc2973ba744946e6a4c5c3}{tiff\_to\_vec}(image\_filename));
+114         \}
+115         free(image\_filename);
+116     \}
+117     \textcolor{keywordflow}{return} cumulative\_image;
+118 \}\end{DoxyCode}
+\hypertarget{tiff__util_8h_a62e9f072f6cc2973ba744946e6a4c5c3}{\index{tiff\-\_\-util.\-h@{tiff\-\_\-util.\-h}!tiff\-\_\-to\-\_\-vec@{tiff\-\_\-to\-\_\-vec}}
+\index{tiff\-\_\-to\-\_\-vec@{tiff\-\_\-to\-\_\-vec}!tiff_util.h@{tiff\-\_\-util.\-h}}
+\subsubsection[{tiff\-\_\-to\-\_\-vec}]{\setlength{\rightskip}{0pt plus 5cm}{\bf vector}$\ast$ tiff\-\_\-to\-\_\-vec (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{filename}
+\end{DoxyParamCaption}
+)}}\label{tiff__util_8h_a62e9f072f6cc2973ba744946e6a4c5c3}
+
+
+Converts tiff to vector this function will take a T\-I\-F\-F filename and return a vector$\ast$ with every element corresponding to pixel. 
+
+\begin{DoxyReturn}{Returns}
+vector$\ast$ newly malloced representing the image 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & char$\ast$ the input filename \\
+\hline
+\end{DoxyParams}
+
+
+References \-\_\-vector\-::padding, V\-E\-C, and vector\-\_\-create().
+
+
+
+Referenced by tiff\-\_\-stream\-\_\-to\-\_\-vec().
+
+
+\begin{DoxyCode}
+11                                     \{
+12     TIFF* image = TIFFOpen(filename, \textcolor{stringliteral}{"r"});
+13     uint32 width;
+14     uint32 height;
+15     TIFFGetField(image, TIFFTAG\_IMAGEWIDTH, &width);
+16     TIFFGetField(image, TIFFTAG\_IMAGELENGTH, &height);
+17 
+18     uint32 num\_pixels = width * height;
+19     uint32 * raster=(uint32*) \_TIFFmalloc(num\_pixels * \textcolor{keyword}{sizeof}(uint32));
+20     \hyperlink{struct__vector}{vector}* retvec = \hyperlink{linalg_8c_a7040be230e99648e77b0932600bf55ef}{vector\_create}(num\_pixels);
+21 
+22     TIFFReadRGBAImage(image, width, height, raster, 0);
+23 
+24     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{size\_t} i = 0; i < num\_pixels; i ++) \{
+25         \hyperlink{linalg_8h_a03e904294c904b01194a25323fc2f6ec}{VEC}(retvec, i) = *(raster + i);
+26     \}
+27     \_TIFFfree(raster);
+28 
+29     retvec->\hyperlink{struct__vector_a4165a40cc39bfd874677299c943b290f}{padding} = width;
+30     TIFFClose(image);
+31     \textcolor{keywordflow}{return} retvec;
+32 \}
+\end{DoxyCode}
+\hypertarget{tiff__util_8h_aa0f92f2f91378e3700ee3eb5802444b5}{\index{tiff\-\_\-util.\-h@{tiff\-\_\-util.\-h}!vec\-\_\-to\-\_\-tiff@{vec\-\_\-to\-\_\-tiff}}
+\index{vec\-\_\-to\-\_\-tiff@{vec\-\_\-to\-\_\-tiff}!tiff_util.h@{tiff\-\_\-util.\-h}}
+\subsubsection[{vec\-\_\-to\-\_\-tiff}]{\setlength{\rightskip}{0pt plus 5cm}T\-I\-F\-F$\ast$ vec\-\_\-to\-\_\-tiff (
+\begin{DoxyParamCaption}
+\item[{char $\ast$}]{filename, }
+\item[{{\bf vector} $\ast$}]{vec}
+\end{DoxyParamCaption}
+)}}\label{tiff__util_8h_aa0f92f2f91378e3700ee3eb5802444b5}
+
+
+Converts vector to tiff this function will take a vector and return a T\-I\-F\-F$\ast$ with every element corresponding to pixel. 
+
+\begin{DoxyReturn}{Returns}
+T\-I\-F\-F$\ast$ opened tiff file stream with necessary data written to from the vector 
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & char$\ast$ the output filename \\
+\hline
+{\em vec} & vector$\ast$ vector representing the image \\
+\hline
+\end{DoxyParams}
+
+
+References \-\_\-vector\-::padding, \-\_\-vector\-::size, and V\-E\-C.
+
+
+\begin{DoxyCode}
+35                                                \{
+36     TIFF* rettiff = TIFFOpen(filename, \textcolor{stringliteral}{"w"});
+37     uint32 width = vec->\hyperlink{struct__vector_a4165a40cc39bfd874677299c943b290f}{padding};
+38     uint32 height = vec->\hyperlink{struct__vector_a1ed8dca78f3e589deb8dad9b53aec3fa}{size} / vec->\hyperlink{struct__vector_a4165a40cc39bfd874677299c943b290f}{padding};
+39 
+40     \textcolor{keywordtype}{char}* image\_char = malloc(vec->\hyperlink{struct__vector_a1ed8dca78f3e589deb8dad9b53aec3fa}{size} * 4); \textcolor{comment}{// 4 since RGBA}
+41 
+42     \textcolor{keywordflow}{for}(\textcolor{keywordtype}{size\_t} i = 0; i < vec->\hyperlink{struct__vector_a1ed8dca78f3e589deb8dad9b53aec3fa}{size}; i ++) \{
+43         image\_char[4 * i] = (char)TIFFGetR((uint32)\hyperlink{linalg_8h_a03e904294c904b01194a25323fc2f6ec}{VEC}(vec, i));
+44         image\_char[4 * i + 1] = (char)TIFFGetG((uint32)\hyperlink{linalg_8h_a03e904294c904b01194a25323fc2f6ec}{VEC}(vec, i));
+45         image\_char[4 * i + 2] = (char)TIFFGetB((uint32)\hyperlink{linalg_8h_a03e904294c904b01194a25323fc2f6ec}{VEC}(vec, i));
+46         image\_char[4 * i + 3] = (char)TIFFGetA((uint32)\hyperlink{linalg_8h_a03e904294c904b01194a25323fc2f6ec}{VEC}(vec, i));
+47     \}
+48     TIFFSetField (rettiff, TIFFTAG\_IMAGEWIDTH, width);
+49     TIFFSetField(rettiff, TIFFTAG\_IMAGELENGTH, height);
+50     TIFFSetField(rettiff, TIFFTAG\_SAMPLESPERPIXEL, 4);
+51     TIFFSetField(rettiff, TIFFTAG\_BITSPERSAMPLE, 8);
+52     TIFFSetField(rettiff, TIFFTAG\_ORIENTATION, ORIENTATION\_TOPLEFT);
+53     TIFFSetField(rettiff, TIFFTAG\_PLANARCONFIG, PLANARCONFIG\_CONTIG);
+54     TIFFSetField(rettiff, TIFFTAG\_PHOTOMETRIC, PHOTOMETRIC\_RGB);
+55 
+56     tsize\_t linebytes = 4 * width;
+57     \textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char}* buf = NULL;
+58 
+59     \textcolor{keywordflow}{if} (TIFFScanlineSize(rettiff) == linebytes) \{
+60         buf =(\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char}*)\_TIFFmalloc(linebytes);
+61     \} \textcolor{keywordflow}{else} \{
+62         buf = (\textcolor{keywordtype}{unsigned} \textcolor{keywordtype}{char}*)\_TIFFmalloc(TIFFScanlineSize(rettiff));
+63     \}
+64 
+65     TIFFSetField(rettiff, TIFFTAG\_ROWSPERSTRIP, TIFFDefaultStripSize(rettiff, width * 4));
+66 
+67     \textcolor{keywordflow}{for} (uint32 i = 0; i < height; i++)
+68     \{
+69         memcpy(buf, &image\_char[(height - i - 1) * linebytes], linebytes);
+70         \textcolor{keywordflow}{if} (TIFFWriteScanline(rettiff, buf, i, 0) < 0) \{
+71             \textcolor{keywordflow}{break};
+72         \}
+73     \}
+74     \_TIFFfree(buf);
+75     free(image\_char);
+76     \textcolor{keywordflow}{return} rettiff;
+77 \}
+\end{DoxyCode}
