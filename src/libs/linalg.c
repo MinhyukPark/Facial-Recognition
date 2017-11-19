@@ -450,7 +450,7 @@ matrix * compute_average(vector* images, int num_images)
     //turn vector list into a matrix then reshape it
     size_t number_of_tiffs = images->size;
     matrix *tiff_matrix = vec_to_mat(images, 1);
-    matrix_reshape(tiff_matrix, (size_t)number_of_tiffs/num_images, (size_t)num_images);    
+    matrix_reshape(tiff_matrix, (size_t)number_of_tiffs/num_images, (size_t)num_images); 
     matrix *transposed_tiff_matrix = mat_transpose(tiff_matrix);
     matrix* one_matrix = matrix_create(1,transposed_tiff_matrix->row);
     for(int i =0; i <num_images; i++)
@@ -469,8 +469,10 @@ matrix * compute_average(vector* images, int num_images)
     matrix *multiplyMat3 = mat_transpose(multiplyMat2);
     free(multiplyMat2);    
     matrix *multiplyMat4 = matscalar_divide(multiplyMat3, num_images);
+    matrix * subtractMat = matmat_subtraction(tiff_matrix, multiplyMat4);
     free(multiplyMat3);    
     free(one_matrix);
     free(transposed_tiff_matrix);
-    return multiplyMat4;
+    free(multiplyMat4);
+    return subtractMat;
 }
