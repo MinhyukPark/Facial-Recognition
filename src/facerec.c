@@ -85,30 +85,32 @@ int main() {
     
     // double error_frobenius = frobenius_norm(n, n, a, v, d);
     // printf("error of A * V - D * V = %g\n",  error_frobenius);
+    vector* vec = vector_create(12);
 
-    matrix* mat = matrix_create(5, 3);
+     double b[12] = {
+         0, 5, 10,
+         0, 10, 20,
+         0, 15, 30,
+         0, 20, 40 };
 
-     double b[15] = {
-         24, 0, 30,
-         24, 30, -30,
-         -6, 0, 0,
-         -6, 0, 30,
-         -36, -30, -30 };
-
-    for(size_t i = 0; i < mat->row * mat->col ; i ++) {
-        mat->data[i] = b[i];
+    for(size_t i = 0; i < vec->size; i ++) {
+        vec->data[i] = b[i];
     }
-    matrix* variance_covariance_mat = covmat(mat);
-    mat_print(variance_covariance_mat);
+    matrix* compute_average_test = compute_average(vec,3);
+    mat_print(compute_average_test);
+    free(compute_average_test);
 
-    free(mat);
-    free(variance_covariance_mat);
+    // matrix* variance_covariance_mat = covmat(mat);
+    // mat_print(variance_covariance_mat);
 
-    int num_files;
-    FILE* out_pipe = get_all_tiff("./dataset/jaffe/", &num_files);
-    vector* image_vector = tiff_stream_to_vec(out_pipe);
-    free(image_vector);
-    pclose(out_pipe);
+    // free(mat);
+    // free(variance_covariance_mat);
+
+    // int num_files;
+    // FILE* out_pipe = get_all_tiff("./dataset/jaffe/", &num_files);
+    // vector* image_vector = tiff_stream_to_vec(out_pipe);
+    // free(image_vector);
+    // pclose(out_pipe);
 
     // free(converted_vecmat);
     // free(converted_matvec);
