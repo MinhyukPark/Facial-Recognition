@@ -245,8 +245,10 @@ double frobenius_norm(int n, int k, double a[], double x[], double lambda[]);
 matrix* covmat(matrix* mat);
 
 /**
- * @brief computes the average matrix of all the tiff images
- * @return matrix* the average matrix 
+ * @brief computes the average matrix of all the *vector images
+ * @return matrix* the average matrix
+ * @param images vector* a vector of all images to average
+ * @param num_images int number of images in the vector 
  */
 matrix * compute_average(vector* images, int num_images);
 

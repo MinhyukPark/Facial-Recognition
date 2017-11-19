@@ -417,37 +417,8 @@ matrix* covmat(matrix* mat) {
     return retmat;
 }
 
-/**
- * @brief computes the average matrix of all the tiff images
- * @return matrix* the average matrix 
- */
 matrix * compute_average(vector* images, int num_images)
 {
-    //turn all tiffs into vector then append them to one vector
-    // vector * testMat1 = vector_create(3);
-    // vector * testMat2 = vector_create(3);
-    // vector * testMat3 = vector_create(3); 
-    // vector * testMat4 = vector_create(3);           
-    // for(size_t i =0; i < 3; i++)
-    // {
-    //    VEC(testMat1,i) = 5*i;
-    //    VEC(testMat2,i) = 10*i;
-    //    VEC(testMat3,i) = 15*i;
-    //    VEC(testMat4,i) = 20*i;       
-    // }
-    // size_t number_of_tiffs = 4;
-    // vector *tiffList = NULL;
-    //tiffList = tiff_to_vec(testMat[0]);
-    // tiffList = testMat1;
-    // vec_append(&tiffList,testMat2);
-    //vec_append(&tiffList,testMat3);
-    //vec_append(&tiffList,testMat4);                            
-    //size_t columns = 3;
-    // for(size_t i =1; i < number_of_tiffs; i++)
-    // {
-    //     vec_append(tiffList,tiff_to_vec(testMat[i]));      
-    // }
-    //turn vector list into a matrix then reshape it
     size_t number_of_tiffs = images->size;
     matrix *tiff_matrix = vec_to_mat(images, 1);
     matrix_reshape(tiff_matrix, (size_t)number_of_tiffs/num_images, (size_t)num_images); 
