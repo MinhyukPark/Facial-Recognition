@@ -32,10 +32,8 @@ vector* tiff_to_vec(char* filename) {
 }
 
 
-TIFF* vec_to_tiff(char* filename, vector* vec) {
+TIFF* vec_to_tiff(char* filename, vector* vec, size_t width, size_t height) {
     TIFF* rettiff = TIFFOpen(filename, "w");
-    uint32 width = vec->padding;
-    uint32 height = vec->size / vec->padding;
 
     char* image_char = malloc(vec->size * 4); // 4 since RGBA
 
@@ -64,8 +62,7 @@ TIFF* vec_to_tiff(char* filename, vector* vec) {
 
     TIFFSetField(rettiff, TIFFTAG_ROWSPERSTRIP, TIFFDefaultStripSize(rettiff, width * 4));
 
-    for (uint32 i = 0; i < height; i++)
-    {
+    for (uint32 i = 0; i < height; i++) {
         memcpy(buf, &image_char[(height - i - 1) * linebytes], linebytes);
         if (TIFFWriteScanline(rettiff, buf, i, 0) < 0) {
             break;

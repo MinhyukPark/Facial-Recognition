@@ -40,6 +40,13 @@ matrix* vec_to_mat(vector* vec, int orientation) {
     return (matrix*)vec;
 }
 
+vector* mat_to_vec(matrix* mat) {
+    assert(mat->row = 1);
+    mat->row = mat->col;
+    mat->col = 1;
+    return (vector*)mat;
+}
+
 
 void matrix_reshape(matrix* mat, size_t row, size_t col) {
     mat->row = row;
@@ -47,56 +54,62 @@ void matrix_reshape(matrix* mat, size_t row, size_t col) {
 }
 
 
-double dot_product(const double* x, const double* y, int length)
-{
-    double retVal = 0.0;
-    for(int i =0;i<length; i++)
-    {
-        retVal+=(x[i] *y[i]);
+double dot_product(const double* left, const double* right, int length) {
+    double retval = 0.0;
+    for(int i = 0; i < length; i ++) {
+        retval += (left[i] * right[i]);
     }
-    return retVal;
+    return retval;
 }
+
+
+vector* vecscalar_multiply(const vector* vec, const double scalar) {
+    vector* retval = vector_create(vec->size);
+    for (size_t i = 0; i < retval->size; i ++) {
+        VEC(retval, i) = VEC(vec, i) * scalar;
+    }
+    return retval; 
+}
+
+vector* vecscalar_divide(const vector* vec, const double scalar) {
+    return vecscalar_multiply(vec, 1 / scalar);
+}
+
 
 
  vector* vecmat_multiply(const vector* vec, const matrix* mat) {
-    
     if(vec == NULL  || mat == NULL) {
         return NULL;
     }
-    vector* retvec = vector_create(vec->size);
-    memset(retvec->data, 0, sizeof(double) * vec->size);
+    vector* retval = vector_create(vec->size);
+    memset(retval->data, 0, sizeof(double) * vec->size);
     for(size_t j = 0; j < mat->col; j ++) {
         for(size_t i = 0; i < mat->row; i ++) {
-            VEC(retvec, j) += (VEC(vec, i) * MAT(mat, i, j));
+            VEC(retval, j) += (VEC(vec, i) * MAT(mat, i, j));
         }
     }
-    return retvec;
+    return retval;
 }
 
 
-vector* matvec_multiply(const matrix* mat, const vector* vec)
-{
+vector* matvec_multiply(const matrix* mat, const vector* vec) {
     if(vec == NULL  || mat == NULL) {
         return NULL;
     }
-    vector *retVec = vector_create(vec->size);
-    for(size_t i =0; i< retVec->size; i++)
-    { 
-        VEC(retVec,i) = dot_product(((double*)(mat->data) + (mat->col * i)), (double*)vec->data, vec->size);
+    vector* retval = vector_create(vec->size);
+    for(size_t i = 0; i < retval->size; i++) { 
+        VEC(retval,i) = dot_product(((double*)(mat->data) + (mat->col * i)), (double*)vec->data, vec->size);
     }
-    return retVec;
+    return retval;
 }
 
 
 void mat_print(const matrix* mat) {
     for(size_t i = 0; i < mat->row; i ++) {
         for(size_t j = 0; j < mat->col; j ++) {
-            if(j==mat->col-1)
-            {
+            if(j == mat->col - 1) {
                 printf("%f ", MAT(mat, i, j));                
-            }
-            else
-            {
+            } else {
                 printf("%f, ", MAT(mat, i, j));
             }
         }
@@ -107,98 +120,72 @@ void mat_print(const matrix* mat) {
 
 void vec_print(const vector* vec) {
     for(size_t i = 0; i < vec->size; i ++) {
-        // printf("%f, ", VEC(vec, i));
         printf("%f ", vec->data[i]);
     }
     printf("\n");
 }
 
 
-matrix* matmat_multiply(const matrix* matA, const matrix* matB)
-{
-    matrix *retVal = matrix_create(matA->row, matB->col);
-    for(size_t i =0; i<matA->row;i++)
-    {
-        for(size_t j=0; j<matB->col;j++)
-        {
-            MAT(retVal,i,j) = 0;
-            for(size_t k=0; k<matA->col;k++)
-            {
-                MAT(retVal,i,j) += MAT(matA,i,k)*MAT(matB,k,j);
+matrix* matmat_multiply(const matrix* left, const matrix* right) {
+    matrix* retval = matrix_create(left->row, right->col);
+    for(size_t i = 0; i < left->row; i ++) {
+        for(size_t j = 0; j < right->col; j ++) {
+            MAT(retval,i,j) = 0;
+            for(size_t k = 0; k < left->col; k ++) {
+                MAT(retval, i, j) += MAT(left, i, k) * MAT(right, k, j);
             }
         }
     }   
-    return retVal;
+    return retval;
 }
 
 
-matrix* matmat_addition(const matrix* matA, const matrix* matB)
-{
-    matrix *retVal = matrix_create(matA->row, matB->col);
-    for (size_t i = 0; i < matA->row; i++)
-    {
-        for (size_t j = 0; j < matB->col; j++)
-        {
-            MAT(retVal,i,j) = MAT(matA,i,j) + MAT(matB,i,j);
+matrix* matmat_addition(const matrix* left, const matrix* right) {
+    matrix* retval = matrix_create(left->row, right->col);
+    for (size_t i = 0; i < left->row; i ++) {
+       for (size_t j = 0; j < right->col; j ++) {
+            MAT(retval, i, j) = MAT(left, i, j) + MAT(right, i, j);
         }
     }
-    return retVal;
+    return retval;
 }
 
 
-matrix* matmat_subtraction(const matrix* matA, const matrix* matB)
-{
-    matrix *retVal = matrix_create(matA->row, matB->col);
-    for (size_t i = 0; i < matA->row; i++)
-    {
-        for (size_t j = 0; j < matB->col; j++)
-        {
-            MAT(retVal,i,j) = MAT(matA,i,j) - MAT(matB,i,j);
+matrix* matmat_subtraction(const matrix* left, const matrix* right) {
+    matrix* retval = matrix_create(left->row, right->col);
+    for (size_t i = 0; i < left->row; i ++) {
+        for (size_t j = 0; j < right->col; j ++) {
+            MAT(retval, i, j) = MAT(left, i, j) - MAT(right, i, j);
         }
     }
-    return retVal;
+    return retval;
 }
 
 
-matrix* matscalar_multiply(const matrix* matA, const double scalar)
-{
-    matrix *retVal = matrix_create(matA->row, matA->col);
-    for (size_t i = 0; i < matA->row; i++)
-    {
-        for (size_t j = 0; j < matA->col; j++)
-        {
-            MAT(retVal,i,j) = MAT(matA,i,j) *scalar;
+matrix* matscalar_multiply(const matrix* mat, const double scalar) {
+    matrix* retval = matrix_create(mat->row, mat->col);
+    for (size_t i = 0; i < mat->row; i++) {
+        for (size_t j = 0; j < mat->col; j++) {
+            MAT(retval,i,j) = MAT(mat,i,j) * scalar;
         }
     }
-    return retVal;
+    return retval;
 }
 
 
-matrix* matscalar_divide(const matrix* matA, const double scalar)
-{
-    matrix *retVal = matrix_create(matA->row, matA->col);
-    for (size_t i = 0; i < matA->row; i++)
-    {
-        for (size_t j = 0; j < matA->col; j++)
-        {
-            MAT(retVal,i,j) = MAT(matA,i,j) /scalar;
-        }
-    }
-    return retVal; 
+matrix* matscalar_divide(const matrix* mat, const double scalar) {
+    return matscalar_multiply(mat, 1/scalar);
 }
 
 
-matrix* mat_transpose(const matrix* mat)
-{
-    matrix *retVal = matrix_create(mat->col, mat->row);
-    for (size_t i = 0; i < mat->row; i++)
-    {
-        for (size_t j = 0; j < mat->col; j++)
-        {
-            MAT(retVal,j,i) = MAT(mat,i,j);
+matrix* mat_transpose(const matrix* mat) {
+    matrix* retval = matrix_create(mat->col, mat->row);
+    for (size_t i = 0; i < mat->row; i ++) {
+        for (size_t j = 0; j < mat->col; j ++) {
+            MAT(retval, j, i) = MAT(mat, i, j);
         }
     }
-    return retVal;
+    return retval;
 }
 
 
@@ -417,33 +404,74 @@ matrix* covmat(matrix* mat) {
     return retmat;
 }
 
-matrix * compute_average(vector* images, int num_images)
-{
-    size_t number_of_tiffs = images->size;
-    matrix *tiff_matrix = vec_to_mat(images, 1);
-    matrix_reshape(tiff_matrix, (size_t)number_of_tiffs/num_images, (size_t)num_images); 
-    matrix *transposed_tiff_matrix = mat_transpose(tiff_matrix);
-    matrix* one_matrix = matrix_create(1,transposed_tiff_matrix->row);
-    for(int i =0; i <num_images; i++)
-    {
-        MAT(one_matrix, 0,i) = 1;
+vector* compute_average(matrix* images, int num_images) {
+    /*
+    matrix* ones_row = matrix_create(1, num_images);
+    for(int i =0; i <num_images; i++) {
+        MAT(ones_row, 0,i) = 1;
     }
-    matrix *multiplyMat = matmat_multiply(one_matrix, transposed_tiff_matrix);
-    free(one_matrix);
-    one_matrix = matrix_create(transposed_tiff_matrix->row, 1);
-    for(size_t i =0; i < transposed_tiff_matrix->row; i++)
-    {
-        MAT(one_matrix, i, 0) = 1;
+    matrix* row_images = mat_transpose(images);
+    matrix* row_sum = matmat_multiply(ones_row, row_images);
+    vector* vector_row_sum = mat_to_vec(row_sum);
+    vector* img_avg = vecscalar_divide(vector_row_sum, num_images);
+    free(vector_row_sum);
+    free(row_images);
+    free(ones_row);
+    */
+    vector* img_avg = vector_create(images->row);
+
+    for(size_t i = 0; i < img_avg->size; i ++) {
+        uint32 avg_pixel = 0;
+
+        uint32 r = 0;
+        uint32 g = 0;
+        uint32 b = 0;
+        uint32 a = 0;
+        for(int j = 0; j < num_images; j ++) {
+            uint32 current_pixel = MAT(images, i, j);
+
+            r += ((current_pixel & 0xff) * (current_pixel & 0xff));
+            g += (((current_pixel >> 8) & 0xff) * ((current_pixel >> 8) & 0xff));
+            b += (((current_pixel >> 16) & 0xff) * ((current_pixel >> 16) & 0xff));
+            a += (((current_pixel >> 24) & 0xff) * ((current_pixel >> 24) & 0xff));
+        }
+
+        r /= num_images;
+        g /= num_images;
+        b /= num_images;
+        a /= num_images;
+
+        r = sqrt(r);
+        g = sqrt(g);
+        b = sqrt(b);
+        a = sqrt(a);
+        /*
+        for(int j = 0; j < num_images; j ++) {
+            uint32 current_pixel = MAT(images, i, j);
+
+            r += ((current_pixel & 0xff));
+            g += (((current_pixel >> 8) & 0xff));
+            b += (((current_pixel >> 16) & 0xff));
+            a += (((current_pixel >> 24) & 0xff));
+        }
+
+        r /= num_images;
+        g /= num_images;
+        b /= num_images;
+        a /= num_images;
+        */
+
+
+        avg_pixel |= r;
+        avg_pixel |= (g << 8);
+        avg_pixel |= (b << 16);
+        avg_pixel |= (a << 24);
+
+        VEC(img_avg, i) = avg_pixel;
     }
-    matrix *multiplyMat2 = matmat_multiply(one_matrix, multiplyMat);
-    free(multiplyMat);
-    matrix *multiplyMat3 = mat_transpose(multiplyMat2);
-    free(multiplyMat2);    
-    matrix *multiplyMat4 = matscalar_divide(multiplyMat3, num_images);
-    matrix * subtractMat = matmat_subtraction(tiff_matrix, multiplyMat4);
-    free(multiplyMat3);    
-    free(one_matrix);
-    free(transposed_tiff_matrix);
-    free(multiplyMat4);
-    return subtractMat;
+
+
+    
+
+    return img_avg;
 }
