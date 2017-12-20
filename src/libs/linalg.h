@@ -11,6 +11,7 @@
 #include <string.h>
 #include <math.h>
 #include <time.h>
+#include <assert.h>
 
 //! macro for element access in a matrix struct
 #define MAT(m, x, y) (m->data[(x * m->col) + y])
@@ -77,6 +78,19 @@ matrix* matrix_create(size_t row, size_t col);
 matrix* vec_to_mat(vector* vec, int orientation);
 
 /**
+ * @brief Converts matrix into vector
+ * this function will "cast" the matrix into a vector
+ * by using the fact that they both have the same size.
+ * when calling this function, calling free() on the vector
+ * will free the matrix and vice versa.
+ * the input matrix can only be a matrix with dimensions 1 X N (a row matrix)
+ * @return vector* the new pointer for input matrix*
+ * @param mat matrix* to be converted
+ * in terms of the newly formed vector
+ */
+vector* mat_to_vec(matrix* mat);
+
+/**
  * @brief Reshapes the matrix
  * this function will reshape the matrix in constant time
  * @param mat matrix* to be reshaped
@@ -90,11 +104,32 @@ void matrix_reshape(matrix* mat, size_t row, size_t col);
  * this function will malloc for the user a double
  * arrays must be of same size
  * @return a double representing the inner product
- * @param x const double* the first vector
- * @param y const double* the second vector
+ * @param left const double* the first vector
+ * @param right const double* the second vector
  * @param length int the size of the vectors
  */
-double dot_product(const double* x, const double* y, int length);
+double dot_product(const double* left, const double* right, int length);
+
+ /**
+ * @brief Performs  scalar multiplication of a vector
+ * this function will malloc for the user a vector*
+ * @return vector* that is the result of element wise multiplication of the
+ * vector by the scalar
+ * @param vec const vector* the input vector
+ * @param scalar const double the input scalar
+ */
+vector* vecscalar_multiply(const vector* vec, const double scalar);
+
+/**
+ * @brief Performs  scalar division of a vector
+ * this function will malloc for the user a vector*
+ * @return vector* that is the result of element wise division of the
+ * vector by the scalar
+ * @param vec const vector* the input vector
+ * @param scalar const double the input scalar
+ */
+ vector* vecscalar_divide(const vector* vec, const double scalar);
+
 
  /**
  * @brief Performs vector matrix multiplication
@@ -135,29 +170,29 @@ void vec_print (const vector* vec);
  /**
  * @brief Performs standard matrix multiplication
  * this function will malloc for the user a matrix*
- * @return matrix* newly malloced result of mat_a times mat_b
- * @param mat_a const matrix* the matrix to be multiplied to
- * @param mat_b const matrix* the matrix to be multiplied
+ * @return matrix* newly malloced result of left times right
+ * @param left const matrix* the matrix to be multiplied to
+ * @param right const matrix* the matrix to be multiplied
  */
-matrix* matmat_multiply(const matrix* mat_a, const matrix* mat_b);
+matrix* matmat_multiply(const matrix* left, const matrix* right);
 
  /**
  * @brief Performs standard matrix addition
  * this function will malloc for the user a matrix*
- * @return matrix* newly malloced result of mat_a plus mat_b
- * @param mat_a const matrix* the matrix to be added to
- * @param mat_b const matrix* the matrix to be added
+ * @return matrix* newly malloced result of left plus right
+ * @param left const matrix* the matrix to be added to
+ * @param right const matrix* the matrix to be added
  */
-matrix* matmat_addition(const matrix* mat_a, const matrix* mat_b);
+matrix* matmat_addition(const matrix* left, const matrix* right);
 
  /**
  * @brief Performs standard matrix subtration
  * this function will malloc for the user a matrix*
- * @return matrix* newly malloced result of mat_a minus mat_b
- * @param mat_a const matrix* the matrix to be subtracted from
- * @param mat_b const matrix* the matrix to be subtrated
+ * @return matrix* newly malloced result of left minus right
+ * @param left const matrix* the matrix to be subtracted from
+ * @param right const matrix* the matrix to be subtrated
  */
-matrix* matmat_subtraction(const matrix* mat_a, const matrix* mat_b);
+matrix* matmat_subtraction(const matrix* left, const matrix* right);
 
  /**
  * @brief Performs  scalar multiplication of a matrix
@@ -167,7 +202,7 @@ matrix* matmat_subtraction(const matrix* mat_a, const matrix* mat_b);
  * @param mat const matrix* the input matrix
  * @param scalar const double the input scalar
  */
-matrix* matscalar_multiply(const matrix* mat_a, const double scalar);
+matrix* matscalar_multiply(const matrix* mat, const double scalar);
 
  /**
  * @brief Performs scalar division of a matrix
@@ -246,11 +281,11 @@ matrix* covmat(matrix* mat);
 
 /**
  * @brief computes the average matrix of all the *vector images
- * @return matrix* the average matrix
- * @param images vector* a vector of all images to average
+ * @return vector* the average image
+ * @param images matrix* a matrix where each column represents an image
  * @param num_images int number of images in the vector 
  */
-matrix * compute_average(vector* images, int num_images);
+vector* compute_average(matrix* images, int num_images);
 
 
 

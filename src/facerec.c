@@ -85,20 +85,25 @@ int main() {
     
     // double error_frobenius = frobenius_norm(n, n, a, v, d);
     // printf("error of A * V - D * V = %g\n",  error_frobenius);
-    vector* vec = vector_create(12);
+    // vector* vec = vector_create(12);
 
-     double b[12] = {
-         0, 5, 10,
-         0, 10, 20,
-         0, 15, 30,
-         0, 20, 40 };
+    //  double b[12] = {
+    //      0, 5, 10,
+    //      0, 10, 20,
+    //      0, 15, 30,
+    //      0, 20, 40 };
 
-    for(size_t i = 0; i < vec->size; i ++) {
-        vec->data[i] = b[i];
-    }
-    matrix* compute_average_test = compute_average(vec,3);
-    mat_print(compute_average_test);
-    free(compute_average_test);
+    // for(size_t i = 0; i < vec->size; i ++) {
+    //     vec->data[i] = b[i];
+    // }
+    // matrix* images = vec_to_mat(vec, 0);
+    // matrix_reshape(images, 4, 3);
+    // vector* compute_average_test = compute_average(images, 3);
+    // vec_print(compute_average_test);
+
+    // free(compute_average_test);
+    // free(vec);
+    
 
     // matrix* variance_covariance_mat = covmat(mat);
     // mat_print(variance_covariance_mat);
@@ -106,11 +111,25 @@ int main() {
     // free(mat);
     // free(variance_covariance_mat);
 
-    // int num_files;
-    // FILE* out_pipe = get_all_tiff("./dataset/jaffe/", &num_files);
-    // vector* image_vector = tiff_stream_to_vec(out_pipe);
-    // free(image_vector);
-    // pclose(out_pipe);
+    int num_files;
+    FILE* out_pipe = get_all_tiff("./dataset/jaffe/", &num_files);
+    vector* image_vector = tiff_stream_to_vec(out_pipe);
+    matrix* image_matrix = vec_to_mat(image_vector, 0);
+    matrix_reshape(image_matrix, num_files, image_matrix->row / num_files);
+    printf("row: %zu    col: %zu\n", image_matrix->row, image_matrix->col);
+    matrix* image_col_matrix = mat_transpose(image_matrix);
+    vector* average_image = compute_average(image_col_matrix, num_files);
+
+    printf("size: %zu\n", average_image->size);
+    TIFF* avg_tiff = vec_to_tiff("average_face.tiff", average_image, 256, 256);
+    TIFFClose(avg_tiff);
+
+
+    
+    free(image_col_matrix);
+    free(average_image);
+    free(image_vector);
+    pclose(out_pipe);
 
     // free(converted_vecmat);
     // free(converted_matvec);

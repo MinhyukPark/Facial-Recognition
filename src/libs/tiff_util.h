@@ -28,8 +28,10 @@ vector* tiff_to_vec(char* filename);
  * vector
  * @param filename char* the output filename
  * @param vec vector* vector representing the image
+ * @param width size_t width of the image
+ * @param height size_t height of the image
  */
-TIFF* vec_to_tiff(char* filename, vector* vec);
+TIFF* vec_to_tiff(char* filename, vector* vec, size_t width, size_t height);
 
 /**
  * @brief Recursively earches the path for all files of .tiff type
