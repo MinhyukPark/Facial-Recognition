@@ -9,6 +9,11 @@
 #include "linalg.h" // unnecessary because tiff_util.h includes linalg.h
 #include "tiff_util.h"
 
+
+int train_dataset(const char* data_path) {
+
+}
+
 int main() {
     // vector* vec = vector_create(5);
     // matrix* mat = matrix_create(5, 5);
@@ -124,6 +129,36 @@ int main() {
     TIFF* avg_tiff = vec_to_tiff("average_face.tiff", average_image, 256, 256);
     TIFFClose(avg_tiff);
 
+    
+    matrix* normalized_image_col_matrix = image_col_matrix;
+
+    for(int r = 0; r < normalized_image_col_matrix->row; r ++) {
+        for(int c = 0; c < normalized_image_col_matrix->col; c ++) {
+            MAT(normalized_image_col_matrix, r, c) -= VEC(average_image, r);
+        }
+    } 
+
+    matrix* covariance_mat = covmat(normalized_image_col_matrix);
+    double eigen_vectors[256 * 256];
+    double eigen_values[256];
+    int* it_num = NULL;
+    int* rot_num = NULL;
+    eigen(256, normalized_image_col_matrix->data, 100, eigen_vectors, eigen_values, it_num, rot_num);
+
+    matrix* projection_matrix = matrix_create(256, 5);
+ 
+    for(size_t i = 0; i < projection_matrix->col; i ++) {
+        for(size_t j = 0; j < projection_matrix->row; j ++) {
+            MAT(projection_matrix, i, j) = eigen_vectors[i * 256 + j];
+        }
+    }
+
+    vector* good_face_one = vec_to_tiff("./dataset/jaffe/KA.NE2.27.tiff");
+    vector* good_face_two = vec_to_tiff("./dataset/jaffe/MK.FE1.131.tiff");
+    vector* bad_image_one = vec_to_tif("./dataset/jaffe/bad_image_one.tiff");
+    vector* bad_image_two = vec_to_tif("./dataset/jaffe/bad_image_two.tiff");
+
+    
 
     
     free(image_col_matrix);
